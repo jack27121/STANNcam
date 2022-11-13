@@ -21,3 +21,15 @@ When imported, it will automatically be placed in the first room of your game.
 you can change the initial resolution and other variables in the **STANNcam** objects **Create** event
 
 It is encouraged to change any and all of the code to better fit your needs! 👍
+
+## Games using STANNcam 🎮
+*Note all games are using older and specialised versions of the camera, but it is the same base in all*
+
+[Pengu Saves Christmas](https://www.newgrounds.com/portal/view/825562) 
+
+![firefox_1mAHf9ZqF8](https://user-images.githubusercontent.com/46312671/201538574-63a003b3-c2c2-4c8a-a7c0-f7149eafb7fa.png)
+
+[BulbBoy](https://www.newgrounds.com/portal/view/837076)
+
+![3](https://user-images.githubusercontent.com/46312671/201538643-c079809f-d15e-481b-a0de-8363105f5727.png)
+
