@@ -4,7 +4,7 @@ https://user-images.githubusercontent.com/46312671/201537605-7193ed70-8db9-4647-
 
 ## Features 💡
 
-**STANNcam** is an easy to use camera object, and collection of associated scripts. Here's a list of features
+**STANNcam** is an easy to use camera and resolution manager object, and collection of associated scripts. Here's a list of features
 - Upscaling, you can have a small game resolution and then upscale it, to allow pixel-perfect visuals
 - Independant Game and GUI resolution, you can have a tiny game resolution and high quality GUI resolution.
 - Following mode, if specified the camera will follow an object around, most commonly used to follow the player around in your game
