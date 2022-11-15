@@ -14,27 +14,22 @@ https://user-images.githubusercontent.com/46312671/201537605-7193ed70-8db9-4647-
 ## Quickstart ✏️
 go to the releases tab, and download the local package, and import it as a new project to see the example.
 
-Or import it into your own project, excluding everything in the **Demonstration** folder
-
-When imported, it will automatically be placed in the first room of your game.
-
-you can change the initial resolution and other variables in the **STANNcam** objects **Create** event
-
+Or import it into your own project, excluding everything in the **Demonstration** folder. 
+When imported, it will automatically be placed in the first room of your game.  
+you can change the initial resolution and other variables in the **STANNcam** objects **Create** event. 
 It is encouraged to change any and all of the code to better fit your needs! 👍
 
 ## Feedback/Contact
-If you have any issues, feedback or questions, you can write here on github,
-
-dm me on Twitter https://twitter.com/STANN_co or Discord STANN.co#6969
+If you have any issues, feedback or questions, you can write here on github,  
+or refer to it's dedicated channel in Juju's kitchen discord server. 
+https://discord.com/channels/724320164371497020/1042079363727892501
 
 ## Games using STANNcam 🎮
 *Note all games are using older and specialised versions of the camera, but it is the same base in all*
 
-[Pengu Saves Christmas](https://www.newgrounds.com/portal/view/825562) 
-
+[Pengu Saves Christmas](https://www.newgrounds.com/portal/view/825562)  
 ![firefox_1mAHf9ZqF8](https://user-images.githubusercontent.com/46312671/201538574-63a003b3-c2c2-4c8a-a7c0-f7149eafb7fa.png)
 
-[BulbBoy](https://www.newgrounds.com/portal/view/837076)
-
+[BulbBoy](https://www.newgrounds.com/portal/view/837076)  
 ![3](https://user-images.githubusercontent.com/46312671/201538643-c079809f-d15e-481b-a0de-8363105f5727.png)
 
