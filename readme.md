@@ -22,7 +22,7 @@ It is encouraged to change any and all of the code to better fit your needs! ðŸ‘
 ## Feedback/Contact
 If you have any issues, feedback or questions, you can write here on github,  
 or refer to it's dedicated channel in Juju's kitchen discord server. 
-https://discord.com/channels/724320164371497020/1042079363727892501
+https://discord.gg/Dac87U7XHS
 
 ## Games using STANNcam ðŸŽ®
 *Note all games are using older and specialised versions of the camera, but it is the same base in all*
