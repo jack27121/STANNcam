@@ -26,10 +26,10 @@ if (!is_undefined(global.camera_follow)){
 }
 
 #region screen-shake
-var screen_shake_ = shake(shake_time++,shake_magnitude,shake_length);
-shake_x = screen_shake_;
-shake_y = screen_shake_;
-var vibration = screen_shake_ / 20;
+var stanncam_shake_ = shake(shake_time++,shake_magnitude,shake_length);
+shake_x = stanncam_shake_;
+shake_y = stanncam_shake_;
+var vibration = stanncam_shake_ / 20;
 gamepad_set_vibration(0,vibration,vibration);
 #endregion
 

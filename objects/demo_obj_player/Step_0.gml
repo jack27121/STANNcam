@@ -18,12 +18,12 @@ if(keyboard_check_pressed(vk_space)){
 if(keyboard_check_pressed(vk_alt)){
 	if(obj_stanncam.gui_hires) obj_stanncam.gui_hires = false
 	else obj_stanncam.gui_hires = true;
-	resolution_update();
+	stanncam_update_resolution();
 }
 
 //moves camera to mouse press location
 if(mouse_check_button_pressed(mb_left)){
-	camera_move(mouse_x,mouse_y,room_speed*1);
+	stanncam_move(mouse_x,mouse_y,room_speed*1);
 	alarm[0] = room_speed*1.1;
 	pointer = true;
 	pointer_x = mouse_x;
@@ -39,17 +39,17 @@ if(mouse_check_button_pressed(mb_right)){
 	    case 0:
 			//no zooming
 			zoom_text = "no zooming";
-	        camera_zoom(1,room_speed*1);
+	        stanncam_zoom(1,room_speed*1);
 	        break;
 	    case 1:
 			//zoom in
 			zoom_text = "zoomed in";
-	        camera_zoom(0.5,room_speed*1);
+	        stanncam_zoom(0.5,room_speed*1);
 	        break;
 		case 2:
 			//zoom out
 			zoom_text = "zoomed out";
-	        camera_zoom(2,room_speed*1);
+	        stanncam_zoom(2,room_speed*1);
 	        break;
 	}
 }
@@ -68,7 +68,7 @@ if(keyboard_check_pressed(vk_f1))
 	if(game_res > 6) game_res = 0;
 	global.view_w = resolutions[game_res].w;
 	global.view_h = resolutions[game_res].h;
-	resolution_update();
+	stanncam_update_resolution();
 }
 
 //switch gui resolutions
@@ -77,18 +77,18 @@ if(keyboard_check_pressed(vk_f2)){
 	if(gui_res > 6) gui_res = 0;
 	global.gui_w = resolutions[gui_res].w;
 	global.gui_h = resolutions[gui_res].h;
-	resolution_update();
+	stanncam_update_resolution();
 }
 
 //switch upscaling
 if(keyboard_check_pressed(vk_f3)) {
 	global.upscale++;
 	if(global.upscale > 4) global.upscale = 1;
-	resolution_update();
+	stanncam_update_resolution();
 }
 
 //toggle fullscreen
-if(keyboard_check_pressed(vk_f4)) toggle_fullscreen();
+if(keyboard_check_pressed(vk_f4)) stanncam_toggle_fullscreen();
 
 
 //Restart

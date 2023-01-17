@@ -35,23 +35,23 @@ draw_text_outline(display_get_gui_width()-1,offset*3,"fullscreen: "+string(windo
 
 //draws pointer over players head
 if(obj_stanncam.gui_hires){
-	draw_sprite_ext(spr_arrow,1,room_to_gui_x(x),room_to_gui_y(y)-64,0.5,0.5,180,-1,1);
+	draw_sprite_ext(spr_arrow,1,stanncam_room_to_gui_x(x),stanncam_room_to_gui_y(y)-64,0.5,0.5,180,-1,1);
 } else {
-	draw_sprite_ext(spr_arrow_small,1,room_to_gui_x(x),room_to_gui_y(y)-12,1,1,180,-1,1);
+	draw_sprite_ext(spr_arrow_small,1,stanncam_room_to_gui_x(x),stanncam_room_to_gui_y(y)-12,1,1,180,-1,1);
 }
 
 
 //point at player, when it's outside camera bounds
-if(out_cam_bounds(8)){
-	var _x = room_to_gui_x(x);
-	var _y = room_to_gui_y(y);
+if(stanncam_out_of_bounds(x,y,8)){
+	var _x = stanncam_room_to_gui_x(x);
+	var _y = stanncam_room_to_gui_y(y);
 	
 	var margin = (obj_stanncam.gui_hires) ? 50 : 20;
 	
 	_x = clamp(_x,margin,display_get_gui_width() -margin);
 	_y = clamp(_y,margin,display_get_gui_height()-margin);
 	
-	var dir = point_direction(_x,_y,room_to_gui_x(x),room_to_gui_y(y));
+	var dir = point_direction(_x,_y,stanncam_room_to_gui_x(x),stanncam_room_to_gui_y(y));
 
 	if(obj_stanncam.gui_hires){
 		draw_sprite_ext(spr_arrow,0,_x,_y,1,1,dir-90,-1,1);
@@ -63,9 +63,9 @@ if(out_cam_bounds(8)){
 //draw pointer on mouse location
 if(pointer){
 	if(obj_stanncam.gui_hires){
-		draw_sprite_ext(spr_arrow,0,room_to_gui_x(pointer_x),room_to_gui_y(pointer_y),1,1,180,-1,1);
+		draw_sprite_ext(spr_arrow,0,stanncam_room_to_gui_x(pointer_x),stanncam_room_to_gui_y(pointer_y),1,1,180,-1,1);
 	} else {
-		draw_sprite_ext(spr_arrow_small,0,room_to_gui_x(pointer_x),room_to_gui_y(pointer_y),1,1,180,-1,1);
+		draw_sprite_ext(spr_arrow_small,0,stanncam_room_to_gui_x(pointer_x),stanncam_room_to_gui_y(pointer_y),1,1,180,-1,1);
 	}
 }
 

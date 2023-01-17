@@ -2,7 +2,7 @@
 #macro cam view_camera[0]
 
 #region change these global variables to whatever you need.
-//if you change resolution or scale at runtime, run resolution_update() after
+//if you change resolution or scale at runtime, run stanncam_update_resolution() after
 global.view_w = 320; //game resolution width
 global.view_h = 180; //game resolution height
 global.gui_w = 1280;  //gui  resolution width
@@ -16,8 +16,6 @@ camera_constrain = false; //if camera should be constrained to the room size
 //the camera bounding box, for the followed object to leave before the camera starts moving
 bounds_w = 20;
 bounds_h = 20;
-
-resolution_update();
 #endregion
 
 #region inits neccesary variables
@@ -38,3 +36,5 @@ moving = false;
 #endregion
 
 application_surface_draw_enable(false);
+
+stanncam_update_resolution();
