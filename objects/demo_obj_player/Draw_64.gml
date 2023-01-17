@@ -24,6 +24,8 @@ draw_text_outline(1,offset*3,"[LMB] move cam to pos (when not following)",outlin
 draw_text_outline(1,offset*4,"[RMB] "+ zoom_text,outline_width);
 var constrained = (obj_stanncam.camera_constrain) ? "camera constrained to room" : "camera not constrained to room";
 draw_text_outline(1,offset*5,"[CTRL] "+ constrained,outline_width);
+draw_text_outline(1,offset*6,"[S] camera shake",outline_width);
+draw_text_outline(1,offset*7,"[Tab] camera speed "+ string(obj_stanncam.spd),outline_width);
 
 //draw current resolution text
 draw_set_halign(fa_right)

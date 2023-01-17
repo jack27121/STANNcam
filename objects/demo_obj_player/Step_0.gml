@@ -54,10 +54,41 @@ if(mouse_check_button_pressed(mb_right)){
 	}
 }
 
+//toggle camera speed
+if(keyboard_check_pressed(vk_tab)){
+	speed_mode++;
+	if(speed_mode > 3) speed_mode = 0;
+	
+	switch (speed_mode) {
+	    case 0:
+			//speed 0.5
+	        stanncam_speed(0.5,50);
+	        break;
+	    case 1:
+			//speed 2
+	        stanncam_speed(1,50);
+	        break;
+		case 2:
+			//speed 10
+	        stanncam_speed(2,50);
+	        break;
+		case 3:
+			//speed 10
+	        stanncam_speed(10,50);
+	        break;
+	}
+}
+
 //toggle if the camera is constrained to the room size
 if(keyboard_check_pressed(vk_control)){
 	if(obj_stanncam.camera_constrain) obj_stanncam.camera_constrain = false;
 	else obj_stanncam.camera_constrain = true;
+	
+}
+
+//do a screenshake
+if(keyboard_check_pressed(ord("S"))){
+	stanncam_shake(30,room_speed*1);
 	
 }
 

@@ -16,6 +16,8 @@ pointer_y = 0;
 zoom_mode = 0;
 zoom_text = "no zooming"
 
+speed_mode = 1;
+
 game_res = 2;
 gui_res = 4;
 

@@ -4,17 +4,22 @@ if (!is_undefined(global.camera_follow)){
 	xTo = global.camera_follow.x;
 	yTo = global.camera_follow.y;
 	
+	var dist_w = max(bounds_w,abs(xTo - x)) - bounds_w;
+	var dist_h = max(bounds_h,abs(yTo - y)) - bounds_h;
+	
 	//update camera position
-	while (abs(xTo - x) > bounds_w)
+	if (abs(xTo - x) > bounds_w)
 	{
-		if (x < xTo) x+=spd;
-		else if (x > xTo) x-=spd;
+		var _spd = (dist_w/spd_threshold)*spd;
+		if (x < xTo) x+=_spd;
+		else if (x > xTo) x-=_spd;
 	}
 	
-	while (abs(y - yTo) > bounds_h)
+	if (abs(y - yTo) > bounds_h)
 	{
-		if (y < yTo) y+=spd;
-		else if (y > yTo) y-=spd;
+		var _spd = (dist_h/spd_threshold)*spd;
+		if (y < yTo) y+=_spd;
+		else if (y > yTo) y-=_spd;
 	}
 } else if(moving){
 	//gradually moves camera into position based on duration

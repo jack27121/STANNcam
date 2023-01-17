@@ -10,7 +10,8 @@ global.gui_h = 720;  //gui  resolution height
 global.upscale = 4; //how much the game should be upscaled
 
 global.camera_follow = undefined; //what object the camera should follow
-spd = 0.2; //how fast the camera follows an object
+spd = 1; //how fast the camera follows an object
+spd_threshold = 50; //the minimum distance the camera is away, for the speed to be in full effect
 gui_hires = true; //if the gui should be independant of the game resolution
 camera_constrain = false; //if camera should be constrained to the room size
 //the camera bounding box, for the followed object to leave before the camera starts moving

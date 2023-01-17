@@ -90,6 +90,15 @@ function stanncam_zoom(_zoom, duration){
 	obj_stanncam.zoom_duration = duration;
 }
 
+/// @function stanncam_speed(spd,threshold)
+/// @description changes the speed of the camera
+/// @param spd how fast the camera can move
+/// @param threshold minimum distance for the speed to have full effect
+function stanncam_speed(spd,threshold){
+	obj_stanncam.spd = spd;	
+	obj_stanncam.spd_threshold = threshold;
+}
+
 /// @function stanncam_x()
 /// @description get camera x position. if need the middle of the screen use obj_stanncam.x
 function stanncam_x(){
