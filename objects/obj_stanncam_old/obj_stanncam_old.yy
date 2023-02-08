@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_stanncam",
+  "name": "obj_stanncam_old",
   "spriteId": null,
   "solid": false,
   "visible": true,

@@ -1,5 +1,5 @@
 //spawns the camera into the first room, you can remove this line if you don't want that
-gml_pragma("global", "stanncam_init()");
+//gml_pragma("global", "stanncam_init()");
 
 /// @description spawns stanncam into the first room
 function stanncam_init(){
