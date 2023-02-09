@@ -1,1 +1,1 @@
-global.camera_follow = demo_obj_player;
+//global.camera_follow = demo_obj_player;

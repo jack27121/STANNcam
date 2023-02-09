@@ -1,5 +1,7 @@
 /// @description
 
+/*
+
 //chooses pixel font or hires font
 if(obj_stanncam.gui_hires){
 	draw_set_font(demo_f_hires);
@@ -72,6 +74,6 @@ if(pointer){
 }
 
 
-
+*/
 
 

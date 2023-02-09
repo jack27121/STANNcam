@@ -8,6 +8,8 @@ y+= vspd;
 x = clamp(x,0,room_width);
 y = clamp(y,0,room_height);
 
+/*
+
 //toggle following player
 if(keyboard_check_pressed(vk_space)){
 	if(global.camera_follow != undefined) global.camera_follow = undefined;
@@ -124,3 +126,5 @@ if(keyboard_check_pressed(vk_f4)) stanncam_toggle_fullscreen();
 
 //Restart
 if(keyboard_check_pressed(ord("R"))) game_restart();
+
+*/

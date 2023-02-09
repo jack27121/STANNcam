@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "stanncam_functions_old",
+  "name": "stanncam_manager_functions",
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
