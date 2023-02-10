@@ -8,28 +8,43 @@ y+= vspd;
 x = clamp(x,0,room_width);
 y = clamp(y,0,room_height);
 
-/*
-
 //toggle following player
 if(keyboard_check_pressed(vk_space)){
-	if(global.camera_follow != undefined) global.camera_follow = undefined;
-	else global.camera_follow = demo_obj_player;
+	if(cam1.follow != undefined) cam1.follow = undefined;
+	else cam1.follow = demo_obj_player;
+}
+	
+//toggle splitscreen
+if(keyboard_check_pressed(vk_f5)){
+	split_screen = !split_screen;
+	if(split_screen){
+		cam1.set_size(global.game_w/2,global.game_h);
+		
+		cam2 = cam1.clone();
+		cam2.follow = demo_obj_player2;
+	}else{
+		if(!cam2.is_destroyed()) cam2.destroy();
+		cam1.set_size(global.game_w,global.game_h);
+	}
 }
 
 //toggle hires gui
 if(keyboard_check_pressed(vk_alt)){
-	if(obj_stanncam.gui_hires) obj_stanncam.gui_hires = false
-	else obj_stanncam.gui_hires = true;
-	stanncam_update_resolution();
+	gui_hires = !gui_hires;
+	if(gui_hires){
+		stanncam_set_gui_resolution(1920,1080);
+	}else{
+		stanncam_set_gui_resolution(global.game_w,global.game_h);
+	}
 }
 
 //moves camera to mouse press location
 if(mouse_check_button_pressed(mb_left)){
-	stanncam_move(mouse_x,mouse_y,room_speed*1);
+	cam1.move(cam1.get_mouse_x(),cam1.get_mouse_y(),room_speed*1);
 	alarm[0] = room_speed*1.1;
 	pointer = true;
-	pointer_x = mouse_x;
-	pointer_y = mouse_y;
+	pointer_x = cam1.get_mouse_x();
+	pointer_y = cam1.get_mouse_y();
 }
 
 //toggle zoom in
@@ -41,17 +56,20 @@ if(mouse_check_button_pressed(mb_right)){
 	    case 0:
 			//no zooming
 			zoom_text = "no zooming";
-	        stanncam_zoom(1,room_speed*1);
+	        cam1.zoom(1,room_speed*1);
+			obj_tv.tv.zoom(1,room_speed*1);
 	        break;
 	    case 1:
 			//zoom in
 			zoom_text = "zoomed in";
-	        stanncam_zoom(0.5,room_speed*1);
+	        cam1.zoom(0.5,room_speed*1);
+			obj_tv.tv.zoom(0.5,room_speed*1);
 	        break;
 		case 2:
 			//zoom out
 			zoom_text = "zoomed out";
-	        stanncam_zoom(2,room_speed*1);
+	        cam1.zoom(2,room_speed*1);
+			obj_tv.tv.zoom(2,room_speed*1);
 	        break;
 	}
 }
@@ -64,60 +82,49 @@ if(keyboard_check_pressed(vk_tab)){
 	switch (speed_mode) {
 	    case 0:
 			//speed 0.5
-	        stanncam_speed(0.5,50);
+	        cam1.set_speed(0.5,50);
 	        break;
 	    case 1:
 			//speed 2
-	        stanncam_speed(1,50);
+	        cam1.set_speed(1,50);
 	        break;
 		case 2:
 			//speed 10
-	        stanncam_speed(2,50);
+	        cam1.set_speed(2,50);
 	        break;
 		case 3:
 			//speed 10
-	        stanncam_speed(10,50);
+	        cam1.set_speed(10,50);
 	        break;
 	}
 }
 
 //toggle if the camera is constrained to the room size
 if(keyboard_check_pressed(vk_control)){
-	if(obj_stanncam.camera_constrain) obj_stanncam.camera_constrain = false;
-	else obj_stanncam.camera_constrain = true;
-	
+	if(cam1.room_constrain) cam1.room_constrain = false;
+	else cam1.room_constrain = true;
 }
 
 //do a screenshake
-if(keyboard_check_pressed(ord("S"))){
-	stanncam_shake(30,room_speed*1);
-	
+if(keyboard_check_pressed(ord("F"))){
+	cam1.shake_screen(30,room_speed*1);
 }
 
 //switch resolutions
 if(keyboard_check_pressed(vk_f1))
 {
-	game_res++
+	game_res++;
 	if(game_res > 6) game_res = 0;
-	global.view_w = resolutions[game_res].w;
-	global.view_h = resolutions[game_res].h;
-	stanncam_update_resolution();
+	stanncam_set_resolution(resolutions[game_res].w,resolutions[game_res].h);
 }
 
 //switch gui resolutions
 if(keyboard_check_pressed(vk_f2)){
 	gui_res++
 	if(gui_res > 6) gui_res = 0;
-	global.gui_w = resolutions[gui_res].w;
-	global.gui_h = resolutions[gui_res].h;
-	stanncam_update_resolution();
-}
-
-//switch upscaling
-if(keyboard_check_pressed(vk_f3)) {
-	global.upscale++;
-	if(global.upscale > 4) global.upscale = 1;
-	stanncam_update_resolution();
+	var gui_w = resolutions[gui_res].w;
+	var gui_h = resolutions[gui_res].h;
+	stanncam_set_gui_resolution(gui_w,gui_h);
 }
 
 //toggle fullscreen
@@ -126,5 +133,3 @@ if(keyboard_check_pressed(vk_f4)) stanncam_toggle_fullscreen();
 
 //Restart
 if(keyboard_check_pressed(ord("R"))) game_restart();
-
-*/

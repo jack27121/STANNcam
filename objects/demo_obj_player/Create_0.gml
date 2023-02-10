@@ -1,4 +1,14 @@
 /// @description
+
+//camera
+stanncam_init(320,240,1920,1080);
+cam1 = new stanncam(demo_obj_player.x,demo_obj_player.y,global.game_w,global.game_h);
+cam1.follow = demo_obj_player;
+
+cam2 = -1;
+
+
+//player
 hspd = 0;
 vspd = 0;
 
@@ -7,6 +17,8 @@ spd = 1.5;
 anim_spd = sprite_get_speed(spr_player_moving);
 
 subimg = 0;
+
+split_screen = false;
 
 //pointer
 pointer = false;
@@ -19,7 +31,8 @@ zoom_text = "no zooming"
 speed_mode = 1;
 
 game_res = 2;
-gui_res = 4;
+gui_hires = false;
+gui_res = 0;
 
 resolutions = [
 { w:400 ,  h:400 }, //1:1

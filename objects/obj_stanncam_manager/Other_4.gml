@@ -1,6 +1,7 @@
 /// @description
 view_enabled = true;
 for (var i = 0; i < array_length(global.stanncams); ++i) {  
-	global.stanncams[i].check_viewports();
+	if (global.stanncams[i] == -1) continue;
+	global.stanncams[i].__check_viewports();
 }
-stanncam_update_resolution();
+__stanncam_update_resolution();
