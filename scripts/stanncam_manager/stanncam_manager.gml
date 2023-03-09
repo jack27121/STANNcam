@@ -47,7 +47,7 @@ function stanncam_get_keep_aspect_ratio(){
 }
 
 //if fullscreen keep_aspect_ratio is on it offsets the x value so the render is in the middle
-function fullscreen_keep_aspect_ratio_compensate(){
+function stanncam_fullscreen_ratio_compensate(){
 	if(stanncam_get_keep_aspect_ratio() && window_get_fullscreen()){
 		return (display_get_width() - __obj_stanncam_manager.display_res_w)/2;
 	} else return 0;
@@ -113,7 +113,7 @@ function __stanncam_update_resolution(){
 	var gui_x_scale = __obj_stanncam_manager.display_res_w / global.gui_w;
 	var gui_y_scale = __obj_stanncam_manager.display_res_h / global.gui_h;
 	
-	display_set_gui_maximize(gui_x_scale,gui_y_scale,fullscreen_keep_aspect_ratio_compensate());
+	display_set_gui_maximize(gui_x_scale,gui_y_scale,stanncam_fullscreen_ratio_compensate());
 	//surface_resize(application_surface, display_get_gui_width(), display_get_gui_height())
 	
 	for (var i = 0; i < array_length(global.stanncams); ++i) {  

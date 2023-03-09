@@ -180,7 +180,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 		x_ *= x_scale;
 		y_ *= y_scale;
 		
-		x_ += fullscreen_keep_aspect_ratio_compensate();
+		x_ += stanncam_fullscreen_ratio_compensate();
 		
 		var w_ = surface_get_width(surface);
 		var h_ = surface_get_height(surface);
@@ -294,7 +294,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	
 	/// @description gets the mouse x position within room relative to the camera
 	static get_mouse_x = function(){
-		return (((display_mouse_get_x() - window_get_x() - fullscreen_keep_aspect_ratio_compensate()) / (__display_scale_x * width)) * width) + get_x();
+		return (((display_mouse_get_x() - window_get_x() - stanncam_fullscreen_ratio_compensate()) / (__display_scale_x * width)) * width) + get_x();
 	}
 	
 	/// @description gets the mouse y position within room relative to the camera
