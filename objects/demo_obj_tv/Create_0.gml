@@ -1,5 +1,5 @@
 /// @description
-tv = new stanncam(0,0,56,56,1);
+tv = new stanncam(0,0,56,56,true);
 
 tv.follow = demo_obj_player2;
 tv.bounds_h = 1;
