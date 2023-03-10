@@ -11,8 +11,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "STANNcam",
+    "path": "folders/STANNcam.yy",
   },
   "parentObjectId": null,
   "persistent": true,
