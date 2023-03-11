@@ -3,7 +3,7 @@ function draw_text_outline(x_,y_,text,width = 1, precision = 16,col = c_black){
 	var prev_color = draw_get_color();
 	draw_set_color(col);
 	
-	var rot = 360 / precision;	
+	var rot = 360 / precision;
 	
 	if(precision > 8){
 		for (var i = 0; i < precision; ++i) {
