@@ -1,14 +1,14 @@
 /// @description
 //chooses pixel font or hires font
 if(gui_hires){
-	draw_set_font(demo_f_hires);
+	draw_set_font(f_hires);
 	var offset = 45;
 	var outline_width = 4;
 	var precision = 16;
 	draw_set_color(c_white)
 	
 } else {
-  draw_set_font(demo_f_pixel);
+  draw_set_font(f_pixel);
   var offset = 8;
   var outline_width = 1;
   var precision = 8;
@@ -39,9 +39,9 @@ draw_text_outline(global.gui_w-1,offset*3,"fullscreen: "+string(window_get_fulls
 draw_text_outline(global.gui_w-1,offset*4,"split-screen: "+string(split_screen)+" [F5]",outline_width,precision);
 
 //point at player, when it's outside camera bounds
-if(cam1.out_of_bounds(demo_obj_player.x,demo_obj_player.y,8)){
-	var _x = cam1.room_to_gui_x(demo_obj_player.x);
-	var _y = cam1.room_to_gui_y(demo_obj_player.y);
+if(cam1.out_of_bounds(obj_player.x,obj_player.y,8)){
+	var _x = cam1.room_to_gui_x(obj_player.x);
+	var _y = cam1.room_to_gui_y(obj_player.y);
 	
 	var margin = (gui_hires) ? 50 : 20;
 	
@@ -51,7 +51,7 @@ if(cam1.out_of_bounds(demo_obj_player.x,demo_obj_player.y,8)){
 	_x = clamp(_x,margin,cam1.width  * gui_scale_x -margin);
 	_y = clamp(_y,margin,cam1.height * gui_scale_y -margin);
 	
-	var dir = point_direction(_x,_y,cam1.room_to_gui_x(demo_obj_player.x),cam1.room_to_gui_y(demo_obj_player.y));
+	var dir = point_direction(_x,_y,cam1.room_to_gui_x(obj_player.x),cam1.room_to_gui_y(obj_player.y));
 
 	if(gui_hires){
 		draw_sprite_ext(spr_arrow,0,_x,_y,1,1,dir-90,-1,1);
@@ -60,8 +60,8 @@ if(cam1.out_of_bounds(demo_obj_player.x,demo_obj_player.y,8)){
 	}
 } else {
 	//draws pointer over players head
-	var arrow_x = cam1.room_to_gui_x(demo_obj_player.x);
-	var arrow_y = cam1.room_to_gui_y(demo_obj_player.y);
+	var arrow_x = cam1.room_to_gui_x(obj_player.x);
+	var arrow_y = cam1.room_to_gui_y(obj_player.y);
 	if(gui_hires){
 		draw_sprite_ext(spr_arrow,1,arrow_x,arrow_y-64,0.5,0.5,180,-1,1);
 	} else {

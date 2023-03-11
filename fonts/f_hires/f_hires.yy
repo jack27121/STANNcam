@@ -1,7 +1,7 @@
 {
   "resourceType": "GMFont",
   "resourceVersion": "1.0",
-  "name": "demo_f_hires",
+  "name": "f_hires",
   "AntiAlias": 1,
   "applyKerning": 0,
   "ascender": 39,

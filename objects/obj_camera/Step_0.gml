@@ -2,7 +2,7 @@
 //toggle following player
 if(keyboard_check_pressed(vk_space)){
 	if(cam1.follow != undefined) cam1.follow = undefined;
-	else cam1.follow = demo_obj_player;
+	else cam1.follow = obj_player;
 }
 	
 //toggle splitscreen
@@ -12,7 +12,7 @@ if(keyboard_check_pressed(vk_f5)){
 		cam1.set_size(global.game_w/2,global.game_h);
 		
 		cam2 = cam1.clone();
-		cam2.follow = demo_obj_player2;
+		cam2.follow = obj_player2;
 	}else{
 		if(!cam2.is_destroyed()) cam2.destroy();
 		cam1.set_size(global.game_w,global.game_h);
@@ -48,19 +48,19 @@ if(mouse_check_button_pressed(mb_right)){
 			//no zooming
 			zoom_text = "no zooming";
 	        cam1.zoom(1,room_speed*1);
-			demo_obj_tv.tv.zoom(1,room_speed*1);
+			obj_tv.tv.zoom(1,room_speed*1);
 	        break;
 	    case 1:
 			//zoom in
 			zoom_text = "zoomed in";
 	        cam1.zoom(0.5,room_speed*1);
-			demo_obj_tv.tv.zoom(0.5,room_speed*1);
+			obj_tv.tv.zoom(0.5,room_speed*1);
 	        break;
 		case 2:
 			//zoom out
 			zoom_text = "zoomed out";
 	        cam1.zoom(2,room_speed*1);
-			demo_obj_tv.tv.zoom(2,room_speed*1);
+			obj_tv.tv.zoom(2,room_speed*1);
 	        break;
 	}
 }

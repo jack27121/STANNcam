@@ -1,7 +1,7 @@
 {
   "resourceType": "GMFont",
   "resourceVersion": "1.0",
-  "name": "demo_f_pixel",
+  "name": "f_pixel",
   "AntiAlias": 0,
   "applyKerning": 0,
   "ascender": 0,
