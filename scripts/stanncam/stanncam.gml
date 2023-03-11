@@ -235,7 +235,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 		__shake_time = 0;
 	}
 	
-	/// @function move(_x,_y,duration)
+	/// @function move
 	/// @description moves the camera to a position over a duration
 	/// @param {Real} _x
 	/// @param {Real} _y
@@ -297,7 +297,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 		return camera_get_view_x(view_camera[cam_id]);
 	}
 	
-	/// @function get_y()
+	/// @function get_y
 	/// @description get camera corner y position. if need the middle of the camera use y
 	/// @returns {Real}
 	static get_y = function(){
@@ -317,7 +317,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 		return (((display_mouse_get_y() - window_get_y()) / (__display_scale_y * height)) * height) + get_y();
 	}
 	
-	/// @function room_to_gui_x(x_)
+	/// @function room_to_gui_x
 	/// @description returns the room x position as the position on the gui relative to camera
 	/// @param {Real} x_
 	/// @returns {Real}
@@ -350,9 +350,9 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	//}
 	
 	/// @function out_of_bounds
-	/// @description returns if a position is outside camera bounds
-	/// @param {Real} x_ position
-	/// @param {Real} y_ position
+	/// @description returns if the position is outside camera bounds
+	/// @param {Real} x_
+	/// @param {Real} y_
 	/// @param {Real} [margin=0] the margin for the camera bounds
 	/// @returns {Bool}
 	static out_of_bounds = function(x_,y_,margin = 0){
@@ -367,7 +367,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 		return col;
 	}
 	
-	/// @function destroy()
+	/// @function destroy
 	static destroy = function(){
 		follow = -1;
 		array_set(global.stanncams,cam_id,-1);
@@ -376,7 +376,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 		__destroyed = true;
 	}
 	
-	/// @function is_destroyed()
+	/// @function is_destroyed
 	/// @returns {Bool}
 	static is_destroyed = function(){
 		return __destroyed;
