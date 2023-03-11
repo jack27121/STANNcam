@@ -6,14 +6,12 @@ if(gui_hires){
 	var outline_width = 4;
 	var precision = 16;
 	draw_set_color(c_white)
-	
 } else {
   draw_set_font(demo_f_pixel);
   var offset = 8;
   var outline_width = 1;
   var precision = 8;
   draw_set_color(c_white)
-  
 }
 
 //draws helper text
@@ -66,7 +64,7 @@ if(cam1.out_of_bounds(demo_obj_player.x,demo_obj_player.y,8)){
 		draw_sprite_ext(spr_arrow,1,arrow_x,arrow_y-64,0.5,0.5,180,-1,1);
 	} else {
 		draw_sprite_ext(spr_arrow_small,1,arrow_x,arrow_y-12,1,1,180,-1,1);
-	}	
+	}
 }
 
 //draw pointer on mouse location
