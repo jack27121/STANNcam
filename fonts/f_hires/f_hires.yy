@@ -1,7 +1,7 @@
 {
   "resourceType": "GMFont",
   "resourceVersion": "1.0",
-  "name": "demo_f_hires",
+  "name": "f_hires",
   "AntiAlias": 1,
   "applyKerning": 0,
   "ascender": 39,
@@ -118,8 +118,8 @@
   "last": 0,
   "maintainGms1Font": false,
   "parent": {
-    "name": "demonstration",
-    "path": "folders/demonstration.yy",
+    "name": "Fonts",
+    "path": "folders/Fonts.yy",
   },
   "pointRounding": 0,
   "ranges": [

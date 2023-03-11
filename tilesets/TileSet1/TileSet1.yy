@@ -12,8 +12,8 @@
   "out_tilehborder": 2,
   "out_tilevborder": 2,
   "parent": {
-    "name": "demonstration",
-    "path": "folders/demonstration.yy",
+    "name": "Sprites",
+    "path": "folders/Sprites.yy",
   },
   "spriteId": {
     "name": "spr_tile_bg",

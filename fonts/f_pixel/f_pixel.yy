@@ -1,7 +1,7 @@
 {
   "resourceType": "GMFont",
   "resourceVersion": "1.0",
-  "name": "demo_f_pixel",
+  "name": "f_pixel",
   "AntiAlias": 0,
   "applyKerning": 0,
   "ascender": 0,
@@ -118,8 +118,8 @@
   "last": 0,
   "maintainGms1Font": false,
   "parent": {
-    "name": "demonstration",
-    "path": "folders/demonstration.yy",
+    "name": "Fonts",
+    "path": "folders/Fonts.yy",
   },
   "pointRounding": 0,
   "ranges": [
