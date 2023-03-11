@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "ease_in_out",
+  "name": "stanncam_shake",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
