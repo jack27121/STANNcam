@@ -118,16 +118,16 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 		
 		} else if(__moving){
 			//gradually moves camera into position based on duration
-			x = ease_in_out(__t,__xStart,__xTo-__xStart,__duration);
-			y = ease_in_out(__t,__yStart,__yTo-__yStart,__duration);
+			x = stanncam_ease_in_out(__t,__xStart,__xTo-__xStart,__duration);
+			y = stanncam_ease_in_out(__t,__yStart,__yTo-__yStart,__duration);
 		
 			__t++;
 			if(x == __xTo && y == __yTo) __moving = false;
 		}
 		
 		#region screen-shake
-		var stanncam_shake_x = shake(__shake_time++,__shake_magnitude,__shake_length);
-		var stanncam_shake_y = shake(__shake_time++,__shake_magnitude,__shake_length);
+		var stanncam_shake_x = stanncam_shake(__shake_time++,__shake_magnitude,__shake_length);
+		var stanncam_shake_y = stanncam_shake(__shake_time++,__shake_magnitude,__shake_length);
 		__shake_x = stanncam_shake_x;
 		__shake_y = stanncam_shake_y;
 		#endregion
@@ -142,7 +142,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 		#region zooming
 		if(__zooming){
 			//gradually zooms camera
-			__zoom_amount = ease_in_out(__t_zoom,__zoomStart,__zoomTo-__zoomStart,__zoom_duration);
+			__zoom_amount = stanncam_ease_in_out(__t_zoom,__zoomStart,__zoomTo-__zoomStart,__zoom_duration);
 			__t_zoom++;
 			if(__zoom_amount == __zoomTo) __zooming = false;
 			camera_set_view_size(view_camera[cam_id],width*__zoom_amount,height*__zoom_amount);
