@@ -19,7 +19,7 @@ function stanncam_init(game_w,game_h,resolution_w=game_w,resolution_h=game_h,gui
 }
 
 /// @function stanncam_set_resolution(resolution_w,resolution_h);
-/// @description updates the camera resolution, change view_w view_h and upscale to see changes
+/// @description updates the camera resolution
 function stanncam_set_resolution(resolution_w,resolution_h){	
 	global.res_w = resolution_w;
 	global.res_h = resolution_h;
