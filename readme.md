@@ -4,7 +4,7 @@ STANNcam is a camera and resolution manager system for GameMaker-LTS (and onward
 It foregoes gamemakers viewports and application_surface,  
 and instead gives full control on where and in which order to draw your different camera's contents to the screen.
 
-https://user-images.githubusercontent.com/46312671/201537605-7193ed70-8db9-4647-bee9-ef039c9e85d7.mp4
+https://user-images.githubusercontent.com/46312671/224503356-25316aab-1c77-422b-b994-b0013da303d0.mp4
 
 # Features
 * Ability to add/clone/remove up to 8 cameras at runtime easily
@@ -27,4 +27,3 @@ For more info on using stanncam consult the [Wiki](https://github.com/jack27121/
 
 [BulbBoy](https://www.newgrounds.com/portal/view/837076)  
 ![3](https://user-images.githubusercontent.com/46312671/201538643-c079809f-d15e-481b-a0de-8363105f5727.png)
-
