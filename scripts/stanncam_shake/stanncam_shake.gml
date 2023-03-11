@@ -4,7 +4,7 @@
 /// @param {Real} magnitude
 /// @param {Real} duration
 /// @returns {Real}
-function stanncam_shake(t, magnitude, duration) {
-	var amount = max(0,(duration-t)/duration);
+function stanncam_shake(time, magnitude, duration) {
+	var amount = max(0,(duration-time)/duration);
 	return random_range(-magnitude,magnitude) * amount;
 }
