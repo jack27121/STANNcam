@@ -334,7 +334,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	/// @param x_ position
 	/// @param y_ position
 	/// @param margin the margin for the camera bounds
-	/// @description returns if the object is outside cam bounds
+	/// @description returns if the position is outside cam bounds
 	function out_of_bounds(x_,y_,margin = 0){
 
 		var col = ( //uses bounding box to see if it's within the camera view
