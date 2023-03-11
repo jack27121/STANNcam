@@ -1,6 +1,6 @@
 # STANNcam 2.1.0🎥
 
-STANNcam is a camera and resolution manager system for GameMaker-LTS (and onwards)  
+STANNcam is a pixel-perfect camera and resolution manager system for GameMaker-LTS (and onwards)  
 It foregoes gamemakers viewports and application_surface,  
 and instead gives full control on where and in which order to draw your different camera's contents to the screen.
 
