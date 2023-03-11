@@ -1,7 +1,7 @@
 {
   "resourceType": "GMProject",
   "resourceVersion": "1.6",
-  "name": "stanncam_lts",
+  "name": "stanncam",
   "resources": [
     {"id":{"name":"f_pixel","path":"fonts/f_pixel/f_pixel.yy",},"order":1,},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},"order":2,},
