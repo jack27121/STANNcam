@@ -7,6 +7,10 @@
 /// @param {Real} [gui_w=game_w]
 /// @param {Real} [gui_h=game_h]
 function stanncam_init(game_w,game_h,resolution_w=game_w,resolution_h=game_h,gui_w=game_w,gui_h=game_h){
+	
+	//if one already exists it is destroyed
+	if(instance_exists(__obj_stanncam_manager)) instance_destroy(__obj_stanncam_manager);
+	
 	instance_create_layer(0,0,"instances",__obj_stanncam_manager);
 	global.stanncams = array_create(8,-1);
 	global.game_w = game_w;
@@ -21,16 +25,17 @@ function stanncam_init(game_w,game_h,resolution_w=game_w,resolution_h=game_h,gui
 	}
 	
 	application_surface_draw_enable(false);
-	__stanncam_update_resolution();
+	
+	stanncam_set_resolution(resolution_w,resolution_h);
 }
 
 /// @function stanncam_set_resolution
-/// @description updates the camera resolution
+/// @description updates the camera resolution, has no visible effect when fullscreened
 /// @param {Real} resolution_w
 /// @param {Real} resolution_h
 function stanncam_set_resolution(resolution_w,resolution_h){
-	global.res_w = resolution_w;
-	global.res_h = resolution_h;
+	__obj_stanncam_manager.display_res_w = resolution_w;
+	__obj_stanncam_manager.display_res_h = resolution_h;
 	__stanncam_update_resolution();
 }
 
@@ -60,7 +65,7 @@ function stanncam_get_keep_aspect_ratio(){
 /// @returns {Real}
 function stanncam_fullscreen_ratio_compensate(){
 	if(stanncam_get_keep_aspect_ratio() && window_get_fullscreen()){
-		return (display_get_width() - __obj_stanncam_manager.display_res_w)/2;
+		return (display_get_width() - global.res_w)/2;
 	} else return 0;
 }
 
@@ -92,14 +97,14 @@ function stanncam_get_gui_scale_y(){
 /// @description gets how much bigger res is from game
 /// @returns {Real}
 function stanncam_get_res_scale_x(){
-	return __obj_stanncam_manager.display_res_w / global.game_w;
+	return global.res_w / global.game_w;
 }
 
 /// @function stanncam_get_res_scale_y
 /// @description gets how much bigger res is from game
 /// @returns {Real}
 function stanncam_get_res_scale_y(){
-	return __obj_stanncam_manager.display_res_h / global.game_h;
+	return global.res_h / global.game_h;
 }
 
 /// @function __stanncam_update_resolution
@@ -109,27 +114,31 @@ function __stanncam_update_resolution(){
 	if(window_get_fullscreen())	{
 		if(__obj_stanncam_manager.keep_aspect_ratio){
 			var ratio = global.game_w / global.game_h;
-			__obj_stanncam_manager.display_res_w = display_get_height() * ratio;
-			__obj_stanncam_manager.display_res_h = display_get_height();
+			
+			global.res_w = display_get_height() * ratio;
+			global.res_h = display_get_height();
 		} else {
-			__obj_stanncam_manager.display_res_w = display_get_width();
-			__obj_stanncam_manager.display_res_h = display_get_height();
+			
+			global.res_w = display_get_width();
+			global.res_h = display_get_height();
 		}
 	} else {
 		if(__obj_stanncam_manager.keep_aspect_ratio){
 			var ratio = global.game_w / global.game_h;
-			__obj_stanncam_manager.display_res_w = global.res_h * ratio;
-			__obj_stanncam_manager.display_res_h = global.res_h;
+			
+			global.res_w = __obj_stanncam_manager.display_res_h * ratio;
+			global.res_h = __obj_stanncam_manager.display_res_h;
 		} else {
-			__obj_stanncam_manager.display_res_w = global.res_w;
-			__obj_stanncam_manager.display_res_h = global.res_h;
+			
+			global.res_w = __obj_stanncam_manager.display_res_w;
+			global.res_h = __obj_stanncam_manager.display_res_h;
 		}
 		
-		window_set_size(__obj_stanncam_manager.display_res_w, __obj_stanncam_manager.display_res_h);
+		window_set_size(global.res_w, global.res_h);
 	}
 	
-	var gui_x_scale = __obj_stanncam_manager.display_res_w / global.gui_w;
-	var gui_y_scale = __obj_stanncam_manager.display_res_h / global.gui_h;
+	var gui_x_scale = global.res_w / global.gui_w;
+	var gui_y_scale = global.res_h / global.gui_h;
 	
 	display_set_gui_maximize(gui_x_scale,gui_y_scale,stanncam_fullscreen_ratio_compensate());
 	//surface_resize(application_surface, display_get_gui_width(), display_get_gui_height())

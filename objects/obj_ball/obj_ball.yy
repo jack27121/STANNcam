@@ -8,8 +8,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "topdown",
+    "path": "folders/Objects/topdown.yy",
   },
   "parentObjectId": null,
   "persistent": false,

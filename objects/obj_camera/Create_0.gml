@@ -14,7 +14,7 @@ pointer_x = 0;
 pointer_y = 0;
 
 zoom_mode = 0;
-zoom_text = "no zooming"
+zoom_text = cam1.zoom_amount
 
 speed_mode = 1;
 
