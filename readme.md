@@ -6,6 +6,8 @@ and instead gives full control on where and in which order to draw your differen
 
 https://user-images.githubusercontent.com/46312671/224503356-25316aab-1c77-422b-b994-b0013da303d0.mp4
 
+https://github.com/jack27121/STANNcam/assets/46312671/d8bde347-346c-48de-88a5-86bfb75c3ecb.mp4
+
 # Features
 * Ability to add/clone/remove up to 8 cameras at runtime easily
 * Camera following options
