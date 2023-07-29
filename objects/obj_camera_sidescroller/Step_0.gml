@@ -97,7 +97,7 @@ if(keyboard_check_pressed(vk_f3)){
 
 //toggle between window modes
 if(keyboard_check_pressed(vk_f4)){
-	var window_mode = stanncam_get_window_mode();
+	var window_mode = global.window_mode;
 	window_mode++;
 	if (window_mode == 3) window_mode = 0;
 	

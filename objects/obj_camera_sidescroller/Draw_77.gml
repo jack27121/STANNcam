@@ -10,7 +10,7 @@ parralax_bg = function(cam_){
 	//the offset the camera is from the middle of the room
 	var offset_x = (-cam_.get_x() -cam_.x_frac) * scalex;
 	var pos_x = -200 + cam_.x_frac;
-	var pos_y = 0  + cam_.__y_frac;
+	var pos_y = 0  + cam_.y_frac;
 	
 	draw_sprite_ext_tiled(spr_underwater_layer00,0,pos_x + (offset_x * 0.0),pos_y,2,1,scalex,scaley);
 	draw_sprite_ext_tiled(spr_underwater_layer01,0,pos_x + (offset_x * 0.2),pos_y,2,1,scalex,scaley);
