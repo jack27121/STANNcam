@@ -3,21 +3,24 @@
 </p>
 
 <h1 align="center" font-size=100em>
-STANNcam 2.1.1
+STANNcam 2.2.0🎥
 </h1>
 
-STANNcam is a pixel-perfect camera and resolution manager system for GameMaker-LTS (and onwards)  
+STANNcam is a pixel-perfect camera and resolution manager system for GameMaker (and onwards)  
 It foregoes gamemakers viewports and application_surface,  
 and instead gives full control on where and in which order to draw your different camera's contents to the screen.
 
 https://user-images.githubusercontent.com/46312671/224503356-25316aab-1c77-422b-b994-b0013da303d0.mp4
 
+https://github.com/jack27121/STANNcam/assets/46312671/d8bde347-346c-48de-88a5-86bfb75c3ecb.mp4
+
 # Features
 * Ability to add/clone/remove up to 8 cameras at runtime easily
 * Camera following options
-* Functions for moving/zooming/shaking the camera
+* Functions for moving/zooming/shaking/resizing the camera
 * Independent game and GUI resolution (can be identical as well)
-* Change display resolution, fullscreen, keep aspect-ratio. at runtime
+* Change display resolution, keep aspect-ratio. at runtime
+* Switch between windowed / borderless windowed / fullscreen
 * Ability to draw camera contents directly on an object in a level (can be used for TV/Monitor/portal effects)
 * Easily apply shaders to everything drawn
 * Draw stuff before and after the camera is drawn (useful for dynamic backgrounds/foregrounds)

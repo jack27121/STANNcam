@@ -46,24 +46,22 @@ if(mouse_check_button_pressed(mb_right)){
 	switch (zoom_mode) {
 	    case 0:
 			//no zooming
-			zoom_text = "no zooming";
 	        cam1.zoom(1,room_speed*1);
 			obj_tv.tv.zoom(1,room_speed*1);
 	        break;
 	    case 1:
 			//zoom in
-			zoom_text = "zoomed in";
 	        cam1.zoom(0.5,room_speed*1);
 			obj_tv.tv.zoom(0.5,room_speed*1);
 	        break;
 		case 2:
 			//zoom out
-			zoom_text = "zoomed out";
 	        cam1.zoom(2,room_speed*1);
 			obj_tv.tv.zoom(2,room_speed*1);
 	        break;
 	}
 }
+zoom_text = cam1.zoom_amount;
 
 //toggle camera speed
 if(keyboard_check_pressed(vk_tab)){
@@ -118,8 +116,16 @@ if(keyboard_check_pressed(vk_f2)){
 	stanncam_set_gui_resolution(gui_w,gui_h);
 }
 
-//toggle fullscreen
-if(keyboard_check_pressed(vk_f3)) stanncam_toggle_keep_aspect_ratio();
+//toggle keep aspect ratio
+if(keyboard_check_pressed(vk_f3)){
+	stanncam_set_keep_aspect_ratio( !stanncam_get_keep_aspect_ratio() );
+}
 
-//toggle fullscreen
-if(keyboard_check_pressed(vk_f4)) stanncam_toggle_fullscreen();
+//toggle between window modes
+if(keyboard_check_pressed(vk_f4)){
+	var window_mode = global.window_mode;
+	window_mode++;
+	if (window_mode == 3) window_mode = 0;
+	
+	stanncam_set_window_mode(window_mode)
+}

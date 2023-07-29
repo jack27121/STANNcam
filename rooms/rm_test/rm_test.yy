@@ -7,7 +7,7 @@
   "inheritCreationOrder": false,
   "inheritLayers": false,
   "instanceCreationOrder": [
-    {"name":"inst_6B735959","path":"rooms/rm_test/rm_test.yy",},
+    {"name":"inst_28868B2A","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_4BF294D5","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_BEB4411","path":"rooms/rm_test/rm_test.yy",},
     {"name":"inst_606FE50A","path":"rooms/rm_test/rm_test.yy",},
@@ -20,7 +20,7 @@
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_BEB4411","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":160.0,"y":160.0,},
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_606FE50A","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_player2","path":"objects/obj_player2/obj_player2.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":272.0,"y":144.0,},
         {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_15296A95","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_tv","path":"objects/obj_tv/obj_tv.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":304.0,"y":48.0,},
-        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_6B735959","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":208.0,"y":112.0,},
+        {"resourceType":"GMRInstance","resourceVersion":"1.0","name":"inst_28868B2A","colour":4294967295,"frozen":false,"hasCreationCode":false,"ignore":false,"imageIndex":0,"imageSpeed":1.0,"inheritCode":false,"inheritedItemId":null,"inheritItemSettings":false,"isDnd":false,"objectId":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},"properties":[],"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"x":16.0,"y":16.0,},
       ],"layers":[],"properties":[],"userdefinedDepth":false,"visible":true,},
     {"resourceType":"GMRTileLayer","resourceVersion":"1.1","name":"Tiles_1","depth":100,"effectEnabled":true,"effectType":null,"gridX":16,"gridY":16,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"properties":[],"tiles":{"SerialiseHeight":8,"SerialiseWidth":14,"TileCompressedData":[
 -112,1,],"TileDataFormat":1,},"tilesetId":{"name":"TileSet1","path":"tilesets/TileSet1/TileSet1.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
@@ -46,7 +46,7 @@
   },
   "sequenceId": null,
   "views": [
-    {"hborder":32,"hport":10,"hspeed":-1,"hview":10,"inherit":false,"objectId":null,"vborder":32,"visible":true,"vspeed":-1,"wport":10,"wview":10,"xport":0,"xview":0,"yport":0,"yview":0,},
+    {"hborder":32,"hport":10,"hspeed":-1,"hview":10,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":10,"wview":10,"xport":0,"xview":0,"yport":0,"yview":0,},
     {"hborder":32,"hport":240,"hspeed":-1,"hview":240,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":420,"wview":420,"xport":0,"xview":0,"yport":0,"yview":0,},
     {"hborder":32,"hport":240,"hspeed":-1,"hview":240,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":420,"wview":420,"xport":0,"xview":0,"yport":0,"yview":0,},
     {"hborder":32,"hport":240,"hspeed":-1,"hview":240,"inherit":false,"objectId":null,"vborder":32,"visible":false,"vspeed":-1,"wport":420,"wview":420,"xport":0,"xview":0,"yport":0,"yview":0,},
@@ -57,8 +57,8 @@
   ],
   "viewSettings": {
     "clearDisplayBuffer": true,
-    "clearViewBackground": true,
-    "enableViews": true,
+    "clearViewBackground": false,
+    "enableViews": false,
     "inheritViewSettings": false,
   },
   "volume": 1.0,

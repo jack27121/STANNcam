@@ -1,6 +1,6 @@
 /// @description
 //camera
-stanncam_init(320,240,1920,1080);
+stanncam_init(320,180,1920,1080);
 cam1 = new stanncam(obj_player.x,obj_player.y,global.game_w,global.game_h);
 cam1.follow = obj_player;
 
@@ -14,7 +14,7 @@ pointer_x = 0;
 pointer_y = 0;
 
 zoom_mode = 0;
-zoom_text = "no zooming"
+zoom_text = cam1.zoom_amount
 
 speed_mode = 1;
 

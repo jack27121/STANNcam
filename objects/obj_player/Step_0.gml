@@ -7,7 +7,3 @@ y+= vspd;
 
 x = clamp(x,0,room_width);
 y = clamp(y,0,room_height);
-
-
-//Restart
-if(keyboard_check_pressed(ord("R"))) game_restart();
