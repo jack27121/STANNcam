@@ -1,18 +1,4 @@
 /// @description
-	
-//toggle splitscreen
-//if(keyboard_check_pressed(vk_f5)){
-//	split_screen = !split_screen;
-//	if(split_screen){
-//		cam1.set_size(global.game_w/2,global.game_h);
-//		
-//		cam2 = cam1.clone();
-//		cam2.follow = obj_player2;
-//	}else{
-//		if(!cam2.is_destroyed()) cam2.destroy();
-//		cam1.set_size(global.game_w,global.game_h);
-//	}
-//}
 
 //toggle hires gui
 if(keyboard_check_pressed(vk_alt)){
@@ -77,6 +63,11 @@ if(keyboard_check_pressed(vk_control)){
 	else cam1.room_constrain = true;
 }
 
+//toggle debug drawing
+if(keyboard_check_pressed(vk_shift)){
+	cam1.debug_draw = !cam1.debug_draw;
+}
+
 //do a screenshake
 if(keyboard_check_pressed(ord("F"))){
 	cam1.shake_screen(30,room_speed*1);
@@ -100,7 +91,38 @@ if(keyboard_check_pressed(vk_f2)){
 }
 
 //toggle keep aspect ratio
-if(keyboard_check_pressed(vk_f3)) stanncam_toggle_keep_aspect_ratio();
+if(keyboard_check_pressed(vk_f3)){
+	stanncam_set_keep_aspect_ratio( !stanncam_get_keep_aspect_ratio() );
+}
 
-//toggle fullscreen
-if(keyboard_check_pressed(vk_f4)) stanncam_toggle_fullscreen();
+//toggle between window modes
+if(keyboard_check_pressed(vk_f4)){
+	var window_mode = stanncam_get_window_mode();
+	window_mode++;
+	if (window_mode == 3) window_mode = 0;
+	
+	stanncam_set_window_mode(window_mode)
+}
+
+//toggle split-screen
+if(keyboard_check_pressed(vk_f5)){
+	split_screen = !split_screen;
+	
+	if(split_screen){
+
+		cam1.set_size(global.game_w/2,global.game_h,room_speed*0.5);
+
+	} else {
+		cam1.follow = obj_player_sidescroller;
+		cam2.follow = obj_player_sidescroller2;
+		cam1.set_size(global.game_w,global.game_h,room_speed*0.5);
+	}
+}
+
+//makes the camera look ahead in the direction the player is going
+if(cam1.bounds_dist_w != 0){
+	if(!lookahead){
+		cam1.offset(60*sign(cam1.bounds_dist_w),0,room_speed*0.5);
+		lookahead = true; 
+	}
+} else lookahead = false;

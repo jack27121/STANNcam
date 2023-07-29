@@ -117,7 +117,15 @@ if(keyboard_check_pressed(vk_f2)){
 }
 
 //toggle keep aspect ratio
-if(keyboard_check_pressed(vk_f3)) stanncam_toggle_keep_aspect_ratio();
+if(keyboard_check_pressed(vk_f3)){
+	stanncam_set_keep_aspect_ratio( !stanncam_get_keep_aspect_ratio() );
+}
 
-//toggle fullscreen
-if(keyboard_check_pressed(vk_f4)) stanncam_toggle_fullscreen();
+//toggle between window modes
+if(keyboard_check_pressed(vk_f4)){
+	var window_mode = stanncam_get_window_mode();
+	window_mode++;
+	if (window_mode == 3) window_mode = 0;
+	
+	stanncam_set_window_mode(window_mode)
+}

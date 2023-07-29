@@ -7,8 +7,6 @@
   "inheritCreationOrder": false,
   "inheritLayers": false,
   "instanceCreationOrder": [
-    {"name":"inst_7AF44202","path":"rooms/rm_sidescroller/rm_sidescroller.yy",},
-    {"name":"inst_3F03D43","path":"rooms/rm_sidescroller/rm_sidescroller.yy",},
     {"name":"inst_25469891","path":"rooms/rm_sidescroller/rm_sidescroller.yy",},
     {"name":"inst_38912525","path":"rooms/rm_sidescroller/rm_sidescroller.yy",},
     {"name":"inst_43F6B6EE","path":"rooms/rm_sidescroller/rm_sidescroller.yy",},
@@ -19,6 +17,8 @@
     {"name":"inst_52A3B4D0","path":"rooms/rm_sidescroller/rm_sidescroller.yy",},
     {"name":"inst_3DFDFCE0","path":"rooms/rm_sidescroller/rm_sidescroller.yy",},
     {"name":"inst_4538CAB8","path":"rooms/rm_sidescroller/rm_sidescroller.yy",},
+    {"name":"inst_7AF44202","path":"rooms/rm_sidescroller/rm_sidescroller.yy",},
+    {"name":"inst_3F03D43","path":"rooms/rm_sidescroller/rm_sidescroller.yy",},
     {"name":"inst_3C1837A1","path":"rooms/rm_sidescroller/rm_sidescroller.yy",},
   ],
   "isDnd": false,

@@ -1,13 +1,13 @@
 {
   "FolderOrderSettings": [
-    {"name":"Animation_curves - add more if needed","order":5,"path":"folders/STANNcam/Animation_curves - add more if needed.yy",},
-    {"name":"gui","order":13,"path":"folders/Sprites/gui.yy",},
-    {"name":"tile","order":14,"path":"folders/Sprites/tile.yy",},
-    {"name":"players","order":15,"path":"folders/Sprites/players.yy",},
-    {"name":"topdown","order":10,"path":"folders/Objects/topdown.yy",},
     {"name":"sidescroller","order":11,"path":"folders/Objects/sidescroller.yy",},
+    {"name":"topdown","order":10,"path":"folders/Objects/topdown.yy",},
     {"name":"BG","order":16,"path":"folders/Sprites/BG.yy",},
     {"name":"Layers","order":1,"path":"folders/Sprites/BG/Layers.yy",},
+    {"name":"gui","order":13,"path":"folders/Sprites/gui.yy",},
+    {"name":"players","order":15,"path":"folders/Sprites/players.yy",},
+    {"name":"tile","order":14,"path":"folders/Sprites/tile.yy",},
+    {"name":"Animation_curves - add more if needed","order":5,"path":"folders/STANNcam/Animation_curves - add more if needed.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"spr_underwater","order":2,"path":"sprites/spr_underwater/spr_underwater.yy",},
@@ -26,6 +26,7 @@
     {"name":"spr_underwater_layer01","order":1,"path":"sprites/spr_underwater_layer01/spr_underwater_layer01.yy",},
     {"name":"obj_camera","order":1,"path":"objects/obj_camera/obj_camera.yy",},
     {"name":"spr_underwater_layer04","order":4,"path":"sprites/spr_underwater_layer04/spr_underwater_layer04.yy",},
+    {"name":"draw_sprite_ext_tiled","order":1,"path":"scripts/draw_sprite_ext_tiled/draw_sprite_ext_tiled.yy",},
     {"name":"obj_player2","order":3,"path":"objects/obj_player2/obj_player2.yy",},
     {"name":"spr_pengu","order":4,"path":"sprites/spr_pengu/spr_pengu.yy",},
     {"name":"stanncam_ac_ease","order":1,"path":"animcurves/stanncam_ac_ease/stanncam_ac_ease.yy",},

@@ -33,7 +33,20 @@ draw_set_halign(fa_right)
 draw_text_outline(global.gui_w-1,1,"game resolution: "+string(global.res_w)+" x "+string(global.res_h)+" [F1]",outline_width,precision);
 draw_text_outline(global.gui_w-1,offset,"GUI resolution: "+string(global.gui_w)+" x "+string(global.gui_h)+" [F2]",outline_width,precision);
 draw_text_outline(global.gui_w-1,offset*2,"Keep aspect ratio: "+string(stanncam_get_keep_aspect_ratio())+" [F3]",outline_width,precision);
-draw_text_outline(global.gui_w-1,offset*3,"fullscreen: "+string(window_get_fullscreen())+" [F4]",outline_width,precision);
+var window_mode_text = "";
+switch (stanncam_get_window_mode()) {
+    case STANNCAM_WINDOW_MODE.windowed:
+        window_mode_text = "windowed  ";
+        break;
+    case STANNCAM_WINDOW_MODE.fullscreen:
+        window_mode_text = "fullscreen";
+        break;
+	case STANNCAM_WINDOW_MODE.borderless:
+        window_mode_text = "borderless";
+        break;
+}
+
+draw_text_outline(global.gui_w-1,offset*3,$"window mode: {window_mode_text} [F4]",outline_width,precision);
 draw_text_outline(global.gui_w-1,offset*4,"split-screen: "+string(split_screen)+" [F5]",outline_width,precision);
 
 //point at player, when it's outside camera bounds

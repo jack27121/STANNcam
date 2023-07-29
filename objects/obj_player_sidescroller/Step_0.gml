@@ -55,12 +55,3 @@ y+= vspd;
 
 scale_x = lerp(scale_x,1,0.15);
 scale_y = lerp(scale_y,1,0.15);
-
-//when going fast the camera looks ahead in that direction
-var bounds_dist_w = obj_camera_sidescroller.cam1.bounds_dist_w;
-if(bounds_dist_w != 0){
-	if(!lookahead){
-		obj_camera_sidescroller.cam1.offset(60*sign(bounds_dist_w),0,room_speed*0.5);
-		lookahead = true; 
-	}
-} else lookahead = false;

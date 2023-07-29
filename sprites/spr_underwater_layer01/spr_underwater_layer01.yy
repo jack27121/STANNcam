@@ -26,7 +26,7 @@
     "resourceType": "GMNineSliceData",
     "resourceVersion": "1.0",
     "bottom": 0,
-    "enabled": true,
+    "enabled": false,
     "guideColour": [
       4294902015,
       4294902015,
@@ -46,7 +46,7 @@
     ],
     "top": 0,
   },
-  "origin": 1,
+  "origin": 0,
   "parent": {
     "name": "Layers",
     "path": "folders/Sprites/BG/Layers.yy",
@@ -82,7 +82,7 @@
     ],
     "visibleRange": null,
     "volume": 1.0,
-    "xorigin": 240,
+    "xorigin": 0,
     "yorigin": 0,
   },
   "swatchColours": null,
