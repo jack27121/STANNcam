@@ -35,6 +35,8 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	offset_x = 0;
 	offset_y = 0;
 	
+	follow = -1;
+	
 	//The extra surface is only neccesary if you are drawing the camera recursively in the room
 	//Like a tv screen, where it can capture itself
 	surface_extra_on = surface_extra_on_;
@@ -53,8 +55,8 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	//wether to use the fractional camera position when drawing the camera contents. Else it will be snapped to nearest integer
 	smooth_draw = smooth_draw_;
 	smooth_zoom = smooth_zoom_;
-	__x_frac = 0;
-	__y_frac = 0;
+	x_frac = 0;
+	y_frac = 0;
 	
 	//which animation curve to use for moving/zooming the camera
 	anim_curve = stanncam_ac_ease;
@@ -65,9 +67,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	surface = -1;
 	surface_extra = -1;
 	
-	follow = -1;
-	
-	debug_draw = true;
+	debug_draw = false;
 	
 	__destroyed = false;
 
@@ -250,11 +250,11 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 		
 		//seperates position into whole and fractional parts
 		if(smooth_draw == true){
-			__x_frac = frac(new_x);
-			__y_frac = frac(new_y);
+			x_frac = frac(new_x);
+			y_frac = frac(new_y);
 		} else {
-			__x_frac = 0;
-			__y_frac = 0;
+			x_frac = 0;
+			y_frac = 0;
 		}
 
 		new_x = floor(abs(new_x)) * sign(new_x);
@@ -390,7 +390,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 			scale_y_/= zoom_amount;
 		}
 		
-		draw_surface_part_ext(surface_,__x_frac+left_,__y_frac+top_,width_,height_,x_,y_,__obj_stanncam_manager.__display_scale_x*scale_x_,__obj_stanncam_manager.__display_scale_y*scale_y_,-1,1);
+		draw_surface_part_ext(surface_,x_frac+left_,y_frac+top_,width_,height_,x_,y_,__obj_stanncam_manager.__display_scale_x*scale_x_,__obj_stanncam_manager.__display_scale_y*scale_y_,-1,1);
 	}
 #endregion
 	
@@ -410,8 +410,6 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 		clone.room_constrain =   room_constrain;
 		clone.bounds_w       =   bounds_w;
 		clone.bounds_h       =   bounds_h;
-		clone.bounds_dist_w  =	 bounds_dist_w;
-		clone.bounds_dist_h	 =	 bounds_dist_h;
 		clone.follow         =   follow;
 		clone.smooth_draw    =   smooth_draw;
 		clone.smooth_zoom    =   smooth_zoom;
@@ -421,6 +419,23 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 		clone.anim_curve_size  = anim_curve_size;
 		
 		return clone;
+	}
+	
+	/// @function move
+	/// @description moves the camera to a position over a duration
+	/// @param {Real} _x
+	/// @param {Real} _y
+	/// @param {Real} [_duration=0]
+	/// @ignore
+	static move = function(_x, _y, _duration = 0){
+		__moving = true;
+		__t = 0;
+		__xStart = x;
+		__yStart = y;
+		
+		__xTo = _x;
+		__yTo = _y;
+		__duration = _duration;
 	}
 	
 	/// @function set_size
@@ -445,34 +460,6 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 			__hTo = _height;
 			__dimen_duration = _duration;
 		}
-	}
-	
-	/// @function shake_screen
-	/// @description makes the camera shake
-	/// @param {Real} magnitude
-	/// @param {Real} duration - duration in frames
-	/// @ignore
-	static shake_screen = function(magnitude, duration) {
-		__shake_magnitude =+ magnitude;
-		__shake_length =+ duration;
-		__shake_time = 0;
-	}
-	
-	/// @function move
-	/// @description moves the camera to a position over a duration
-	/// @param {Real} _x
-	/// @param {Real} _y
-	/// @param {Real} [_duration=0]
-	/// @ignore
-	static move = function(_x, _y, _duration = 0){
-		__moving = true;
-		__t = 0;
-		__xStart = x;
-		__yStart = y;
-		
-		__xTo = _x;
-		__yTo = _y;
-		__duration = _duration;
 	}
 	
 	/// @function offset
@@ -509,6 +496,17 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 			__zoomTo = _zoom;
 			__zoom_duration = _duration;
 		}
+	}
+	
+	/// @function shake_screen
+	/// @description makes the camera shake
+	/// @param {Real} magnitude
+	/// @param {Real} duration - duration in frames
+	/// @ignore
+	static shake_screen = function(magnitude, duration) {
+		__shake_magnitude =+ magnitude;
+		__shake_length =+ duration;
+		__shake_time = 0;
 	}
 	
 	/// @function set_speed
@@ -559,7 +557,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	/// @returns {Real}
 	/// @ignore
 	static room_to_gui_x = function(x_){
-		return (x_-get_x()-__x_frac)*stanncam_get_gui_scale_x()/zoom_amount;
+		return (x_-get_x()-x_frac)*stanncam_get_gui_scale_x()/zoom_amount;
 	}
 	
 	/// @function room_to_gui_y
@@ -568,7 +566,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	/// @returns {Real}
 	/// @ignore
 	static room_to_gui_y = function(y_){
-		return (y_-get_y()-__y_frac)*stanncam_get_gui_scale_y()/zoom_amount;
+		return (y_-get_y()-y_frac)*stanncam_get_gui_scale_y()/zoom_amount;
 	}
 	
 	/// @description returns the room x position as the position on the display relative to camera

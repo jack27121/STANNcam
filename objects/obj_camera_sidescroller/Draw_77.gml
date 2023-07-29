@@ -8,8 +8,8 @@ parralax_bg = function(cam_){
 	var scaley = stanncam_get_res_scale_y();
 	
 	//the offset the camera is from the middle of the room
-	var offset_x = (-cam_.get_x() -cam_.__x_frac) * scalex;
-	var pos_x = -200 + cam_.__x_frac;
+	var offset_x = (-cam_.get_x() -cam_.x_frac) * scalex;
+	var pos_x = -200 + cam_.x_frac;
 	var pos_y = 0  + cam_.__y_frac;
 	
 	draw_sprite_ext_tiled(spr_underwater_layer00,0,pos_x + (offset_x * 0.0),pos_y,2,1,scalex,scaley);

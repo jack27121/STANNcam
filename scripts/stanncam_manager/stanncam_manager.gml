@@ -81,13 +81,6 @@ function stanncam_set_window_mode(window_mode){
 	});
 }
 
-/// @function stanncam_get_window_mode()
-/// @description set game to be windowed/fullscreen/borderless
-/// @returns {STANNCAM_WINDOW_MODE}
-function stanncam_get_window_mode(){
-	return global.window_mode;
-}
-
 /// @function stanncam_set_windowed()
 /// @description set windowed
 function stanncam_set_windowed(){
