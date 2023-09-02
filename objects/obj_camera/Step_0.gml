@@ -31,8 +31,11 @@ if(keyboard_check_pressed(vk_alt)){
 
 //moves camera to mouse press location
 if(mouse_check_button_pressed(mb_left)){
-	cam1.move(cam1.get_mouse_x(),cam1.get_mouse_y(),room_speed*1);
-	alarm[0] = room_speed*1.1;
+	var _x = cam1.get_mouse_x();
+	var _y = cam1.get_mouse_y();
+	
+	cam1.move(_x,_y,game_speed*1);
+	alarm[0] = game_speed*1.1;
 	pointer = true;
 	pointer_x = cam1.get_mouse_x();
 	pointer_y = cam1.get_mouse_y();
@@ -46,18 +49,18 @@ if(mouse_check_button_pressed(mb_right)){
 	switch (zoom_mode) {
 	    case 0:
 			//no zooming
-	        cam1.zoom(1,room_speed*1);
-			obj_tv.tv.zoom(1,room_speed*1);
+	        cam1.zoom(1,game_speed*1);
+			obj_tv.tv.zoom(1,game_speed*1);
 	        break;
 	    case 1:
 			//zoom in
-	        cam1.zoom(0.5,room_speed*1);
-			obj_tv.tv.zoom(0.5,room_speed*1);
+	        cam1.zoom(0.5,game_speed*1);
+			obj_tv.tv.zoom(0.5,game_speed*1);
 	        break;
 		case 2:
 			//zoom out
-	        cam1.zoom(2,room_speed*1);
-			obj_tv.tv.zoom(2,room_speed*1);
+	        cam1.zoom(2,game_speed*1);
+			obj_tv.tv.zoom(2,game_speed*1);
 	        break;
 	}
 }
@@ -96,7 +99,7 @@ if(keyboard_check_pressed(vk_control)){
 
 //do a screenshake
 if(keyboard_check_pressed(ord("F"))){
-	cam1.shake_screen(30,room_speed*1);
+	cam1.shake_screen(30,game_speed*1);
 }
 
 //switch resolutions

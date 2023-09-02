@@ -26,7 +26,7 @@ var debug = (cam1.debug_draw) ? "debug draw on" : "debug draw off";
 draw_text_outline(1,offset*6,"[SHIFT] "+ debug,outline_width,precision);
 draw_text_outline(1,offset*7,"[F] camera shake",outline_width,precision);
 draw_text_outline(1,offset*8,"[Tab] camera speed "+ string(cam1.spd),outline_width,precision);
-draw_text_outline(1,offset*9,"[1 & 2] to switch between example rooms",outline_width,precision);
+draw_text_outline(1,offset*9,"[1 & 2 & 3] to switch between example rooms",outline_width,precision);
 
 //draw current resolution text
 draw_set_halign(fa_right)

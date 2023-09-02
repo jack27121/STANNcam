@@ -250,8 +250,8 @@ function __stanncam_update_resolution(){
 
 /// @function __stanncam_center
 /// @description moves the window to the center of whichever window it's within
-/// @param {int} x_ offset
-/// @param {int} y_ offset
+/// @param {real} x_ offset
+/// @param {real} y_ offset
 /// @ignore
 function __stanncam_center(x_ = 0,y_ = 0){
 	var wx = window_get_x();

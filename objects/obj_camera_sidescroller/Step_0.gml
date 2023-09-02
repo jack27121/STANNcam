@@ -18,15 +18,15 @@ if(mouse_check_button_pressed(mb_right)){
 	switch (zoom_mode) {
 	    case 0:
 			//no zooming
-	        cam1.zoom(1,room_speed*1);
+	        cam1.zoom(1,game_speed*1);
 	        break;
 	    case 1:
 			//zoom in
-	        cam1.zoom(0.5,room_speed*1);
+	        cam1.zoom(0.5,game_speed*1);
 	        break;
 		case 2:
 			//zoom out
-	        cam1.zoom(2,room_speed*1);
+	        cam1.zoom(2,game_speed*1);
 	        break;
 	}
 }
@@ -70,7 +70,7 @@ if(keyboard_check_pressed(vk_shift)){
 
 //do a screenshake
 if(keyboard_check_pressed(ord("F"))){
-	cam1.shake_screen(30,room_speed*1);
+	cam1.shake_screen(30,game_speed*1);
 }
 
 //switch resolutions
@@ -110,19 +110,19 @@ if(keyboard_check_pressed(vk_f5)){
 	
 	if(split_screen){
 
-		cam1.set_size(global.game_w/2,global.game_h,room_speed*0.5);
+		cam1.set_size(global.game_w/2,global.game_h,game_speed*0.5);
 
 	} else {
 		cam1.follow = obj_player_sidescroller;
 		cam2.follow = obj_player_sidescroller2;
-		cam1.set_size(global.game_w,global.game_h,room_speed*0.5);
+		cam1.set_size(global.game_w,global.game_h,game_speed*0.5);
 	}
 }
 
 //makes the camera look ahead in the direction the player is going
 if(cam1.bounds_dist_w != 0){
 	if(!lookahead){
-		cam1.offset(60*sign(cam1.bounds_dist_w),0,room_speed*0.5);
+		cam1.offset(60*sign(cam1.bounds_dist_w),0,game_speed*0.5);
 		lookahead = true; 
 	}
 } else lookahead = false;

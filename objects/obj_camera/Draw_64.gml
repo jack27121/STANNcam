@@ -27,7 +27,7 @@ var constrained = (cam1.room_constrain) ? "camera constrained to room" : "camera
 draw_text_outline(1,offset*5,"[CTRL] "+ constrained,outline_width,precision);
 draw_text_outline(1,offset*6,"[F] camera shake",outline_width,precision);
 draw_text_outline(1,offset*7,"[Tab] camera speed "+ string(cam1.spd),outline_width,precision);
-draw_text_outline(1,offset*8,"[1 & 2] to switch between example rooms",outline_width,precision);
+draw_text_outline(1,offset*8,"[1 & 2 & 3] to switch between example rooms",outline_width,precision);
 
 //draw current resolution text
 draw_set_halign(fa_right)
@@ -63,7 +63,9 @@ if(cam1.out_of_bounds(obj_player.x,obj_player.y,8)){
 	_x = clamp(_x,margin,cam1.width  * gui_scale_x -margin);
 	_y = clamp(_y,margin,cam1.height * gui_scale_y -margin);
 	
-	var dir = point_direction(_x,_y,cam1.room_to_gui_x(obj_player.x),cam1.room_to_gui_y(obj_player.y));
+	var _x2 = cam1.room_to_gui_x(obj_player.x);
+	var _y2 = cam1.room_to_gui_y(obj_player.y);
+	var dir = point_direction(_x,_y,_x2,_y2);
 
 	if(gui_hires){
 		draw_sprite_ext(spr_arrow,0,_x,_y,1,1,dir-90,-1,1);
