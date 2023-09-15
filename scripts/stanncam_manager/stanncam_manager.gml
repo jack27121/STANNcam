@@ -18,7 +18,8 @@ function stanncam_init(game_w,game_h,resolution_w=game_w,resolution_h=game_h,gui
 	//if one already exists it is destroyed
 	if(instance_exists(__obj_stanncam_manager)) instance_destroy(__obj_stanncam_manager);	
 	
-	instance_create_layer(0,0,"instances",__obj_stanncam_manager);
+	instance_create_depth(0,0,0,__obj_stanncam_manager);
+	
 	global.stanncams = array_create(8,-1);
 	global.game_w = game_w;
 	global.game_h = game_h;
