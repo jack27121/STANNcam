@@ -32,7 +32,7 @@
   "isEcma": false,
   "LibraryEmitters": [],
   "MetaData": {
-    "IDEVersion": "2023.6.0.92",
+    "IDEVersion": "2023.8.1.102",
   },
   "resources": [
     {"id":{"name":"macros","path":"scripts/macros/macros.yy",},},
@@ -94,6 +94,7 @@
     {"roomId":{"name":"rm_sidescroller","path":"rooms/rm_sidescroller/rm_sidescroller.yy",},},
     {"roomId":{"name":"rm_pixel_grid","path":"rooms/rm_pixel_grid/rm_pixel_grid.yy",},},
   ],
+  "templateType": null,
   "TextureGroups": [
     {"resourceType":"GMTextureGroup","resourceVersion":"1.3","name":"Default","autocrop":true,"border":2,"compressFormat":"bz2","directory":"","groupParent":null,"isScaled":true,"loadType":"default","mipsToGenerate":0,"targets":-1,},
   ],
