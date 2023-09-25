@@ -211,12 +211,12 @@ function __stanncam_update_resolution(){
 			if(__obj_stanncam_manager.keep_aspect_ratio){
 				var res_ratio = (__obj_stanncam_manager.display_res_w / __obj_stanncam_manager.display_res_h) / (global.game_w / global.game_h);
 				var game_ratio = global.game_w / global.game_h;
-				if(res_ratio > 1){
+				if(res_ratio >= 1){
 					global.res_w = __obj_stanncam_manager.display_res_h * game_ratio;
 					global.res_h = __obj_stanncam_manager.display_res_h;
 				} else {
-					global.res_w = __obj_stanncam_manager.display_res_w;
-					global.res_h = __obj_stanncam_manager.display_res_w * game_ratio;
+					global.res_w =  __obj_stanncam_manager.display_res_w ;
+					global.res_h =  __obj_stanncam_manager.display_res_w / game_ratio;
 				}
 			} else {
 				global.res_w = __obj_stanncam_manager.display_res_w;

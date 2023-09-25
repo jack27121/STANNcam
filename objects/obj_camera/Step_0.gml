@@ -102,6 +102,12 @@ if(keyboard_check_pressed(ord("F"))){
 	cam1.shake_screen(30,game_speed*1);
 }
 
+//Toggle smooth camera
+if(keyboard_check_pressed(ord("B"))){
+	cam1.smooth_draw = !cam1.smooth_draw;
+	//cam1.smooth_draw = !cam1.smooth_draw;
+}
+
 //switch resolutions
 if(keyboard_check_pressed(vk_f1))
 {

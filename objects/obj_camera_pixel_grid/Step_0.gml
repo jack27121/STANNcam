@@ -48,3 +48,14 @@ if(keyboard_check_pressed(vk_f4)){
 	
 	stanncam_set_window_mode(window_mode)
 }
+
+//move camera one pixel
+var hinput = keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left);
+var vinput = keyboard_check_pressed(vk_down) - keyboard_check_pressed(vk_up);
+if(hinput != 0 || vinput != 0){
+	
+	var x_ = cam1.x + hinput;
+	var y_ = cam1.y + vinput;
+	cam1.move(x_,y_,0);
+}
+

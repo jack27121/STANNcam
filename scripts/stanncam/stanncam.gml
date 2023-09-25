@@ -315,7 +315,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	/// @param {Real} _zoom
 	/// @param {Real} _duration
 	/// @ignore
-	static zoom = function(_zoom, _duration){
+	static zoom = function(_zoom, _duration = 0){
 		if(_duration == 0){ //if duration is 0 the view is updated immedietly
 			zoom_amount = _zoom;
 			zoom_x = ((width *zoom_amount) - width)/2;
@@ -328,6 +328,22 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 			__zoomTo = _zoom;
 			__zoom_duration = _duration;
 		}
+	}
+	
+	/// @function get_zoom_x
+	/// @description there's a difference in how zoom works with smooth_draw on/off if you need to use the zoom_amount while smooth_draw is off, you need to use this function
+	/// @ignore
+	static get_zoom_x = function(){
+		if (smooth_draw) return zoom_amount
+		else return surface_get_width(surface) / width;
+	}
+	
+	/// @function get_zoom_y
+	/// @description there's a difference in how zoom works with smooth_draw on/off if you need to use the zoom_amount while smooth_draw is off, you need to use this function
+	/// @ignore
+	static get_zoom_y = function(){
+		if (smooth_draw) return zoom_amount
+		else return surface_get_height(surface) / height;
 	}
 	
 	/// @function shake_screen
@@ -372,7 +388,9 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	/// @returns {Real}
 	/// @ignore
 	static get_mouse_x = function(){
-		return (((display_mouse_get_x() - window_get_x() - stanncam_fullscreen_ratio_compensate_x()) / (__obj_stanncam_manager.__display_scale_x * width)) * width * zoom_amount) + get_x();
+		var mouse_x_ = (((display_mouse_get_x() - window_get_x() - stanncam_fullscreen_ratio_compensate_x()) / (__obj_stanncam_manager.__display_scale_x * width)) * width * get_zoom_x()) + get_x();
+		if(smooth_draw) return mouse_x_;
+		else return mouse_x_ - (mouse_x_ mod get_zoom_x());
 	}
 	
 	/// @function get_mouse_y
@@ -380,7 +398,9 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	/// @returns {Real}
 	/// @ignore
 	static get_mouse_y = function(){
-		return (((display_mouse_get_y() - window_get_y() - stanncam_fullscreen_ratio_compensate_y()) / (__obj_stanncam_manager.__display_scale_y * height)) * height * zoom_amount) + get_y();
+		var mouse_y_ = (((display_mouse_get_y() - window_get_y() - stanncam_fullscreen_ratio_compensate_y()) / (__obj_stanncam_manager.__display_scale_y * height)) * height * get_zoom_y()) + get_y();
+		if(smooth_draw) return mouse_y_;
+		else return mouse_y_ - (mouse_y_ mod get_zoom_y());
 	}
 	
 	/// @function room_to_gui_x
@@ -389,7 +409,7 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	/// @returns {Real}
 	/// @ignore
 	static room_to_gui_x = function(x_){
-		return (x_-get_x()-x_frac)*stanncam_get_gui_scale_x()/zoom_amount;
+		return ((x_-get_x()-x_frac) / get_zoom_x()) * stanncam_get_gui_scale_x();
 	}
 	
 	/// @function room_to_gui_y
@@ -397,8 +417,8 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 	/// @param {Real} y_
 	/// @returns {Real}
 	/// @ignore
-	static room_to_gui_y = function(y_, margin_ = 0){
-		return (y_-get_y()-y_frac)*stanncam_get_gui_scale_y()/zoom_amount;
+	static room_to_gui_y = function(y_){
+		return ((y_-get_y()-y_frac) / get_zoom_y()) * stanncam_get_gui_scale_y();
 	}
 	
 	/// @description returns the room x position as the position on the display relative to camera
@@ -523,6 +543,11 @@ function stanncam(x_ = 0,y_ = 0,width_ = global.game_w,height_ = global.game_h, 
 		//update camera view
 		var new_x = x + offset_x - (width /  2) + __shake_x;
 		var new_y = y + offset_y - (height / 2) + __shake_y;
+		
+		if(!smooth_draw){ // when smooth draw is off, the actual camera position gets rounded to whole numbers
+			new_x = round(new_x);	
+			new_y = round(new_y);
+		}
 		
 		//Constrains camera to room
 		if(room_constrain){
