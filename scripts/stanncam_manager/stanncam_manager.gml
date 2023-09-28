@@ -18,7 +18,8 @@ function stanncam_init(game_w,game_h,resolution_w=game_w,resolution_h=game_h,gui
 	//if one already exists it is destroyed
 	if(instance_exists(__obj_stanncam_manager)) instance_destroy(__obj_stanncam_manager);	
 	
-	instance_create_layer(0,0,"instances",__obj_stanncam_manager);
+	instance_create_depth(0,0,0,__obj_stanncam_manager);
+	
 	global.stanncams = array_create(8,-1);
 	global.game_w = game_w;
 	global.game_h = game_h;
@@ -210,12 +211,12 @@ function __stanncam_update_resolution(){
 			if(__obj_stanncam_manager.keep_aspect_ratio){
 				var res_ratio = (__obj_stanncam_manager.display_res_w / __obj_stanncam_manager.display_res_h) / (global.game_w / global.game_h);
 				var game_ratio = global.game_w / global.game_h;
-				if(res_ratio > 1){
+				if(res_ratio >= 1){
 					global.res_w = __obj_stanncam_manager.display_res_h * game_ratio;
 					global.res_h = __obj_stanncam_manager.display_res_h;
 				} else {
-					global.res_w = __obj_stanncam_manager.display_res_w;
-					global.res_h = __obj_stanncam_manager.display_res_w * game_ratio;
+					global.res_w =  __obj_stanncam_manager.display_res_w ;
+					global.res_h =  __obj_stanncam_manager.display_res_w / game_ratio;
 				}
 			} else {
 				global.res_w = __obj_stanncam_manager.display_res_w;
@@ -250,8 +251,8 @@ function __stanncam_update_resolution(){
 
 /// @function __stanncam_center
 /// @description moves the window to the center of whichever window it's within
-/// @param {int} x_ offset
-/// @param {int} y_ offset
+/// @param {real} x_ offset
+/// @param {real} y_ offset
 /// @ignore
 function __stanncam_center(x_ = 0,y_ = 0){
 	var wx = window_get_x();
