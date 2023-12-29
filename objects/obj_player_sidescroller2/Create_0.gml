@@ -1,4 +1,3 @@
-/// @description
 // Inherit the parent event
 event_inherited();
 
@@ -11,4 +10,3 @@ right = function(){
 jump = function(){
 	return keyboard_check_pressed(ord("W"));
 };
-
