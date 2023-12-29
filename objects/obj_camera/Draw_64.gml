@@ -48,7 +48,7 @@ switch (global.window_mode) {
 		break;
 }
 
-draw_text_outline(global.gui_w - 1, _offset * 4, $"window mode: {_window_mode_text} [F4]", _outline_width, _precision);
+draw_text_outline(global.gui_w - 1, _offset * 4, "window mode: " + _window_mode_text + " [F4]", _outline_width, _precision);
 draw_text_outline(global.gui_w - 1, _offset * 5, "split-screen: " + (split_screen ? "ON" : "OFF") + " [F5]", _outline_width, _precision);
 
 //point at player, when it's outside camera bounds

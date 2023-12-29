@@ -28,4 +28,4 @@ switch (global.window_mode) {
 		break;
 }
 
-draw_text_outline(global.gui_w - 1, _offset * 3, $"window mode: {_window_mode_text} [F4]", _outline_width, _precision);
+draw_text_outline(global.gui_w - 1, _offset * 3, "window mode: " + _window_mode_text + " [F4]", _outline_width, _precision);
