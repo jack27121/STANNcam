@@ -42,11 +42,11 @@ if(keyboard_check_pressed(vk_tab)){
 			cam1.set_speed(0.5, 50);
 			break;
 		case 1:
-			//speed 2
+			//speed 1
 			cam1.set_speed(1, 50);
 			break;
 		case 2:
-			//speed 10
+			//speed 2
 			cam1.set_speed(2, 50);
 			break;
 		case 3:
