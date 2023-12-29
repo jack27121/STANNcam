@@ -26,7 +26,7 @@ https://github.com/jack27121/STANNcam/assets/46312671/d8bde347-346c-48de-88a5-86
 * Draw stuff before and after the camera is drawn *(useful for dynamic backgrounds/foregrounds)*
 
 # Documentation
-For more info on using STANNcam consult the [Wiki](https://github.com/jack27121/STANNcam/wiki)
+For more info on using STANNcam, consult the [Wiki](https://github.com/jack27121/STANNcam/wiki)
 
 # Games using STANNcam 🎮
 > [!NOTE]
