@@ -19,14 +19,14 @@ draw_text_outline(global.gui_w-1,offset*1,"Resolution: "+string(global.res_w)+" 
 draw_text_outline(global.gui_w-1,offset*2,"Keep aspect ratio: "+string(stanncam_get_keep_aspect_ratio())+" [F3]",outline_width,precision);
 var window_mode_text = "";
 switch (global.window_mode) {
-    case STANNCAM_WINDOW_MODE.windowed:
         window_mode_text = "windowed  ";
+    case STANNCAM_WINDOW_MODE.WINDOWED:
         break;
-    case STANNCAM_WINDOW_MODE.fullscreen:
         window_mode_text = "fullscreen";
+    case STANNCAM_WINDOW_MODE.FULLSCREEN:
         break;
-	case STANNCAM_WINDOW_MODE.borderless:
         window_mode_text = "borderless";
+	case STANNCAM_WINDOW_MODE.BORDERLESS:
         break;
 }
 

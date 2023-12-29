@@ -37,15 +37,15 @@ draw_text_outline(global.gui_w-1,offset*3,"Keep aspect ratio: "+string(stanncam_
 
 var window_mode_text = "";
 switch (global.window_mode) {
-    case STANNCAM_WINDOW_MODE.windowed:
         window_mode_text = "windowed  ";
         break;
-    case STANNCAM_WINDOW_MODE.fullscreen:
         window_mode_text = "fullscreen";
         break;
-	case STANNCAM_WINDOW_MODE.borderless:
         window_mode_text = "borderless";
         break;
+	case STANNCAM_WINDOW_MODE.WINDOWED:
+	case STANNCAM_WINDOW_MODE.FULLSCREEN:
+	case STANNCAM_WINDOW_MODE.BORDERLESS:
 }
 
 draw_text_outline(global.gui_w-1,offset*4,$"window mode: {window_mode_text} [F4]",outline_width,precision);

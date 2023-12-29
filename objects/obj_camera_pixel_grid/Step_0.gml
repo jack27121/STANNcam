@@ -8,15 +8,15 @@ if(mouse_check_button_pressed(mb_right)){
 	switch (zoom_mode) {
 	    case 0:
 			//no zooming
-	        cam1.zoom(1,game_speed*1);
+	        cam1.zoom(1, GAME_SPEED*1);
 	        break;
 	    case 1:
 			//zoom in
-	        cam1.zoom(0.5,game_speed*1);
+	        cam1.zoom(0.5, GAME_SPEED*1);
 	        break;
 		case 2:
 			//zoom out
-	        cam1.zoom(2,game_speed*1);
+	        cam1.zoom(2, GAME_SPEED*1);
 	        break;
 	}
 }
@@ -24,7 +24,7 @@ zoom_text = cam1.zoom_amount;
 
 //do a screenshake
 if(keyboard_check_pressed(ord("F"))){
-	cam1.shake_screen(30,game_speed*1);
+	cam1.shake_screen(30, GAME_SPEED*1);
 }
 
 //switch resolutions

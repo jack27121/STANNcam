@@ -1,7 +1,7 @@
-enum STANNCAM_WINDOW_MODE{
-	windowed,
-	fullscreen,
-	borderless	
+enum STANNCAM_WINDOW_MODE {
+	WINDOWED,
+	FULLSCREEN,
+	BORDERLESS
 }
 
 /// @function stanncam_init
@@ -55,24 +55,24 @@ function stanncam_set_resolution(resolution_w,resolution_h){
 }
 
 /// @function stanncam_set_window_mode(window_mode)
-/// @param  {STANNCAM_WINDOW_MODE} window_mode
+/// @param {Real} _window_mode
 /// @description set game to be windowed/fullscreen/borderless
 function stanncam_set_window_mode(window_mode){
 	global.window_mode = window_mode;
 	switch (window_mode) {
-	    case STANNCAM_WINDOW_MODE.windowed:
 	        window_set_fullscreen(false);
+		case STANNCAM_WINDOW_MODE.WINDOWED:
 			window_set_showborder(true);
 			
 			window_set_size(__obj_stanncam_manager.display_res_w, __obj_stanncam_manager.display_res_h);
 			__stanncam_center(20,20);
 			
 	        break;
-	    case STANNCAM_WINDOW_MODE.fullscreen:
 	        window_set_fullscreen(true);
 			window_set_showborder(false);			
 	        break;
-		case STANNCAM_WINDOW_MODE.borderless:
+		case STANNCAM_WINDOW_MODE.FULLSCREEN:
+		case STANNCAM_WINDOW_MODE.BORDERLESS:
 			window_set_fullscreen(false);
 			window_set_showborder(false);
 	        break;
@@ -85,19 +85,19 @@ function stanncam_set_window_mode(window_mode){
 /// @function stanncam_set_windowed()
 /// @description set windowed
 function stanncam_set_windowed(){
-	stanncam_set_window_mode(STANNCAM_WINDOW_MODE.windowed);
+	stanncam_set_window_mode(STANNCAM_WINDOW_MODE.WINDOWED);
 }
 
 /// @function stanncam_set_fullscreen()
 /// @description set fullscreen
 function stanncam_set_fullscreen(){
-	stanncam_set_window_mode(STANNCAM_WINDOW_MODE.fullscreen);
+	stanncam_set_window_mode(STANNCAM_WINDOW_MODE.FULLSCREEN);
 }
 
 /// @function stanncam_set_borderless()
 /// @description set borderless
 function stanncam_set_borderless(){
-	stanncam_set_window_mode(STANNCAM_WINDOW_MODE.borderless);
+	stanncam_set_window_mode(STANNCAM_WINDOW_MODE.BORDERLESS);
 }
 
 /// @function stanncam_set_keep_aspect_ratio(on_off)
@@ -178,7 +178,7 @@ function __stanncam_update_resolution(){
 	
 	switch (global.window_mode) {
 		//fullscreen
-		case STANNCAM_WINDOW_MODE.fullscreen:
+		case STANNCAM_WINDOW_MODE.FULLSCREEN:
 			if(__obj_stanncam_manager.keep_aspect_ratio){
 				var ratio = global.game_w / global.game_h;
 				global.res_w = display_get_height() * ratio;
@@ -191,7 +191,7 @@ function __stanncam_update_resolution(){
 			__stanncam_center();
 	        break;
 		//borderless windowed
-		case STANNCAM_WINDOW_MODE.borderless:
+		case STANNCAM_WINDOW_MODE.BORDERLESS:
 			if(__obj_stanncam_manager.keep_aspect_ratio){
 				var ratio = global.game_w / global.game_h;
 				global.res_w = display_get_height() * ratio;
@@ -206,8 +206,7 @@ function __stanncam_update_resolution(){
 	        break;
 			
 		//windowed
-	    case STANNCAM_WINDOW_MODE.windowed:
-
+		case STANNCAM_WINDOW_MODE.WINDOWED:
 			if(__obj_stanncam_manager.keep_aspect_ratio){
 				var res_ratio = (__obj_stanncam_manager.display_res_w / __obj_stanncam_manager.display_res_h) / (global.game_w / global.game_h);
 				var game_ratio = global.game_w / global.game_h;
