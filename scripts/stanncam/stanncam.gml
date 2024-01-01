@@ -40,6 +40,9 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	//Like a tv screen, where it can capture itself
 	surface_extra_on = _surface_extra_on;
 	
+	//the first camera uses the application surface
+	use_app_surface = (cam_id == 0) ? true : false;
+	
 	spd = 10; //how fast the camera follows an instance
 	spd_threshold = 50; //the minimum distance the camera is away, for the speed to be in full effect
 	
@@ -490,12 +493,14 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	
 	/// @function __check_surface
 	/// @description checks if surface & surface_extra exists and else creates it
-	/// @param {Real} [_width=width]
-	/// @param {Real} [_height=height]
 	/// @ignore
-	static __check_surface = function(_width=width, _height=height){
-		if(!surface_exists(surface)){
-			surface = surface_create(width, height);
+	static __check_surface = function(){
+		if(use_app_surface){
+			surface = application_surface;
+		} else {
+			if (!surface_exists(surface)){
+				surface = surface_create(width, height);
+			}
 		}
 		
 		if(surface_extra_on && !surface_exists(surface_extra)){
