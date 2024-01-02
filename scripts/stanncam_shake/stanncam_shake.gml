@@ -1,10 +1,10 @@
-/// @description makes an object shake
 /// @function stanncam_shake
-/// @param {Real} time
-/// @param {Real} magnitude
-/// @param {Real} duration
+/// @description makes an object shake
+/// @param {Real} _time
+/// @param {Real} _magnitude
+/// @param {Real} _duration
 /// @returns {Real}
-function stanncam_shake(time, magnitude, duration) {
-	var amount = max(0,(duration-time)/duration);
-	return random_range(-magnitude,magnitude) * amount;
+function stanncam_shake(_time, _magnitude, _duration){
+	var _amount = max(0, (_duration - _time) / _duration);
+	return random_range(-_magnitude, _magnitude) * _amount;
 }

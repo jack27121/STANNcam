@@ -1,2 +1,1 @@
-/// @description
 pointer = false;

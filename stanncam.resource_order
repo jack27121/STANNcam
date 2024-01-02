@@ -38,6 +38,7 @@
     {"name":"obj_tv","order":4,"path":"objects/obj_tv/obj_tv.yy",},
     {"name":"obj_collision","order":1,"path":"objects/obj_collision/obj_collision.yy",},
     {"name":"spr_bg","order":1,"path":"sprites/spr_bg/spr_bg.yy",},
+    {"name":"stanncam_macros","order":3,"path":"scripts/stanncam_macros/stanncam_macros.yy",},
     {"name":"spr_underwater_layer05","order":5,"path":"sprites/spr_underwater_layer05/spr_underwater_layer05.yy",},
     {"name":"spr_ball","order":2,"path":"sprites/spr_ball/spr_ball.yy",},
     {"name":"stanncam_shake","order":2,"path":"scripts/stanncam_shake/stanncam_shake.yy",},

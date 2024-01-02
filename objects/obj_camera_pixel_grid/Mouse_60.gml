@@ -1,5 +1,4 @@
-/// @description
-var zoom_amount = cam1.zoom_amount;
-zoom_amount-=0.01
-zoom_amount = clamp(zoom_amount,0.1,2);
-cam1.zoom(zoom_amount,0);
+var _zoom_amount = cam1.zoom_amount;
+_zoom_amount -= 0.01;
+_zoom_amount = clamp(_zoom_amount, 0.1, 2);
+cam1.zoom(_zoom_amount, 0);
