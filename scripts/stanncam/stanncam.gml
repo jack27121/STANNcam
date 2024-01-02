@@ -41,7 +41,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	surface_extra_on = _surface_extra_on;
 	
 	//the first camera uses the application surface
-	use_app_surface = (cam_id == 0) ? true : false;
+	use_app_surface = cam_id == 0;
 	
 	spd = 10; //how fast the camera follows an instance
 	spd_threshold = 50; //the minimum distance the camera is away, for the speed to be in full effect
