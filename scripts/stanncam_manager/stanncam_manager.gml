@@ -215,7 +215,7 @@ function __stanncam_update_resolution(){
 					global.res_w = __obj_stanncam_manager.display_res_h * _game_ratio;
 					global.res_h = __obj_stanncam_manager.display_res_h;
 				} else {
-					global.res_w = __obj_stanncam_manager.display_res_w ;
+					global.res_w = __obj_stanncam_manager.display_res_w;
 					global.res_h = __obj_stanncam_manager.display_res_w / _game_ratio;
 				}
 			} else {

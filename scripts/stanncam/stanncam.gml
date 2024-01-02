@@ -534,13 +534,13 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			var _new_width = width * _ceiled_zoom;
 			var _new_height = height * _ceiled_zoom;
 		} else {
-			var _new_width  = floor(width *zoom_amount);
+			var _new_width  = floor(width * zoom_amount);
 			var _new_height = floor(height * zoom_amount);
 			
 			var _width_2px = _new_width mod 2;
 			var _height_2px = _new_height mod 2;
 			
-			_new_width  = _new_width - _width_2px ;
+			_new_width  = _new_width - _width_2px;
 			_new_height = _new_height - _height_2px;
 		}
 		//only runs if the size has changed (unless forced, used by __check_viewports to initialize)
