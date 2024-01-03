@@ -735,4 +735,12 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	}
 #endregion
 
+	/**
+	 * @function toString
+	 * @returns {String}
+	 */
+	static toString = function() {
+		return "<stanncam[" + string(cam_id) + "] (" + string(width) + ", " + string(height) + ")>";
+	}
+
 }
