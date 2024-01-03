@@ -251,7 +251,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @param {Real} [_duration=0]
 	/// @ignore
 	static move = function(_x, _y, _duration=0){
-		if(_duration == 0){ //if duration is 0 the view is updated immedietly
+		if(_duration == 0){ //if duration is 0 the view is updated immediately
 			x = _x;
 			y = _y;
 			__update_view_pos();
@@ -274,7 +274,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @param {Real} [_duration=0]
 	/// @ignore
 	static set_size = function(_width, _height, _duration=0){
-		if(_duration == 0){ //if duration is 0 the view is updated immedietly
+		if(_duration == 0){ //if duration is 0 the view is updated immediately
 			width = _width;
 			height = _height;
 			zoom_x = ((width * zoom_amount) - width) * 0.5;
@@ -299,7 +299,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @param {Real} [_duration=0]
 	/// @ignore
 	static offset = function(_offset_x, _offset_y, _duration=0){
-		if(_duration == 0){ //if duration is 0 the view is updated immedietly
+		if(_duration == 0){ //if duration is 0 the view is updated immediately
 			offset_x = _offset_x;
 			offset_y = _offset_y;
 			__update_view_pos();
@@ -321,7 +321,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @param {Real} [_duration=0]
 	/// @ignore
 	static zoom = function(_zoom, _duration=0){
-		if(_duration == 0){ //if duration is 0 the view is updated immedietly
+		if(_duration == 0){ //if duration is 0 the view is updated immediately
 			zoom_amount = _zoom;
 			zoom_x = ((width * zoom_amount) - width) * 0.5;
 			zoom_y = ((height * zoom_amount) - height) * 0.5;
