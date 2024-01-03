@@ -15,8 +15,9 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	if(cam_id == 8){
 		show_error("There can only be a maximum of 8 cameras.", true);
 	}
-	
-	view_camera[cam_id] = camera_create();
+
+	__camera = camera_create();
+	view_camera[cam_id] = __camera;
 	
 	__obj_stanncam_manager.number_of_cams++;
 	
@@ -465,9 +466,10 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @description marks the stanncam as destroyed
 	/// @ignore
 	static destroy = function(){
-		follow = undefined;
+		camera_destroy(__camera);
 		global.stanncams[cam_id] = -1;
 		--__obj_stanncam_manager.number_of_cams;
+		follow = undefined;
 		if(surface_exists(surface)) surface_free(surface);
 		__destroyed = true;
 	}
