@@ -471,6 +471,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		--__obj_stanncam_manager.number_of_cams;
 		follow = undefined;
 		if(surface_exists(surface)) surface_free(surface);
+		if(surface_exists(surface_extra)) surface_free(surface_extra);
 		__destroyed = true;
 	}
 	
