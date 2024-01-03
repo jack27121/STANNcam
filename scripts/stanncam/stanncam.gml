@@ -377,7 +377,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @returns {Real}
 	/// @ignore
 	static get_x = function(){
-		return camera_get_view_x(view_camera[cam_id]);
+		return camera_get_view_x(__camera);
 	}
 	
 	/// @function get_y
@@ -385,7 +385,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @returns {Real}
 	/// @ignore
 	static get_y = function(){
-		return camera_get_view_y(view_camera[cam_id]);
+		return camera_get_view_y(__camera);
 	}
 	
 	/// @function get_mouse_x
@@ -550,7 +550,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		if(_force || surface_get_width(surface) != _new_width || surface_get_height(surface) != _new_height){
 			__check_surface();
 			surface_resize(surface,	_new_width, _new_height);
-			camera_set_view_size(view_camera[cam_id], _new_width, _new_height);
+			camera_set_view_size(__camera, _new_width, _new_height);
 		}
 }
 
@@ -596,7 +596,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			_new_y = ceil(_new_y);
 		}
 		
-		camera_set_view_pos(view_camera[cam_id], _new_x, _new_y);
+		camera_set_view_pos(__camera, _new_x, _new_y);
 	}
 #endregion
 
