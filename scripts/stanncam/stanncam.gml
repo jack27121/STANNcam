@@ -227,19 +227,19 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	static clone = function(){
 		var _clone = new stanncam(x, y, width, height);
 		_clone.surface_extra_on = surface_extra_on;
-		_clone.offset_x		 =   offset_x;
-		_clone.offset_y		 =   offset_y;
-		_clone.spd            =   spd;
-		_clone.spd_threshold  =   spd_threshold;
-		_clone.room_constrain =   room_constrain;
-		_clone.bounds_w       =   bounds_w;
-		_clone.bounds_h       =   bounds_h;
-		_clone.follow         =   follow;
-		_clone.smooth_draw    =   smooth_draw;
-		_clone.anim_curve	 =	 anim_curve;
-		_clone.anim_curve_zoom =	 anim_curve_zoom;
-		_clone.anim_curve_offset =anim_curve_offset;
-		_clone.anim_curve_size  = anim_curve_size;
+		_clone.offset_x = offset_x;
+		_clone.offset_y = offset_y;
+		_clone.spd = spd;
+		_clone.spd_threshold = spd_threshold;
+		_clone.room_constrain = room_constrain;
+		_clone.bounds_w = bounds_w;
+		_clone.bounds_h = bounds_h;
+		_clone.follow = follow;
+		_clone.smooth_draw = smooth_draw;
+		_clone.anim_curve = anim_curve;
+		_clone.anim_curve_zoom = anim_curve_zoom;
+		_clone.anim_curve_offset = anim_curve_offset;
+		_clone.anim_curve_size = anim_curve_size;
 		
 		return _clone;
 	}
