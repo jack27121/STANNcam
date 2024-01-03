@@ -19,7 +19,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	__camera = camera_create();
 	view_camera[cam_id] = __camera;
 	
-	__obj_stanncam_manager.number_of_cams++;
+	++__obj_stanncam_manager.number_of_cams;
 	
 	global.stanncams[cam_id] = self;
 #endregion
