@@ -7,7 +7,8 @@
     {"name":"gui","order":13,"path":"folders/Sprites/gui.yy",},
     {"name":"players","order":15,"path":"folders/Sprites/players.yy",},
     {"name":"tile","order":14,"path":"folders/Sprites/tile.yy",},
-    {"name":"Animation_curves - add more if needed","order":5,"path":"folders/STANNcam/Animation_curves - add more if needed.yy",},
+    {"name":"Animation_curves - add more if needed","order":1,"path":"folders/STANNcam/configurable - edit these to your needs/Animation_curves - add more if needed.yy",},
+    {"name":"configurable - edit these to your needs","order":6,"path":"folders/STANNcam/configurable - edit these to your needs.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"macros","order":2,"path":"scripts/macros/macros.yy",},

@@ -109,33 +109,3 @@ if(keyboard_check_pressed(ord("B"))){
 	cam1.smooth_draw = !cam1.smooth_draw;
 }
 
-//switch resolutions
-if(keyboard_check_pressed(vk_f1))
-{
-	game_res++;
-	if(game_res > 6) game_res = 0;
-	stanncam_set_resolution(resolutions[game_res].w, resolutions[game_res].h);
-}
-
-//switch gui resolutions
-if(keyboard_check_pressed(vk_f2)){
-	gui_res++
-	if(gui_res > 6) gui_res = 0;
-	var _gui_w = resolutions[gui_res].w;
-	var _gui_h = resolutions[gui_res].h;
-	stanncam_set_gui_resolution(_gui_w, _gui_h);
-}
-
-//toggle keep aspect ratio
-if(keyboard_check_pressed(vk_f3)){
-	stanncam_set_keep_aspect_ratio(!stanncam_get_keep_aspect_ratio());
-}
-
-//toggle between window modes
-if(keyboard_check_pressed(vk_f4)){
-	var _window_mode = global.window_mode;
-	_window_mode++;
-	if(_window_mode == 3) _window_mode = 0;
-	
-	stanncam_set_window_mode(_window_mode);
-}

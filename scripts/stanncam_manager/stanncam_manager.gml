@@ -1,9 +1,3 @@
-enum STANNCAM_WINDOW_MODE {
-	WINDOWED,
-	FULLSCREEN,
-	BORDERLESS
-}
-
 /// @function stanncam_init
 /// @description set game dimensions, display resolution, and gui dimensions, it's the same as game scale by default
 /// @param {Real} _game_w
@@ -53,6 +47,16 @@ function stanncam_set_resolution(_resolution_w, _resolution_h){
 	__obj_stanncam_manager.display_res_h = _resolution_h;
 	window_set_size(_resolution_w, _resolution_h);
 	__stanncam_update_resolution();
+}
+
+/// @function stanncam_get_resolution_array
+/// @description returns an array of resolutions using a starting index and an end index
+function stanncam_get_resolution_array(start_i = 0,end_i = array_length(global.stanncam_res)-1){
+	var res_array = [];
+	for (var i = start_i; i <= end_i; i++) {
+	    array_push(res_array,global.stanncam_res[@i]);
+	}
+	return res_array;
 }
 
 /// @function stanncam_set_window_mode(_window_mode)
