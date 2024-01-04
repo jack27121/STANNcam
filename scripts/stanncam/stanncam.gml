@@ -68,6 +68,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	
 	surface = -1;
 	surface_extra = -1;
+	__surface_special = -1;
 	
 	debug_draw = false;
 	
@@ -472,6 +473,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		follow = undefined;
 		if(surface_exists(surface)) surface_free(surface);
 		if(surface_exists(surface_extra)) surface_free(surface_extra);
+		if(surface_exists(__surface_special)) surface_free(__surface_special);
 		__destroyed = true;
 	}
 	
@@ -689,14 +691,22 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @param {Real} [_scale_x=1]
 	/// @param {Real} [_scale_y=1]
 	/// @ignore
-		var _surface_special = surface_create(floor(_surf_width * zoom_amount), floor(_surf_height * zoom_amount));
-		surface_set_target(_surface_special);
 	static draw_special = function(_draw_func, _x, _y, _surf_width=width, _surf_height=height, _scale_x=1, _scale_y=1){
+		var _surf_width_scaled = floor(_surf_width * zoom_amount);
+		var _surf_height_scaled = floor(_surf_height * zoom_amount);
+		if(surface_exists(__surface_special)){
+			if((surface_get_width(__surface_special) != _surf_width_scaled) || (surface_get_height(__surface_special) != _surf_height_scaled)){
+				surface_free(__surface_special);
+			}
+		}
+		if(!surface_exists(__surface_special)){
+			__surface_special = surface_create(_surf_width_scaled, _surf_height_scaled);
+		}
+		surface_set_target(__surface_special);
 		draw_clear_alpha(c_black, 0);
 		_draw_func();
 		surface_reset_target();
-		draw_surf(_surface_special, _x, _y, _scale_x, _scale_y, 0, 0, _surf_width, _surf_height);
-		surface_free(_surface_special);
+		draw_surf(__surface_special, _x, _y, _scale_x, _scale_y, 0, 0, _surf_width, _surf_height);
 	}
 	
 	/// @function draw_surf
