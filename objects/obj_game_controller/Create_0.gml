@@ -1,17 +1,22 @@
-room_goto_next();
+resolution = global.stanncam_res_presets[STANNCAM_RES_PRESETS.DESKTOP_1080P];
 
-//Debug overlay
-show_debug_overlay(true,true,2)
+stanncam_init(320, 180, resolution.width, resolution.height);
+
+#region Debug overlay
+//dbg_add_font_glyphs("text.ttf",14,5);
+show_debug_overlay(true,true,1)
 
 dbgview = dbg_view("settings",true);
-section = dbg_section("Stanncam manager");
 
+section = dbg_section("Stanncam manager");
 #region Change screen resolution
-resolution = global.stanncam_res[STANNCAM_RES.DESKTOP_1080P];
 
 var _ref = ref_create(self,"resolution");
 
-var screen_resolutions = stanncam_get_resolution_array(STANNCAM_RES.DESKTOP_720P,STANNCAM_RES.DESKTOP_4K);
+screen_resolutions = stanncam_get_preset_resolution_range(STANNCAM_RES_PRESETS.DESKTOP_720P,STANNCAM_RES_PRESETS.DESKTOP_4K);
+//inserting an extra 1:1 resolution that isn't part of any preset, you can define and use any resolutions you'd like
+array_insert(screen_resolutions,0,{width: 600, height: 600});
+
 dbg_drop_down(_ref,screen_resolutions);
 
 dbg_same_line();
@@ -21,11 +26,11 @@ dbg_button("apply resolution",function(){
 #endregion
 
 #region Change GUI resolution
-gui_resolution = global.stanncam_res[STANNCAM_RES.DESKTOP_1080P];
+gui_resolution = global.stanncam_res_presets[STANNCAM_RES_PRESETS.DESKTOP_1080P];
 
 _ref = ref_create(self,"gui_resolution");
 
-var gui_resolutions = stanncam_get_resolution_array();
+gui_resolutions = stanncam_get_preset_resolution_range(); //no params defaults to getting all presets
 dbg_drop_down(_ref,gui_resolutions);
 
 dbg_same_line();
@@ -34,25 +39,51 @@ dbg_button("apply GUI resolution",function(){
 })
 #endregion
 
-//switch gui resolutions
-if(keyboard_check_pressed(vk_f2)){
-	gui_res++
-	if(gui_res > 6) gui_res = 0;
-	var _gui_w = resolutions[gui_res].w;
-	var _gui_h = resolutions[gui_res].h;
-	stanncam_set_gui_resolution(_gui_w, _gui_h);
-}
+#region Toggle keep aspect ratio
 
-//toggle keep aspect ratio
-if(keyboard_check_pressed(vk_f3)){
-	stanncam_set_keep_aspect_ratio(!stanncam_get_keep_aspect_ratio());
-}
+keep_aspect_ratio = stanncam_get_keep_aspect_ratio();
+_ref = ref_create(self,"keep_aspect_ratio");
 
-//toggle between window modes
-if(keyboard_check_pressed(vk_f4)){
-	var _window_mode = global.window_mode;
-	_window_mode++;
-	if(_window_mode == 3) _window_mode = 0;
-	
-	stanncam_set_window_mode(_window_mode);
-}
+dbg_text("Keep aspect ratio:");
+dbg_same_line()
+dbg_text(_ref);
+dbg_same_line()
+dbg_button("Toggle",function(){
+	//toggles to keep aspect ratio
+	keep_aspect_ratio  = !stanncam_get_keep_aspect_ratio();
+	stanncam_set_keep_aspect_ratio(keep_aspect_ratio);
+})
+#endregion
+
+#region set window mode
+
+dbg_button("windowed",function(){
+	stanncam_set_windowed()
+});
+dbg_same_line()
+dbg_button("fullscreen",function(){
+	stanncam_set_fullscreen()
+});
+dbg_same_line()
+dbg_button("borderless fullscreen",function(){
+	stanncam_set_borderless()
+});
+#endregion
+section = dbg_section("Switch between example rooms");
+dbg_button("Topdown",function(){
+	room_goto(rm_test);
+})
+dbg_same_line();
+dbg_button("Sidescroller",function(){
+	room_goto(rm_sidescroller);
+})
+dbg_same_line();
+dbg_button("Pixel-grid",function(){
+	room_goto(rm_pixel_grid);
+})
+
+
+
+#endregion
+
+room_goto_next();

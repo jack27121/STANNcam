@@ -49,12 +49,19 @@ function stanncam_set_resolution(_resolution_w, _resolution_h){
 	__stanncam_update_resolution();
 }
 
-/// @function stanncam_get_resolution_array
-/// @description returns an array of resolutions using a starting index and an end index
-function stanncam_get_resolution_array(start_i = 0,end_i = array_length(global.stanncam_res)-1){
+/// @function stanncam_get_preset_resolution_range
+/// @description returns an array of preset resolutions using a starting index and an end index
+/// @param STANNCAM_RES
+function stanncam_get_preset_resolution(stanncam_res){
+	return global.stanncam_res_presets[@stanncam_res];
+}
+
+/// @function stanncam_get_preset_resolution_range
+/// @description returns an array of preset resolutions using a starting index and an end index
+function stanncam_get_preset_resolution_range(start_i = 0,end_i = array_length(global.stanncam_res_presets)-1){
 	var res_array = [];
 	for (var i = start_i; i <= end_i; i++) {
-	    array_push(res_array,global.stanncam_res[@i]);
+	    array_push(res_array,global.stanncam_res_presets[@i]);
 	}
 	return res_array;
 }
