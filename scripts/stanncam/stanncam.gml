@@ -681,7 +681,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	
 	/// @function draw_special
 	/// @description pass in draw commands, and have them be scaled to match the stanncam
-	/// @param {Function} draw_func
+	/// @param {Function} _draw_func
 	/// @param {Real} _x
 	/// @param {Real} _y
 	/// @param {Real} [_surf_width=width]
@@ -689,11 +689,11 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @param {Real} [_scale_x=1]
 	/// @param {Real} [_scale_y=1]
 	/// @ignore
-	static draw_special = function(draw_func, _x, _y, _surf_width=width, _surf_height=height, _scale_x=1, _scale_y=1){
 		var _surface_special = surface_create(floor(_surf_width * zoom_amount), floor(_surf_height * zoom_amount));
 		surface_set_target(_surface_special);
+	static draw_special = function(_draw_func, _x, _y, _surf_width=width, _surf_height=height, _scale_x=1, _scale_y=1){
 		draw_clear_alpha(c_black, 0);
-		draw_func();
+		_draw_func();
 		surface_reset_target();
 		draw_surf(_surface_special, _x, _y, _scale_x, _scale_y, 0, 0, _surf_width, _surf_height);
 		surface_free(_surface_special);
