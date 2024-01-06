@@ -72,6 +72,7 @@
     {"id":{"name":"spr_player_idle","path":"sprites/spr_player_idle/spr_player_idle.yy",},},
     {"id":{"name":"obj_camera_sidescroller","path":"objects/obj_camera_sidescroller/obj_camera_sidescroller.yy",},},
     {"id":{"name":"stanncam_macros","path":"scripts/stanncam_macros/stanncam_macros.yy",},},
+    {"id":{"name":"stanncam_resolution_presets","path":"scripts/stanncam_resolution_presets/stanncam_resolution_presets.yy",},},
     {"id":{"name":"spr_underwater_layer05","path":"sprites/spr_underwater_layer05/spr_underwater_layer05.yy",},},
     {"id":{"name":"spr_ball","path":"sprites/spr_ball/spr_ball.yy",},},
     {"id":{"name":"stanncam_shake","path":"scripts/stanncam_shake/stanncam_shake.yy",},},
