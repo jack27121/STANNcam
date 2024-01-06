@@ -289,3 +289,20 @@ function __stanncam_center(_x=0, _y=0){
 		window_set_position(_x, _y);
 	}
 }
+
+/// @function stanncam_get_preset_resolution_range
+/// @description returns an array of preset resolutions using a starting index and an end index
+/// @param STANNCAM_RES
+function stanncam_get_preset_resolution(stanncam_res){
+	return global.stanncam_res_presets[@stanncam_res];
+}
+
+/// @function stanncam_get_preset_resolution_range
+/// @description returns an array of preset resolutions using a starting index and an end index
+function stanncam_get_preset_resolution_range(start_i = 0,end_i = array_length(global.stanncam_res_presets)-1){
+	var res_array = [];
+	for (var i = start_i; i <= end_i; i++) {
+	    array_push(res_array,global.stanncam_res_presets[@i]);
+	}
+	return res_array;
+}

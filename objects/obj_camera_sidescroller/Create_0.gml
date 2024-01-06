@@ -1,5 +1,19 @@
 //camera
-stanncam_init(400, 270, 1920, 1080);
+game_res = stanncam_get_preset_resolution(STANNCAM_RES_PRESETS.GAME_BOY_ADVANCE_160P);
+resolution = stanncam_get_preset_resolution(STANNCAM_RES_PRESETS.DESKTOP_1080P);
+
+resoulution_array = stanncam_get_preset_resolution_range(STANNCAM_RES_PRESETS.DESKTOP_720P,STANNCAM_RES_PRESETS.DESKTOP_4K)
+array_insert(resoulution_array,0, //adds custom resolution to the array
+	{
+		width: 400,
+		height: 400
+	}
+);
+
+gui_resolution_array = stanncam_get_preset_resolution_range(); //gets all the presets
+
+stanncam_init(game_res.width, game_res.height, 1920, 1080);
+
 cam1 = new stanncam(obj_player_sidescroller.x, obj_player_sidescroller.y, global.game_w, global.game_h);
 cam1.follow = obj_player_sidescroller;
 cam1.room_constrain = true;
@@ -19,16 +33,6 @@ zoom_mode = 1;
 game_res = 2;
 gui_hires = false;
 gui_res = 0;
-
-resolutions = [
-	{w:400, h:400}, //1:1
-	{w:500, h:250}, //2:1
-	{w:320, h:180}, //16:9
-	{w:640, h:360},
-	{w:1280, h:720},
-	{w:1920, h:1080},
-	{w:2560, h:1440}
-];
 
 lookahead = false;
 

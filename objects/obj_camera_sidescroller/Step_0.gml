@@ -74,16 +74,18 @@ if(keyboard_check_pressed(ord("F"))){
 //switch resolutions
 if(keyboard_check_pressed(vk_f1)){
 	game_res++;
-	if(game_res > 6) game_res = 0;
-	stanncam_set_resolution(resolutions[game_res].w, resolutions[game_res].h);
+	if(game_res >= array_length(resoulution_array)) game_res = 0;
+	var _res_w = resoulution_array[game_res].width;
+	var _res_h = resoulution_array[game_res].height;
+	stanncam_set_resolution(_res_w, _res_h);
 }
 
 //switch gui resolutions
 if(keyboard_check_pressed(vk_f2)){
 	gui_res++;
-	if(gui_res > 6) gui_res = 0;
-	var _gui_w = resolutions[gui_res].w;
-	var _gui_h = resolutions[gui_res].h;
+	if(gui_res >= 6) gui_res = 0;
+	var _gui_w = gui_resolution_array[gui_res].width;
+	var _gui_h = gui_resolution_array[gui_res].height;
 	stanncam_set_gui_resolution(_gui_w, _gui_h);
 }
 

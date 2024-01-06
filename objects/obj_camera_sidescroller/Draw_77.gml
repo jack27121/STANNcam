@@ -1,3 +1,6 @@
+//background get's drawn behind, so when the game's aspect ratio doesn't match the windows, there's still some visuals
+draw_sprite_tiled(spr_bg2,0,0,0);
+
 //fancy splitscreen rendering
 var _width = global.res_w;
 var _height = global.res_h;
