@@ -10,6 +10,7 @@ if(keyboard_check_pressed(vk_space)){
 //toggle splitscreen
 if(keyboard_check_pressed(vk_f5)){
 	split_screen = !split_screen;
+	
 	if(split_screen){
 		cam1.set_size(global.game_w * 0.5, global.game_h);
 		

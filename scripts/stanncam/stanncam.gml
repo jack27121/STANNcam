@@ -469,6 +469,8 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	static destroy = function(){
 		camera_destroy(__camera);
 		global.stanncams[cam_id] = -1;
+		view_camera[cam_id] = -1;
+		view_visible[cam_id] = false;
 		--__obj_stanncam_manager.number_of_cams;
 		follow = undefined;
 		if(surface_exists(surface)) surface_free(surface);
