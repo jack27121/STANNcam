@@ -116,20 +116,20 @@ function stanncam_get_keep_aspect_ratio(){
 	return __obj_stanncam_manager.keep_aspect_ratio;
 }
 
-/// @function stanncam_fullscreen_ratio_compensate_x
-/// @description if fullscreen keep_aspect_ratio is on it offsets the x value so the render is in the middle
+/// @function stanncam_ratio_compensate_x
+/// @description if keep_aspect_ratio is on it offsets the x value so the render is in the middle
 /// @returns {Real}
-function stanncam_fullscreen_ratio_compensate_x(){
+function stanncam_ratio_compensate_x(){
 	if(stanncam_get_keep_aspect_ratio()){
 		return (window_get_width() - (global.game_w * __obj_stanncam_manager.__display_scale_x)) * 0.5;
 	}
 	return 0;
 }
 
-/// @function stanncam_fullscreen_ratio_compensate_y
-/// @description if fullscreen keep_aspect_ratio is on it offsets the y value so the render is in the middle
+/// @function stanncam_ratio_compensate_y
+/// @description if keep_aspect_ratio is on it offsets the y value so the render is in the middle
 /// @returns {Real}
-function stanncam_fullscreen_ratio_compensate_y(){
+function stanncam_ratio_compensate_y(){
 	if(stanncam_get_keep_aspect_ratio()){
 		return (window_get_height() - (global.game_h * __obj_stanncam_manager.__display_scale_y)) * 0.5;
 	}
@@ -245,7 +245,7 @@ function __stanncam_update_resolution(){
 			var _gui_x_scale = global.res_w / global.gui_w;
 			var _gui_y_scale = global.res_h / global.gui_h;
 		}
-		display_set_gui_maximize(_gui_x_scale, _gui_y_scale, stanncam_fullscreen_ratio_compensate_x(), stanncam_fullscreen_ratio_compensate_y());
+		display_set_gui_maximize(_gui_x_scale, _gui_y_scale, stanncam_ratio_compensate_x(), stanncam_ratio_compensate_y());
 	}
 }
 
