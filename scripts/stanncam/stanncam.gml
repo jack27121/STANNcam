@@ -629,8 +629,8 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		
 		//Constrains camera to room
 		if(room_constrain){
-			constrain_offset_x = (clamp(_new_x, 0, room_width - width*zoom_amount) - _new_x)  // * clamp(zoom_amount, 0, 1);
-			constrain_offset_y = (clamp(_new_y, 0, room_height - height*zoom_amount) - _new_y)// * clamp(zoom_amount, 0, 1);
+			constrain_offset_x = (clamp(_new_x, 0, room_width  - width*zoom_amount ) - _new_x);
+			constrain_offset_y = (clamp(_new_y, 0, room_height - height*zoom_amount) - _new_y);
 			
 			_new_x += constrain_offset_x;
 			_new_y += constrain_offset_y;

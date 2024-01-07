@@ -48,8 +48,8 @@
   },
   "origin": 4,
   "parent": {
-    "name": "STANNcam",
-    "path": "folders/STANNcam.yy",
+    "name": "Miscellaneous",
+    "path": "folders/STANNcam/Miscellaneous.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
