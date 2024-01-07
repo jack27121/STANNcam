@@ -394,7 +394,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @returns {Real}
 	/// @ignore
 	static get_mouse_x = function(){
-		var _mouse_x = (((display_mouse_get_x() - window_get_x() - stanncam_ratio_compensate_x()) / (__obj_stanncam_manager.__display_scale_x * width)) * width * get_zoom_x()) + get_x();
+		var _mouse_x = (((window_mouse_get_x() - stanncam_ratio_compensate_x()) / (__obj_stanncam_manager.__display_scale_x * width)) * width * get_zoom_x()) + get_x();
 		if(smooth_draw) return _mouse_x;
 		return _mouse_x - (_mouse_x mod get_zoom_x());
 	}
@@ -404,7 +404,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @returns {Real}
 	/// @ignore
 	static get_mouse_y = function(){
-		var _mouse_y = (((display_mouse_get_y() - window_get_y() - stanncam_ratio_compensate_y()) / (__obj_stanncam_manager.__display_scale_y * height)) * height * get_zoom_y()) + get_y();
+		var _mouse_y = (((window_mouse_get_y() - stanncam_ratio_compensate_y()) / (__obj_stanncam_manager.__display_scale_y * height)) * height * get_zoom_y()) + get_y();
 		if(smooth_draw) return _mouse_y;
 		return _mouse_y - (_mouse_y mod get_zoom_y());
 	}

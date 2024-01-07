@@ -29,3 +29,10 @@ switch (global.window_mode) {
 }
 
 draw_text_outline(global.gui_w - 1, _offset * 3, "window mode: " + _window_mode_text + " [F4]", _outline_width, _precision);
+
+var mx = cam1.room_to_gui_x(cam1.get_mouse_x());
+var my = cam1.room_to_gui_y(cam1.get_mouse_y());
+draw_set_halign(fa_left);
+draw_text(mx,my,$"{mx} {my}");
+
+
