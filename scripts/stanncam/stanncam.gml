@@ -494,6 +494,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @ignore
 	static __check_viewports = function(){
 		view_visible[cam_id] = true;
+		view_camera[cam_id] = __camera;
 		__check_surface();
 		__update_view_size(true);
 	}
