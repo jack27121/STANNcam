@@ -524,11 +524,10 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		if(surface_extra_on){
 			surface_copy(surface_extra, 0, 0, surface);
 		}
-		
-		var old_target = surface_get_target();
+
 		surface_set_target(surface);
 		draw_clear_alpha(c_black, 0);
-		__reset_surface(old_target)
+		surface_reset_target()
 		view_set_surface_id(cam_id, surface);
 	}
 	
@@ -605,16 +604,6 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		
 		camera_set_view_pos(__camera, _new_x, _new_y);
 	}
-	
-	/// @function __reset_surface
-	/// @description checks supplied surface,  and goes back to it if it exists, else runs  reset_surface_target
-	/// @ignore
-	static __reset_surface = function(prev_surface){
-		surface_reset_target();
-		if(surface_exists(prev_surface)){
-			surface_set_target(prev_surface)
-		}
-	}
 #endregion
 
 #region Drawing functions
@@ -626,7 +615,6 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		if(debug_draw){
 			//draws camera bounding box
 			if(follow != -1){
-				var old_target = surface_get_target();
 				surface_set_target(surface);
 				
 				var _pre_color = draw_get_color();
@@ -662,7 +650,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 				}
 				
 				draw_set_color(_pre_color);
-				__reset_surface(old_target);
+				surface_reset_target();
 			}
 		}
 	}
@@ -732,12 +720,10 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			__surface_special = surface_create(_surf_width_scaled, _surf_height_scaled);
 		}
 		
-		var old_target = surface_get_target();
-		
 		surface_set_target(__surface_special);
 		draw_clear_alpha(c_black, 0);
 		_draw_func();
-		__reset_surface(old_target);
+		surface_reset_target();
 		
 		draw_surf(__surface_special, _x, _y, _scale_x, _scale_y, 0, 0, _surf_width, _surf_height);
 	}
