@@ -1,4 +1,3 @@
-/// @description 
 if(should_draw){
-	draw_self();	
+	draw_self();
 }
