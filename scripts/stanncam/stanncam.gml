@@ -35,7 +35,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	offset_x = 0;
 	offset_y = 0;
 	
-	follow = undefined;
+	follow = noone;
 	
 	//The extra surface is only neccesary if you are drawing the camera recursively in the room
 	//Like a tv screen, where it can capture itself
@@ -177,7 +177,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		
 		#region zone constrain
 		var _constrain_on = false;
-		if(follow != undefined){
+		if(instance_exists(follow)){
 			var __zone_new = instance_position(follow.x, follow.y, obj_stanncam_zone);
 			if(__zone_new != noone){
 				__zone = __zone_new;
@@ -494,7 +494,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		view_camera[cam_id] = -1;
 		view_visible[cam_id] = false;
 		--__obj_stanncam_manager.number_of_cams;
-		follow = undefined;
+		follow = noone;
 		if(surface_exists(surface)) surface_free(surface);
 		if(surface_exists(surface_extra)) surface_free(surface_extra);
 		if(surface_exists(__surface_special)) surface_free(__surface_special);
@@ -662,7 +662,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	static __debug_draw = function(){
 		if(debug_draw){
 			//draws camera bounding box
-			if(follow != -1){
+			if(instance_exists(follow)){
 				surface_set_target(surface);
 				
 				var _pre_color = draw_get_color();
