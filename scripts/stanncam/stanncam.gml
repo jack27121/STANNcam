@@ -79,6 +79,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	__zone = noone;
 	__zone_constrain_x = 0;
 	__zone_constrain_y = 0;
+	__zone_active = false;
 	zone_constrain_speed = 0.1;
 
 	#region animation variables
@@ -178,15 +179,14 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		#endregion
 		
 		#region zone constrain
-		var _constrain_on = false;
 		if(instance_exists(follow)){
 			var __zone_new = instance_position(follow.x, follow.y, obj_stanncam_zone);
 			if(__zone_new != noone){
 				__zone = __zone_new;
-				_constrain_on = true;
-			}
+				__zone_active = true;
+			} else __zone_active = false;
 		}
-		if(_constrain_on){
+		if(__zone_active){
 			__zone_constrain_amount = lerp(__zone_constrain_amount, 1, zone_constrain_speed);
 		} else {
 			__zone_constrain_amount = lerp(__zone_constrain_amount, 0, zone_constrain_speed);
@@ -449,6 +449,16 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @ignore
 	static room_to_gui_y = function(_y){
 		return ((_y - get_y() - y_frac) / get_zoom_y()) * stanncam_get_gui_scale_y();
+	}
+	
+	/// @function get_active_zone
+	/// @description returns the active zone the followed instance is within, noone if outside, or no instance is followed
+	/// @returns {Instance id}
+	/// @ignore
+	static get_active_zone = function(){
+		if(__zone_active){
+			return __zone;	
+		} else return noone;
 	}
 	
 	/// @function room_to_display_x
