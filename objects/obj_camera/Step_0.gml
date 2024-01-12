@@ -1,7 +1,7 @@
 //toggle following player
 if(keyboard_check_pressed(vk_space)){
-	if(cam1.follow != undefined){
-		cam1.follow = undefined;
+	if(instance_exists(cam1.follow)){
+		cam1.follow = noone;
 	} else {
 		cam1.follow = obj_player;
 	}
