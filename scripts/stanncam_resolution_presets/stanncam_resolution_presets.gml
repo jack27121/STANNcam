@@ -1,16 +1,15 @@
-//more common tablet and phone resolutions can be found here 
-// https://gist.github.com/JujuAdams/dcae208b947c337a5e2f55f05bb64fdc
+//more common tablet and phone resolutions can be found here:
+//https://github.com/JujuAdams/ResolutionLibrary/blob/main/resLib.gml
 
-//more old console resolutions can be found here
-// https://emulation.gametechwiki.com/index.php/Resolution
+//more old console resolutions can be found here:
+//https://emulation.gametechwiki.com/index.php/Resolution
 
 //this is just presets, if you define your own to use, don't do it in this file, as it may get changed in future versions
 
 //you most likely want to just pick one retro resolution for your game and gui
 //and then expose the desktop resolutions to the player in a settings menu, but it's up to you
 
-enum STANNCAM_RES_PRESETS
-{
+enum STANNCAM_RES_PRESETS {
 	//Retro consoles
 	ATARI_192P,
 	NES_240P,
@@ -21,12 +20,12 @@ enum STANNCAM_RES_PRESETS
 	NINTENDO_64_320_X_240,
 	PLAYSTATION_512_X_224,
 	
-    //Desktop and console
-    DESKTOP_720P,
-    DESKTOP_1366_X_768,
-    DESKTOP_1080P,
-    DESKTOP_1440P,
-    DESKTOP_4K,
+	//Desktop and console
+	DESKTOP_720P,
+	DESKTOP_1366_X_768,
+	DESKTOP_1080P,
+	DESKTOP_1440P,
+	DESKTOP_4K,
 }
 
 global.stanncam_res_presets = [];

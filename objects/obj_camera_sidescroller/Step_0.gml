@@ -74,9 +74,9 @@ if(keyboard_check_pressed(ord("F"))){
 //switch resolutions
 if(keyboard_check_pressed(vk_f1)){
 	game_res++;
-	if(game_res >= array_length(resoulution_array)) game_res = 0;
-	var _res_w = resoulution_array[game_res].width;
-	var _res_h = resoulution_array[game_res].height;
+	if(game_res >= array_length(resolution_array)) game_res = 0;
+	var _res_w = resolution_array[game_res].width;
+	var _res_h = resolution_array[game_res].height;
 	stanncam_set_resolution(_res_w, _res_h);
 }
 

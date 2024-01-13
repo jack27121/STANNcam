@@ -2,8 +2,8 @@
 game_res = stanncam_get_preset_resolution(STANNCAM_RES_PRESETS.GAME_BOY_ADVANCE_160P);
 resolution = stanncam_get_preset_resolution(STANNCAM_RES_PRESETS.DESKTOP_1080P);
 
-resoulution_array = stanncam_get_preset_resolution_range(STANNCAM_RES_PRESETS.DESKTOP_720P,STANNCAM_RES_PRESETS.DESKTOP_4K)
-array_insert(resoulution_array,0, //adds custom resolution to the array
+resolution_array = stanncam_get_preset_resolution_range(STANNCAM_RES_PRESETS.DESKTOP_720P, STANNCAM_RES_PRESETS.DESKTOP_4K);
+array_insert(resolution_array, 0, //adds custom resolution to the array
 	{
 		width: 400,
 		height: 400
