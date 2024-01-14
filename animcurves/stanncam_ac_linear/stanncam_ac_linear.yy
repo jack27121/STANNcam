@@ -11,6 +11,6 @@
   "function": 0,
   "parent": {
     "name": "Animation_curves - add more if needed",
-    "path": "folders/STANNcam/Animation_curves - add more if needed.yy",
+    "path": "folders/STANNcam/Miscellaneous/Animation_curves - add more if needed.yy",
   },
 }

@@ -289,3 +289,26 @@ function __stanncam_center(_x=0, _y=0){
 		window_set_position(_x, _y);
 	}
 }
+
+/// @function stanncam_get_preset_resolution
+/// @description gets a resolution preset
+/// @param {Real} _preset_index
+/// @returns {Struct}
+function stanncam_get_preset_resolution(_preset_index){
+	return global.stanncam_res_presets[@ _preset_index];
+}
+
+/// @function stanncam_get_preset_resolution_range
+/// @description returns an array of preset resolutions using a starting index and an end index
+/// @param {Real} [_start_i=0]
+/// @param {Real} [_end_i=array_length(global.stanncam_res_presets)-1]
+/// @returns {Array<Struct>}
+function stanncam_get_preset_resolution_range(_start_i=0, _end_i=array_length(global.stanncam_res_presets)-1){
+	var _start = min(_start_i, _end_i);
+	var _end = max(_start_i, _end_i);
+	var _res_array = [];
+	for (var i = _start; i <= _end; ++i){
+		array_push(_res_array, stanncam_get_preset_resolution(i));
+	}
+	return _res_array;
+}
