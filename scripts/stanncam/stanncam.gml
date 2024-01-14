@@ -418,7 +418,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @returns {Real}
 	/// @ignore
 	static get_mouse_x = function(){
-		var _mouse_x = (((display_mouse_get_x() - window_get_x() - stanncam_fullscreen_ratio_compensate_x()) / (__obj_stanncam_manager.__display_scale_x * width)) * width * get_zoom_x()) + get_x();
+		var _mouse_x = (((window_mouse_get_x() - stanncam_ratio_compensate_x()) / (__obj_stanncam_manager.__display_scale_x * width)) * width * get_zoom_x()) + get_x();
 		if(smooth_draw) return _mouse_x;
 		return _mouse_x - (_mouse_x mod get_zoom_x());
 	}
@@ -428,7 +428,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @returns {Real}
 	/// @ignore
 	static get_mouse_y = function(){
-		var _mouse_y = (((display_mouse_get_y() - window_get_y() - stanncam_fullscreen_ratio_compensate_y()) / (__obj_stanncam_manager.__display_scale_y * height)) * height * get_zoom_y()) + get_y();
+		var _mouse_y = (((window_mouse_get_y() - stanncam_ratio_compensate_y()) / (__obj_stanncam_manager.__display_scale_y * height)) * height * get_zoom_y()) + get_y();
 		if(smooth_draw) return _mouse_y;
 		return _mouse_y - (_mouse_y mod get_zoom_y());
 	}
@@ -528,6 +528,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @ignore
 	static __check_viewports = function(){
 		view_visible[cam_id] = true;
+		view_camera[cam_id] = __camera;
 		__check_surface();
 		__update_view_size(true);
 	}
@@ -557,9 +558,10 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		if(surface_extra_on){
 			surface_copy(surface_extra, 0, 0, surface);
 		}
+
 		surface_set_target(surface);
 		draw_clear_alpha(c_black, 0);
-		surface_reset_target();
+		surface_reset_target()
 		view_set_surface_id(cam_id, surface);
 	}
 	
@@ -730,6 +732,19 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		draw_surf(surface, _x, _y, _scale_x, _scale_y, 0, 0, width, height);
 	}
 	
+	/// @function draw_no_compensate
+	/// @description draws stanncam but without being offset by stanncam_ratio_compensate
+	/// @param {Real} _x
+	/// @param {Real} _y
+	/// @param {Real} [_scale_x=1]
+	/// @param {Real} [_scale_y=1]
+	/// @ignore
+	static draw_no_compensate = function(_x, _y, _scale_x=1, _scale_y=1){
+		__check_surface();
+		__debug_draw();
+		draw_surf(surface, _x, _y, _scale_x, _scale_y, 0, 0, width, height, false);
+	}
+	
 	/// @function draw_part
 	/// @description draws part of stanncam
 	/// @param {Real} _x
@@ -768,10 +783,12 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		if(!surface_exists(__surface_special)){
 			__surface_special = surface_create(_surf_width_scaled, _surf_height_scaled);
 		}
+		
 		surface_set_target(__surface_special);
 		draw_clear_alpha(c_black, 0);
 		_draw_func();
 		surface_reset_target();
+		
 		draw_surf(__surface_special, _x, _y, _scale_x, _scale_y, 0, 0, _surf_width, _surf_height);
 	}
 	
@@ -786,14 +803,17 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @param {Real} [_top=0]
 	/// @param {Real} [_width=surface_get_width(_surface)]
 	/// @param {Real} [_height=surface_get_height(_surface)]
+	/// @param {Bool} [_ratio_compensate=true]
 	/// @ignore
-	static draw_surf = function(_surface, _x, _y, _scale_x=1, _scale_y=1, _left=0, _top=0, _width=surface_get_width(_surface), _height=surface_get_height(_surface)){
+	static draw_surf = function(_surface, _x, _y, _scale_x=1, _scale_y=1, _left=0, _top=0, _width=surface_get_width(_surface), _height=surface_get_height(_surface), _ratio_compensate = true){
 		//offsets position to match with display resoultion
 		_x *= (global.res_w / global.game_w);
 		_y *= (global.res_h / global.game_h);
 		
-		_x += stanncam_fullscreen_ratio_compensate_x();
-		_y += stanncam_fullscreen_ratio_compensate_y();
+		if(_ratio_compensate){
+			_x += stanncam_ratio_compensate_x();
+			_y += stanncam_ratio_compensate_y();
+		}
 		
 		if(smooth_draw){
 		//draws super smooth both when moving and zooming

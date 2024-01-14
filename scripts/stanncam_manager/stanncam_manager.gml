@@ -116,20 +116,20 @@ function stanncam_get_keep_aspect_ratio(){
 	return __obj_stanncam_manager.keep_aspect_ratio;
 }
 
-/// @function stanncam_fullscreen_ratio_compensate_x
-/// @description if fullscreen keep_aspect_ratio is on it offsets the x value so the render is in the middle
+/// @function stanncam_ratio_compensate_x
+/// @description if keep_aspect_ratio is on it offsets the x value so the render is in the middle
 /// @returns {Real}
-function stanncam_fullscreen_ratio_compensate_x(){
+function stanncam_ratio_compensate_x(){
 	if(stanncam_get_keep_aspect_ratio()){
 		return (window_get_width() - (global.game_w * __obj_stanncam_manager.__display_scale_x)) * 0.5;
 	}
 	return 0;
 }
 
-/// @function stanncam_fullscreen_ratio_compensate_y
-/// @description if fullscreen keep_aspect_ratio is on it offsets the y value so the render is in the middle
+/// @function stanncam_ratio_compensate_y
+/// @description if keep_aspect_ratio is on it offsets the y value so the render is in the middle
 /// @returns {Real}
-function stanncam_fullscreen_ratio_compensate_y(){
+function stanncam_ratio_compensate_y(){
 	if(stanncam_get_keep_aspect_ratio()){
 		return (window_get_height() - (global.game_h * __obj_stanncam_manager.__display_scale_y)) * 0.5;
 	}
@@ -245,7 +245,7 @@ function __stanncam_update_resolution(){
 			var _gui_x_scale = global.res_w / global.gui_w;
 			var _gui_y_scale = global.res_h / global.gui_h;
 		}
-		display_set_gui_maximize(_gui_x_scale, _gui_y_scale, stanncam_fullscreen_ratio_compensate_x(), stanncam_fullscreen_ratio_compensate_y());
+		display_set_gui_maximize(_gui_x_scale, _gui_y_scale, stanncam_ratio_compensate_x(), stanncam_ratio_compensate_y());
 	}
 }
 
@@ -288,4 +288,27 @@ function __stanncam_center(_x=0, _y=0){
 	if(_outside_view){
 		window_set_position(_x, _y);
 	}
+}
+
+/// @function stanncam_get_preset_resolution
+/// @description gets a resolution preset
+/// @param {Real} _preset_index
+/// @returns {Struct}
+function stanncam_get_preset_resolution(_preset_index){
+	return global.stanncam_res_presets[@ _preset_index];
+}
+
+/// @function stanncam_get_preset_resolution_range
+/// @description returns an array of preset resolutions using a starting index and an end index
+/// @param {Real} [_start_i=0]
+/// @param {Real} [_end_i=array_length(global.stanncam_res_presets)-1]
+/// @returns {Array<Struct>}
+function stanncam_get_preset_resolution_range(_start_i=0, _end_i=array_length(global.stanncam_res_presets)-1){
+	var _start = min(_start_i, _end_i);
+	var _end = max(_start_i, _end_i);
+	var _res_array = [];
+	for (var i = _start; i <= _end; ++i){
+		array_push(_res_array, stanncam_get_preset_resolution(i));
+	}
+	return _res_array;
 }
