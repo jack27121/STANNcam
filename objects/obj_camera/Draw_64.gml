@@ -24,9 +24,10 @@ draw_text_outline(1, _offset * 4, "[RMB] Zoom amount: " + string(zoom_text), _ou
 var _constrained = (cam1.room_constrain) ? "camera constrained to room" : "camera not constrained to room";
 draw_text_outline(1, _offset * 5, "[CTRL] " + _constrained, _outline_width, _precision);
 draw_text_outline(1, _offset * 6, "[F] camera shake", _outline_width, _precision);
-draw_text_outline(1, _offset * 7, "[Tab] camera speed " + string(cam1.spd), _outline_width, _precision);
-draw_text_outline(1, _offset * 8, "[B] smooth_draw: " + (cam1.smooth_draw ? "ON" : "OFF"), _outline_width, _precision);
-draw_text_outline(1, _offset * 9, "[1 & 2 & 3] to switch between example rooms", _outline_width, _precision);
+draw_text_outline(1, _offset * 7, "[P] camera paused: " + (cam1.get_paused() ? "ON" : "OFF"), _outline_width, _precision);
+draw_text_outline(1, _offset * 8, "[Tab] camera speed " + string(cam1.spd), _outline_width, _precision);
+draw_text_outline(1, _offset * 9, "[B] smooth_draw: " + (cam1.smooth_draw ? "ON" : "OFF"), _outline_width, _precision);
+draw_text_outline(1, _offset * 10, "[1 & 2 & 3] to switch between example rooms", _outline_width, _precision);
 
 //draw current resolution text
 draw_set_halign(fa_right)
