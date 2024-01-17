@@ -28,10 +28,8 @@ if(keyboard_check_pressed(ord("F"))){
 
 //toggle camera pause
 if(keyboard_check_pressed(ord("P"))){
-	var _paused = false;
 	if(is_instanceof(cam1, stanncam)){
-		_paused = !cam1.get_paused();
-		cam1.set_paused(_paused);
+		cam1.toggle_paused();
 	}
 }
 

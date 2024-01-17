@@ -76,11 +76,8 @@ if(keyboard_check_pressed(ord("P"))){
 	var _paused = false;
 	if(is_instanceof(cam1, stanncam)){
 		_paused = !cam1.get_paused();
-		cam1.set_paused(_paused);
 	}
-	if(is_instanceof(cam2, stanncam)){
-		cam2.set_paused(_paused);
-	}
+	stanncam_set_cameras_paused(_paused);
 }
 
 //switch resolutions

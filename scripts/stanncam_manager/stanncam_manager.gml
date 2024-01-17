@@ -349,33 +349,3 @@ function stanncam_cameras_pause() {
 function stanncam_cameras_unpause() {
 	return stanncam_set_cameras_paused(false);
 }
-
-/// @function stanncam_get_cameras_paused
-/// @description returns cameras that are in a paused state
-/// @returns {Array<Struct>}
-function stanncam_get_cameras_paused() {
-	var _array = [];
-	var _len = array_length(global.stanncams);
-	for (var i = 0; i < _len; ++i){
-		var _camera = global.stanncams[i];
-		if(is_instanceof(_camera, stanncam) && _camera.get_paused()){
-			array_push(_array, _camera);
-		}
-	}
-	return _array;
-}
-
-/// @function stanncam_get_cameras_unpaused
-/// @description returns cameras that are not in a paused state
-/// @returns {Array<Struct>}
-function stanncam_get_cameras_unpaused() {
-	var _array = [];
-	var _len = array_length(global.stanncams);
-	for (var i = 0; i < _len; ++i){
-		var _camera = global.stanncams[i];
-		if(is_instanceof(_camera, stanncam) && !_camera.get_paused()){
-			array_push(_array, _camera);
-		}
-	}
-	return _array;
-}
