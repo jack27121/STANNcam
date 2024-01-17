@@ -312,3 +312,40 @@ function stanncam_get_preset_resolution_range(_start_i=0, _end_i=array_length(gl
 	}
 	return _res_array;
 }
+
+/// @function stanncam_toggle_cameras_paused
+/// @description toggles camera's paused state
+function stanncam_toggle_cameras_paused() {
+	var _len = array_length(global.stanncams);
+	for (var i = 0; i < _len; ++i){
+		var _camera = global.stanncams[i];
+		if(is_instanceof(_camera, stanncam)){
+			_camera.toggle_paused();
+		}
+	}
+}
+
+/// @function stanncam_set_cameras_paused
+/// @description sets all cameras to paused state
+/// @param {Bool} _paused
+function stanncam_set_cameras_paused(_paused) {
+	var _len = array_length(global.stanncams);
+	for (var i = 0; i < _len; ++i){
+		var _camera = global.stanncams[i];
+		if(is_instanceof(_camera, stanncam)){
+			_camera.set_paused(_paused);
+		}
+	}
+}
+
+/// @function stanncam_cameras_pause
+/// @description sets all cameras to paused state
+function stanncam_cameras_pause() {
+	return stanncam_set_cameras_paused(true);
+}
+
+/// @function stanncam_cameras_unpause
+/// @description sets all cameras to an unpaused state
+function stanncam_cameras_unpause() {
+	return stanncam_set_cameras_paused(false);
+}

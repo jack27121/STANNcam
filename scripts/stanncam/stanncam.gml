@@ -74,6 +74,8 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	
 	__destroyed = false;
 
+	paused = false;
+
 	#region animation variables
 	
 	//moving
@@ -135,6 +137,12 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @description gets called every step
 	/// @ignore
 	static __step = function(){
+
+		//camera doesn't update if paused
+		if(get_paused()){
+			return;
+		}
+
 		#region moving
 		if(instance_exists(follow)){
 	
@@ -214,7 +222,6 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		#endregion
 		
 		__update_view_size();
-		
 		__update_view_pos();
 	}
 #endregion
@@ -241,6 +248,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		_clone.anim_curve_zoom = anim_curve_zoom;
 		_clone.anim_curve_offset = anim_curve_offset;
 		_clone.anim_curve_size = anim_curve_size;
+		_clone.paused = paused;
 		
 		return _clone;
 	}
@@ -326,7 +334,9 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			zoom_amount = _zoom;
 			zoom_x = ((width * zoom_amount) - width) * 0.5;
 			zoom_y = ((height * zoom_amount) - height) * 0.5;
-			__update_view_size();
+			if(!get_paused()) {
+				__update_view_size();
+			}
 		} else {
 			__zooming = true;
 			__t_zoom = 0;
@@ -372,7 +382,27 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		spd = _spd;
 		spd_threshold = _threshold;
 	}
-	
+
+	/// @function set_paused
+	/// @description sets camera paused state
+	/// @param {Bool} _paused
+	static set_paused = function(_paused) {
+		paused = _paused;
+	}
+
+	/// @function get_paused
+	/// @description gets camera's paused state
+	/// @returns {Bool}
+	static get_paused = function() {
+		return paused;
+	}
+
+	/// @function toggle_paused
+	/// @description toggles the camera's paused state
+	static toggle_paused = function() {
+		set_paused(!get_paused());
+	}
+
 	/// @function get_x
 	/// @description get camera corner x position. if need the middle of the camera use x
 	/// @returns {Real}

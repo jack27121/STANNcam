@@ -3,7 +3,7 @@ stanncam_init(320, 180, 1920, 1080);
 cam1 = new stanncam(obj_player.x, obj_player.y, global.game_w, global.game_h, 0, 0);
 cam1.follow = obj_player;
 
-cam2 = -1;
+cam2 = undefined;
 
 split_screen = false;
 
