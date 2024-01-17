@@ -431,17 +431,17 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @description returns the room x position as the position on the display relative to camera
 	/// @param {Real} _x
 	/// @returns {Real}
-	// function room_to_display_x(_x){
-	// 	return (_x - get_x()) * stanncam_get_res_scale_x() / zoom_amount;
-	// }
+	function room_to_display_x(_x){
+		return ((_x - get_x() - x_frac) / get_zoom_x()) * stanncam_get_res_scale_x();
+	}
 	
 	/// @function room_to_display_y
 	/// @description returns the room y position as the position on the display relative to camera
 	/// @param {Real} _y
 	/// @returns {Real}
-	//function room_to_display_y(_y){
-	//	return (_y - get_y()) * stanncam_get_res_scale_y() / zoom_amount;
-	//}
+	function room_to_display_y(_y){
+		return ((_y - get_y() - y_frac) / get_zoom_y()) * stanncam_get_res_scale_y();
+	}
 	
 	/// @function out_of_bounds
 	/// @description returns if the position is outside of camera bounds
