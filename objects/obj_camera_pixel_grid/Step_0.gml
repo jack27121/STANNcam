@@ -49,9 +49,11 @@ if(keyboard_check_pressed(vk_f3)){
 if(keyboard_check_pressed(vk_f4)){
 	var _window_mode = global.window_mode;
 	_window_mode++;
-	if(_window_mode == 3) _window_mode = 0;
+	if(_window_mode == STANNCAM_WINDOW_MODE.__SIZE){
+		_window_mode = 0;
+	}
 	
-	stanncam_set_window_mode(_window_mode)
+	stanncam_set_window_mode(_window_mode);
 }
 
 //move camera one pixel
