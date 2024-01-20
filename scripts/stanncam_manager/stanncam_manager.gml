@@ -1,3 +1,5 @@
+// Feather disable all
+
 enum STANNCAM_WINDOW_MODE {
 	WINDOWED,
 	FULLSCREEN,

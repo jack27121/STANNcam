@@ -1,3 +1,5 @@
+// Feather disable all
+
 /// @constructor stanncam
 /// @description creates a new stanncam
 /// @param {Real} [_x=0] - X position
