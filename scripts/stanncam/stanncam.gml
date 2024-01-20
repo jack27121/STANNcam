@@ -453,12 +453,13 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	
 	/// @function get_active_zone
 	/// @description returns the active zone the followed instance is within, noone if outside, or no instance is followed
-	/// @returns {Instance id}
+	/// @returns {Id.Instance|Noone}
 	/// @ignore
 	static get_active_zone = function(){
 		if(__zone_active){
-			return __zone;	
-		} else return noone;
+			return __zone;
+		}
+		return noone;
 	}
 	
 	/// @function room_to_display_x
