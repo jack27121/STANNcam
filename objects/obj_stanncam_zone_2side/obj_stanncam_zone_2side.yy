@@ -1,9 +1,8 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_stanncam_zone",
+  "name": "obj_stanncam_zone_2side",
   "eventList": [
-    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,},
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
   ],
   "managed": true,
@@ -12,7 +11,10 @@
     "name": "STANNcam",
     "path": "folders/STANNcam.yy",
   },
-  "parentObjectId": null,
+  "parentObjectId": {
+    "name": "obj_stanncam_zone",
+    "path": "objects/obj_stanncam_zone/obj_stanncam_zone.yy",
+  },
   "persistent": false,
   "physicsAngularDamping": 0.1,
   "physicsDensity": 0.5,
@@ -28,11 +30,16 @@
   "physicsStartAwake": true,
   "properties": [
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"should_draw","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"0","varType":3,},
+    {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"constrain_dimension","filters":[],"listItems":[
+        "\"Both\"",
+        "\"Horizontal\"",
+        "\"Vertical\"",
+      ],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"\"Both\"","varType":6,},
   ],
   "solid": false,
   "spriteId": {
-    "name": "stanncam_camzone",
-    "path": "sprites/stanncam_camzone/stanncam_camzone.yy",
+    "name": "stanncam_camzone_2side",
+    "path": "sprites/stanncam_camzone_2side/stanncam_camzone_2side.yy",
   },
   "spriteMaskId": null,
   "visible": true,

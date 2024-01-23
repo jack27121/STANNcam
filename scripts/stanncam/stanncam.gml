@@ -76,7 +76,8 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	
 	//zone constrain
 	__zone_constrain_amount = 0;
-	__zone = noone;
+	__zones = ds_list_create();
+	__zone_count = 0;
 	__zone_constrain_x = 0;
 	__zone_constrain_y = 0;
 	__zone_active = false;
@@ -180,9 +181,8 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		
 		#region zone constrain
 		if(instance_exists(follow)){
-			var __zone_new = instance_position(follow.x, follow.y, obj_stanncam_zone);
-			if(__zone_new != noone){
-				__zone = __zone_new;
+			__zone_count = instance_position_list(follow.x, follow.y, obj_stanncam_zone,__zones,false);
+			if(__zone_count > 0){
 				__zone_active = true;
 			} else __zone_active = false;
 		}
@@ -613,33 +613,63 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		_new_y -= zoom_y;
 				
 		//zone constricting
-		if(instance_exists(__zone)){
-			if(__zone.constrain_dimension == "Horizontal" || __zone.constrain_dimension == "Both"){
+		if(__zone_count > 0){
+			//if(__zone.constrain_dimension == "Horizontal" || __zone.constrain_dimension == "Both"){
+			//	
+			//	var _left = max(0, __zone.bbox_left - _new_x);
+			//	var _right = -max(0, _new_x + (width * zoom_amount) - __zone.bbox_right);
+			//	
+			//	if(__zone.sprite_width <= (width * zoom_amount)){
+			//		var _constrained_x = (__zone.x - (width * zoom_amount) * 0.5) - _new_x;
+			//	} else {
+			//		var _constrained_x = _left + _right; 
+			//	}
+			//	__zone_constrain_x = lerp(0, _constrained_x, __zone_constrain_amount);
+			//	_new_x += __zone_constrain_x;
+			//}
+			//
+			//if(__zone.constrain_dimension == "Vertical" || __zone.constrain_dimension == "Both"){
+			//	var _top = max(0, __zone.bbox_top - _new_y);
+			//	var _bottom = -max(0, _new_y + (height * zoom_amount) - __zone.bbox_bottom);
+			//	
+			//	if(__zone.sprite_height <= (height * zoom_amount)){
+			//		var _constrained_y = (__zone.y - (height * zoom_amount) * 0.5) - _new_y;
+			//	} else {
+			//		var _constrained_y = _top + _bottom;
+			//	}
+			//	__zone_constrain_y = lerp(0, _constrained_y, __zone_constrain_amount);
+			//	_new_y += __zone_constrain_y;
+			//}
+			
+			for (var i = 0; i < __zone_count; ++i) {
+			    
+				var zone = __zones[|i];
 				
-				var _left = max(0, __zone.bbox_left - _new_x);
-				var _right = -max(0, _new_x + (width * zoom_amount) - __zone.bbox_right);
-				
-				if(__zone.sprite_width <= (width * zoom_amount)){
-					var _constrained_x = (__zone.x - (width * zoom_amount) * 0.5) - _new_x;
-				} else {
-					var _constrained_x = _left + _right; 
+				//constrains left
+				if(zone.left){
+					_new_x = max(_new_x,zone.bbox_left);
 				}
-				__zone_constrain_x = lerp(0, _constrained_x, __zone_constrain_amount);
-				_new_x += __zone_constrain_x;
+				
+				//constrain top
+				if(zone.top){
+					_new_y = max(_new_y,zone.bbox_top);
+				}
+				
+				//constrains right
+				if(zone.right){					
+					_new_x = min(_new_x + width,zone.bbox_right)-width;
+				}
+				
+				//constrains bottom
+				if(zone.bottom){					
+					_new_y = min(_new_y + height,zone.bbox_bottom)-height;
+				}
+				
 			}
 			
-			if(__zone.constrain_dimension == "Vertical" || __zone.constrain_dimension == "Both"){
-				var _top = max(0, __zone.bbox_top - _new_y);
-				var _bottom = -max(0, _new_y + (height * zoom_amount) - __zone.bbox_bottom);
-				
-				if(__zone.sprite_height <= (height * zoom_amount)){
-					var _constrained_y = (__zone.y - (height * zoom_amount) * 0.5) - _new_y;
-				} else {
-					var _constrained_y = _top + _bottom;
-				}
-				__zone_constrain_y = lerp(0, _constrained_y, __zone_constrain_amount);
-				_new_y += __zone_constrain_y;
-			}
+			
+			
+			
 		}
 		
 		//Constrains camera to room
