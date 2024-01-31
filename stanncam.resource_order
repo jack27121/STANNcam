@@ -1,5 +1,6 @@
 {
   "FolderOrderSettings": [
+    {"name":"Zones","order":5,"path":"folders/STANNcam/Zones.yy",},
     {"name":"sprites","order":3,"path":"folders/STANNcam/Miscellaneous/sprites.yy",},
   ],
   "ResourceOrderSettings": [

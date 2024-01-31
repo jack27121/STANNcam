@@ -24,6 +24,7 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"players","folderPath":"folders/Sprites/players.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"tile","folderPath":"folders/Sprites/tile.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"STANNcam","folderPath":"folders/STANNcam.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Zones","folderPath":"folders/STANNcam/Zones.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Miscellaneous","folderPath":"folders/STANNcam/Miscellaneous.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Animation_curves - add more if needed","folderPath":"folders/STANNcam/Miscellaneous/Animation_curves - add more if needed.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"sprites","folderPath":"folders/STANNcam/Miscellaneous/sprites.yy",},

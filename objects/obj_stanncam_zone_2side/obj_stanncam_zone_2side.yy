@@ -8,8 +8,8 @@
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "STANNcam",
-    "path": "folders/STANNcam.yy",
+    "name": "Zones",
+    "path": "folders/STANNcam/Zones.yy",
   },
   "parentObjectId": {
     "name": "obj_stanncam_zone",
