@@ -1,1 +1,6 @@
+# GameMaker files
 *.resource_order
+
+# Stitch files
+stitch.config.json
+tmp/

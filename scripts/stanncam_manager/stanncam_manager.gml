@@ -1,7 +1,10 @@
+// Feather disable all
+
 enum STANNCAM_WINDOW_MODE {
 	WINDOWED,
 	FULLSCREEN,
-	BORDERLESS
+	BORDERLESS,
+	__SIZE
 }
 
 /// @function stanncam_init
@@ -16,7 +19,9 @@ enum STANNCAM_WINDOW_MODE {
 function stanncam_init(_game_w, _game_h, _resolution_w=_game_w, _resolution_h=_game_h, _gui_w=_game_w, _gui_h=_game_h, _window_mode=STANNCAM_WINDOW_MODE.WINDOWED){
 	
 	//if one already exists it is destroyed
-	if(instance_exists(__obj_stanncam_manager)) instance_destroy(__obj_stanncam_manager);
+	if(instance_exists(__obj_stanncam_manager)){
+		instance_destroy(__obj_stanncam_manager);
+	}
 	
 	instance_create_depth(0, 0, 0, __obj_stanncam_manager);
 	
@@ -42,6 +47,17 @@ function stanncam_init(_game_w, _game_h, _resolution_w=_game_w, _resolution_h=_g
 	
 	__obj_stanncam_manager.resize_width = window_get_width();
 	__obj_stanncam_manager.resize_height = window_get_height();
+	
+	//check if stanncam manager has been deactivated and if so throw an error
+	global.stanncam_time_source = time_source_create(time_source_global, 1, time_source_units_frames, function(){
+	if(!instance_exists(__obj_stanncam_manager)){
+			instance_activate_object(__obj_stanncam_manager);
+			if(instance_exists(__obj_stanncam_manager)){
+				show_error("__obj_stanncam_manager has been deactivated.\nMake sure that it is never deactivated.\nConsider using instance_activate_object(__obj_stanncam_manager)\nin the same step you deactivate other stuff.", true);
+			}
+		}
+	}, [], -1);
+	time_source_start(global.stanncam_time_source);
 }
 
 /// @function stanncam_set_resolution
@@ -229,19 +245,19 @@ function __stanncam_update_resolution(){
 		if(stanncam_get_keep_aspect_ratio()){
 			var _ratio = (global.res_w / global.res_h) / (global.game_w / global.game_h);
 			if(_ratio > 1){
-				__display_scale_x = global.res_h / global.game_h;
+				__display_scale_x = stanncam_get_res_scale_y();
 				__display_scale_y = __display_scale_x;
 				var _gui_x_scale = global.res_h / global.gui_h;
 				var _gui_y_scale = _gui_x_scale;
 			} else {
-				__display_scale_x = global.res_w / global.game_w;
+				__display_scale_x = stanncam_get_res_scale_x();
 				__display_scale_y = __display_scale_x;
 				var _gui_x_scale = global.res_w / global.gui_w;
 				var _gui_y_scale = _gui_x_scale;
 			}
 		} else {
-			__display_scale_x = global.res_w / global.game_w;
-			__display_scale_y = global.res_h / global.game_h;
+			__display_scale_x = stanncam_get_res_scale_x();
+			__display_scale_y = stanncam_get_res_scale_y();
 			var _gui_x_scale = global.res_w / global.gui_w;
 			var _gui_y_scale = global.res_h / global.gui_h;
 		}
@@ -318,4 +334,41 @@ function stanncam_get_preset_resolution_range(_start_i=0, _end_i=array_length(gl
 /// @param {Bool} _should_draw
 function stanncam_debug_set_draw_zones(_should_draw){
 	__obj_stanncam_manager.draw_zones = _should_draw;
+}
+
+/// @function stanncam_toggle_cameras_paused
+/// @description toggles camera's paused state
+function stanncam_toggle_cameras_paused() {
+	var _len = array_length(global.stanncams);
+	for (var i = 0; i < _len; ++i){
+		var _camera = global.stanncams[i];
+		if(is_instanceof(_camera, stanncam)){
+			_camera.toggle_paused();
+		}
+	}
+}
+
+/// @function stanncam_set_cameras_paused
+/// @description sets all cameras to paused state
+/// @param {Bool} _paused
+function stanncam_set_cameras_paused(_paused) {
+	var _len = array_length(global.stanncams);
+	for (var i = 0; i < _len; ++i){
+		var _camera = global.stanncams[i];
+		if(is_instanceof(_camera, stanncam)){
+			_camera.set_paused(_paused);
+		}
+	}
+}
+
+/// @function stanncam_cameras_pause
+/// @description sets all cameras to paused state
+function stanncam_cameras_pause() {
+	return stanncam_set_cameras_paused(true);
+}
+
+/// @function stanncam_cameras_unpause
+/// @description sets all cameras to an unpaused state
+function stanncam_cameras_unpause() {
+	return stanncam_set_cameras_paused(false);
 }

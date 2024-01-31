@@ -77,19 +77,15 @@ if(keyboard_check_pressed(vk_tab)){
 	
 	switch (speed_mode) {
 		case 0:
-			//speed 0.5
 			cam1.set_speed(0.5, 50);
 			break;
 		case 1:
-			//speed 1
 			cam1.set_speed(1, 50);
 			break;
 		case 2:
-			//speed 2
 			cam1.set_speed(2, 50);
 			break;
 		case 3:
-			//speed 10
 			cam1.set_speed(10, 50);
 			break;
 	}
@@ -108,6 +104,15 @@ if(keyboard_check_pressed(ord("F"))){
 //Toggle smooth camera
 if(keyboard_check_pressed(ord("B"))){
 	cam1.smooth_draw = !cam1.smooth_draw;
+}
+
+//toggle camera pause
+if(keyboard_check_pressed(ord("P"))){
+	var _paused = false;
+	if(is_instanceof(cam1, stanncam)){
+		_paused = !cam1.get_paused();
+	}
+	stanncam_set_cameras_paused(_paused);
 }
 
 //switch resolutions
@@ -136,7 +141,9 @@ if(keyboard_check_pressed(vk_f3)){
 if(keyboard_check_pressed(vk_f4)){
 	var _window_mode = global.window_mode;
 	_window_mode++;
-	if(_window_mode == 3) _window_mode = 0;
+	if(_window_mode == STANNCAM_WINDOW_MODE.__SIZE){
+		_window_mode = 0;
+	}
 	
 	stanncam_set_window_mode(_window_mode);
 }

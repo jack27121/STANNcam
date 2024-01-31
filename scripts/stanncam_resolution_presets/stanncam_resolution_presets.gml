@@ -37,7 +37,6 @@ global.stanncam_res_presets[@ STANNCAM_RES_PRESETS.SEGA_MS_256_X_224		] = { widt
 global.stanncam_res_presets[@ STANNCAM_RES_PRESETS.GAME_BOY_144P			] = { width: 160, height:  144 };
 global.stanncam_res_presets[@ STANNCAM_RES_PRESETS.GAME_BOY_ADVANCE_160P    ] = { width: 240, height:  160 };
 global.stanncam_res_presets[@ STANNCAM_RES_PRESETS.NINTENDO_64_320_X_200    ] = { width: 320, height:  200 };
-global.stanncam_res_presets[@ STANNCAM_RES_PRESETS.NINTENDO_64_320_X_200    ] = { width: 320, height:  200 };
 global.stanncam_res_presets[@ STANNCAM_RES_PRESETS.NINTENDO_64_320_X_240    ] = { width: 320, height:  240 };
 global.stanncam_res_presets[@ STANNCAM_RES_PRESETS.PLAYSTATION_512_X_224    ] = { width: 512, height:  224 };
 

@@ -7,8 +7,9 @@ draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_text_outline(1, 0, "[RMB] Zoom amount: " + string(zoom_text), _outline_width, _precision);
 draw_text_outline(1, _offset * 1, "[F] camera shake", _outline_width, _precision);
-draw_text_outline(1, _offset * 2, "[1 & 2 & 3] to switch", _outline_width, _precision);
-draw_text_outline(1, _offset * 3, "between example rooms", _outline_width, _precision);
+draw_text_outline(1, _offset * 2, "[P] camera paused: " + (cam1.get_paused() ? "ON" : "OFF"), _outline_width, _precision);
+draw_text_outline(1, _offset * 3, "[1 & 2 & 3] to switch", _outline_width, _precision);
+draw_text_outline(1, _offset * 4, "between example rooms", _outline_width, _precision);
 
 //draw current resolution text
 draw_set_halign(fa_right);
