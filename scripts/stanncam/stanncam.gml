@@ -190,7 +190,9 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 				__zone_active = true;
 				__zone = new_zone;
 				
-			} else __zone_active = false;
+			} else {
+				__zone_active = false;
+			}
 		}
 		if(__zone_active){
 			__zone_constrain_amount = lerp(__zone_constrain_amount, 1, zone_constrain_speed);
@@ -201,8 +203,6 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		if(__zone_transition != 1){
 			__zone_transition = lerp(__zone_transition, 1, zone_constrain_speed);
 		}
-		show_debug_message($"transition {__zone_transition}");
-		show_debug_message($"constrain amount {__zone_constrain_amount}");
 		
 		#endregion
 		
@@ -711,10 +711,13 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 				
 				var _pre_color = draw_get_color();
 				
-				var _x1 = (width * 0.5)  - bounds_w - offset_x - __constrain_offset_x - __zone_constrain_x + zoom_x;
-				var _x2 = (width * 0.5)  + bounds_w - offset_x - __constrain_offset_x - __zone_constrain_x + zoom_x;
-				var _y1 = (height * 0.5) - bounds_h - offset_y - __constrain_offset_y - __zone_constrain_y + zoom_y;
-				var _y2 = (height * 0.5) + bounds_h - offset_y - __constrain_offset_y - __zone_constrain_y + zoom_y;
+				var x_offset = -offset_x - __constrain_offset_x - (__zone_constrain_x * __zone_constrain_amount) + zoom_x;
+				var y_offset = -offset_y - __constrain_offset_y - (__zone_constrain_y * __zone_constrain_amount) + zoom_y;
+				
+				var _x1 = (width * 0.5)  - bounds_w + x_offset;
+				var _x2 = (width * 0.5)  + bounds_w + x_offset;
+				var _y1 = (height * 0.5) - bounds_h + y_offset;
+				var _y2 = (height * 0.5) + bounds_h + y_offset;
 				draw_set_color(c_white);
 				draw_rectangle(_x1, _y1, _x2, _y2, true);
 				
