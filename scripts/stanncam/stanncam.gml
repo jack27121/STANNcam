@@ -76,11 +76,11 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	
 	//zone constrain
 	__zone_constrain_amount = 0;
-	__zones = ds_list_create();
-	__zone_count = 0;
+	__zone = noone;
 	__zone_constrain_x = 0;
 	__zone_constrain_y = 0;
 	__zone_active = false;
+	__zone_transition = 1;
 	zone_constrain_speed = 0.1;
 
 	#region animation variables
@@ -181,9 +181,15 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		
 		#region zone constrain
 		if(instance_exists(follow)){
-			__zone_count = instance_position_list(follow.x, follow.y, obj_stanncam_zone,__zones,false);
-			if(__zone_count > 0){
+			var new_zone = instance_position(follow.x, follow.y, obj_stanncam_zone);
+			if(new_zone != noone){
+				
+				//if a zone is already active it will transition from one to the other
+				if(__zone != new_zone && __zone_active) __zone_transition = 0;
+				
 				__zone_active = true;
+				__zone = new_zone;
+				
 			} else __zone_active = false;
 		}
 		if(__zone_active){
@@ -191,6 +197,12 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		} else {
 			__zone_constrain_amount = lerp(__zone_constrain_amount, 0, zone_constrain_speed);
 		}
+		
+		if(__zone_transition != 1){
+			__zone_transition = lerp(__zone_transition, 1, zone_constrain_speed);
+		}
+		show_debug_message($"transition {__zone_transition}");
+		show_debug_message($"constrain amount {__zone_constrain_amount}");
 		
 		#endregion
 		
@@ -593,7 +605,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			surface_resize(surface,	_new_width, _new_height);
 			camera_set_view_size(__camera, _new_width, _new_height);
 		}
-}
+	}
 
 	/// @function __update_view_pos
 	/// @description updates the view position
@@ -612,64 +624,49 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		_new_x -= zoom_x;
 		_new_y -= zoom_y;
 				
-		//zone constricting
-		if(__zone_count > 0){
-			//if(__zone.constrain_dimension == "Horizontal" || __zone.constrain_dimension == "Both"){
-			//	
-			//	var _left = max(0, __zone.bbox_left - _new_x);
-			//	var _right = -max(0, _new_x + (width * zoom_amount) - __zone.bbox_right);
-			//	
-			//	if(__zone.sprite_width <= (width * zoom_amount)){
-			//		var _constrained_x = (__zone.x - (width * zoom_amount) * 0.5) - _new_x;
-			//	} else {
-			//		var _constrained_x = _left + _right; 
-			//	}
-			//	__zone_constrain_x = lerp(0, _constrained_x, __zone_constrain_amount);
-			//	_new_x += __zone_constrain_x;
-			//}
-			//
-			//if(__zone.constrain_dimension == "Vertical" || __zone.constrain_dimension == "Both"){
-			//	var _top = max(0, __zone.bbox_top - _new_y);
-			//	var _bottom = -max(0, _new_y + (height * zoom_amount) - __zone.bbox_bottom);
-			//	
-			//	if(__zone.sprite_height <= (height * zoom_amount)){
-			//		var _constrained_y = (__zone.y - (height * zoom_amount) * 0.5) - _new_y;
-			//	} else {
-			//		var _constrained_y = _top + _bottom;
-			//	}
-			//	__zone_constrain_y = lerp(0, _constrained_y, __zone_constrain_amount);
-			//	_new_y += __zone_constrain_y;
-			//}
+		//zone constricting	
+		if(__zone != noone){
+			var _zone_constrain_x = 0;
+			var _zone_constrain_y = 0;
 			
-			for (var i = 0; i < __zone_count; ++i) {
-			    
-				var zone = __zones[|i];
-				
-				//constrains left
-				if(zone.left){
-					_new_x = max(_new_x,zone.bbox_left);
-				}
-				
-				//constrain top
-				if(zone.top){
-					_new_y = max(_new_y,zone.bbox_top);
-				}
-				
-				//constrains right
-				if(zone.right){					
-					_new_x = min(_new_x + width,zone.bbox_right)-width;
-				}
-				
-				//constrains bottom
-				if(zone.bottom){					
-					_new_y = min(_new_y + height,zone.bbox_bottom)-height;
-				}
-				
+			var _left, _right, _top, _bottom;
+			
+			if(__zone.left){
+				_left = max(0, __zone.bbox_left - _new_x);
+			}
+			if(__zone.right){
+				_right = -max(0, _new_x + (width * zoom_amount) - __zone.bbox_right);
+			}
+			if(__zone.top){
+				_top = max(0, __zone.bbox_top - _new_y);
+			}
+			if(__zone.bottom){
+				_bottom = -max(0, _new_y + (height * zoom_amount) - __zone.bbox_bottom);
 			}
 			
+			//horizontal check
+			if(__zone.sprite_width <= (width * zoom_amount) && __zone.left && __zone.right){
+				//if the zones width is smaller than the camera and both left and right are constraining the cam will be pushed to its middle
+				_zone_constrain_x = (__zone.x+__zone.sprite_width/2) - (_new_x+(width*zoom_amount)/2);
+			} else {
+				if(__zone.left)  _zone_constrain_x += _left;
+				if(__zone.right) _zone_constrain_x += _right;
+			}
 			
+			//vertical check
+			if(__zone.sprite_height <= (height * zoom_amount) && __zone.top && __zone.bottom){
+				_zone_constrain_y = (__zone.y+__zone.sprite_height/2) - (_new_y+(height*zoom_amount)/2);
+			} else {
+				if(__zone.top)	_zone_constrain_y += _top;
+				if(__zone.bottom) _zone_constrain_y += _bottom;
+			}
 			
-			
+			__zone_constrain_x = lerp(__zone_constrain_x, _zone_constrain_x, __zone_transition);
+			__zone_constrain_y = lerp(__zone_constrain_y, _zone_constrain_y, __zone_transition);
+		
+			//constrains new camera position using constrain_amount
+			_new_x += lerp(0, __zone_constrain_x, __zone_constrain_amount);
+			_new_y += lerp(0, __zone_constrain_y, __zone_constrain_amount);
 		}
 		
 		//Constrains camera to room

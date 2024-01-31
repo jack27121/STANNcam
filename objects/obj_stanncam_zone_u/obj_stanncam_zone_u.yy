@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_stanncam_zone_2side",
+  "name": "obj_stanncam_zone_u",
   "eventList": [
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
   ],
@@ -31,8 +31,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "stanncam_camzone_2side",
-    "path": "sprites/stanncam_camzone_2side/stanncam_camzone_2side.yy",
+    "name": "stanncam_camzone_u",
+    "path": "sprites/stanncam_camzone_u/stanncam_camzone_u.yy",
   },
   "spriteMaskId": null,
   "visible": true,

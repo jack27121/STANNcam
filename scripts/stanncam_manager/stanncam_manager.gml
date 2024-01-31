@@ -312,3 +312,10 @@ function stanncam_get_preset_resolution_range(_start_i=0, _end_i=array_length(gl
 	}
 	return _res_array;
 }
+
+/// @function stanncam_debug_set_draw_zones
+/// @description sets whether or not zones should be drawn in the room, for debugging
+/// @param {Bool} _should_draw
+function stanncam_debug_set_draw_zones(_should_draw){
+	__obj_stanncam_manager.draw_zones = _should_draw;
+}
