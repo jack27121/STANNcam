@@ -1,3 +1,5 @@
+// Feather disable all
+
 /// @constructor stanncam
 /// @description creates a new stanncam
 /// @param {Real} [_x=0] - X position
@@ -712,7 +714,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	}
 	
 	/// @function draw_part
-	/// @description draws part of stanncam
+	/// @description draws part of stanncam camera view
 	/// @param {Real} _x
 	/// @param {Real} _y
 	/// @param {Real} _left
@@ -771,15 +773,22 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @param {Real} [_height=surface_get_height(_surface)]
 	/// @param {Bool} [_ratio_compensate=true]
 	/// @ignore
-	static draw_surf = function(_surface, _x, _y, _scale_x=1, _scale_y=1, _left=0, _top=0, _width=surface_get_width(_surface), _height=surface_get_height(_surface), _ratio_compensate = true){
+	static draw_surf = function(_surface, _x, _y, _scale_x=1, _scale_y=1, _left=0, _top=0, _width=surface_get_width(_surface), _height=surface_get_height(_surface), _ratio_compensate=true){
+		if(!surface_exists(_surface)){
+			return;
+		}
+
 		//offsets position to match with display resoultion
-		_x *= (global.res_w / global.game_w);
-		_y *= (global.res_h / global.game_h);
+		_x *= stanncam_get_res_scale_x();
+		_y *= stanncam_get_res_scale_y();
 		
 		if(_ratio_compensate){
 			_x += stanncam_ratio_compensate_x();
 			_y += stanncam_ratio_compensate_y();
 		}
+
+		var _display_scale_x = __obj_stanncam_manager.__display_scale_x;
+		var _display_scale_y = __obj_stanncam_manager.__display_scale_y;
 		
 		if(smooth_draw){
 		//draws super smooth both when moving and zooming
@@ -788,10 +797,10 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			_scale_x /= zoom_amount;
 			_scale_y /= zoom_amount;
 			
-			draw_surface_part_ext(_surface, x_frac + _left, y_frac + _top, _width, _height, _x, _y, __obj_stanncam_manager.__display_scale_x * _scale_x, __obj_stanncam_manager.__display_scale_y * _scale_y, -1, 1);
+			draw_surface_part_ext(_surface, x_frac + _left, y_frac + _top, _width, _height, _x, _y, _display_scale_x * _scale_x, _display_scale_y * _scale_y, -1, 1);
 		} else {
-		//maintains pixel perfection when moving and zooming, appears more stuttery
-			draw_surface_stretched(_surface, _x, _y, _width * __obj_stanncam_manager.__display_scale_x * _scale_x, _height * __obj_stanncam_manager.__display_scale_y * _scale_y);
+			//maintains pixel perfection when moving and zooming, appears more stuttery
+			draw_surface_stretched(_surface, _x, _y, _width * _display_scale_x * _scale_x, _height * _display_scale_y * _scale_y);
 		}
 		
 	}
