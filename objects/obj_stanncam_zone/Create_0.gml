@@ -4,28 +4,8 @@ top		= true;
 right	= true;
 bottom	= true;
 
+image_angle = (image_angle mod 360 + 360) mod 360;
+
 if(image_angle mod 90 != 0){
-	show_error($"stanncam_camzone {id}/bimage_angle must be 90 degree angles",true);
+	show_error(object_get_name(object_index) + ".image_angle must be a multiple of 90 degrees, got " + string(image_angle) + ".", true);
 }
-
-if(image_angle < 0) image_angle += 360;
-if(image_angle > 360) image_angle -= 360;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
