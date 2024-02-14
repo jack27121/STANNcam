@@ -62,9 +62,9 @@ function stanncam_init(_game_w, _game_h, _resolution_w=_game_w, _resolution_h=_g
 
 /// @function stanncam_destroy
 /// @description removes all stanncam references from the game, the opposite of stanncam_init
-/// @param {Bool} [application_surface_draw_enable = true]
-function stanncam_destroy(_app_surface_draw_enable = true){
-	application_surface_draw_enable(_app_surface_draw_enable);
+/// @param {Bool} [_application_surface_draw_enable=true]
+function stanncam_destroy(_application_surface_draw_enable = true){
+	application_surface_draw_enable(_application_surface_draw_enable);
 	
 	time_source_destroy(global.stanncam_time_source,true);	
 	for (var i = 0; i < array_length(global.stanncams); ++i) {
