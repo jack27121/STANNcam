@@ -80,6 +80,12 @@ if(keyboard_check_pressed(ord("P"))){
 	stanncam_set_cameras_paused(_paused);
 }
 
+//toggle drawing camera zones
+if(keyboard_check_pressed(ord("Z"))){
+	draw_zones = !draw_zones;
+	stanncam_debug_set_draw_zones(draw_zones);
+}
+
 //switch resolutions
 if(keyboard_check_pressed(vk_f1)){
 	game_res++;

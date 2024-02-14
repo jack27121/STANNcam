@@ -37,7 +37,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	offset_x = 0;
 	offset_y = 0;
 	
-	follow = undefined;
+	follow = noone;
 	
 	//The extra surface is only neccesary if you are drawing the camera recursively in the room
 	//Like a tv screen, where it can capture itself
@@ -75,6 +75,15 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	debug_draw = false;
 	
 	__destroyed = false;
+	
+	//zone constrain
+	__zone_constrain_amount = 0;
+	__zone = noone;
+	__zone_constrain_x = 0;
+	__zone_constrain_y = 0;
+	__zone_active = false;
+	__zone_transition = 1;
+	zone_constrain_speed = 0.1;
 
 	paused = false;
 
@@ -178,6 +187,33 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			
 			if(x == __xTo && y == __yTo) __moving = false;
 		}
+		#endregion
+		
+		#region zone constrain
+		if(instance_exists(follow)){
+			var new_zone = instance_position(follow.x, follow.y, obj_stanncam_zone);
+			if(new_zone != noone){
+				
+				//if a zone is already active it will transition from one to the other
+				if(__zone != new_zone && __zone_active) __zone_transition = 0;
+				
+				__zone_active = true;
+				__zone = new_zone;
+				
+			} else {
+				__zone_active = false;
+			}
+		}
+		if(__zone_active){
+			__zone_constrain_amount = lerp(__zone_constrain_amount, 1, zone_constrain_speed);
+		} else {
+			__zone_constrain_amount = lerp(__zone_constrain_amount, 0, zone_constrain_speed);
+		}
+		
+		if(__zone_transition != 1){
+			__zone_transition = lerp(__zone_transition, 1, zone_constrain_speed);
+		}
+		
 		#endregion
 		
 		#region offset
@@ -459,6 +495,17 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		return ((_y - get_y() - y_frac) / get_zoom_y()) * stanncam_get_gui_scale_y();
 	}
 	
+	/// @function get_active_zone
+	/// @description returns the active zone the followed instance is within, noone if outside, or no instance is followed
+	/// @returns {Id.Instance|Noone}
+	/// @ignore
+	static get_active_zone = function(){
+		if(__zone_active){
+			return __zone;
+		}
+		return noone;
+	}
+	
 	/// @function room_to_display_x
 	/// @description returns the room x position as the position on the display relative to camera
 	/// @param {Real} _x
@@ -504,7 +551,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		view_camera[cam_id] = -1;
 		view_visible[cam_id] = false;
 		--__obj_stanncam_manager.number_of_cams;
-		follow = undefined;
+		follow = noone;
 		if(surface_exists(surface)) surface_free(surface);
 		if(surface_exists(surface_extra)) surface_free(surface_extra);
 		if(surface_exists(__surface_special)) surface_free(__surface_special);
@@ -590,7 +637,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			surface_resize(surface,	_new_width, _new_height);
 			camera_set_view_size(__camera, _new_width, _new_height);
 		}
-}
+	}
 
 	/// @function __update_view_pos
 	/// @description updates the view position
@@ -605,21 +652,66 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			_new_y = round(_new_y);
 		}
 		
-		//Constrains camera to room
-		if(room_constrain){
-			constrain_offset_x = (clamp(_new_x, 0, room_width - width) - _new_x) * clamp(zoom_amount, 0, 1);
-			constrain_offset_y = (clamp(_new_y, 0, room_height - height) - _new_y) * clamp(zoom_amount, 0, 1);
-			
-			_new_x += constrain_offset_x;
-			_new_y += constrain_offset_y;
-		} else {
-			constrain_offset_x = 0;
-			constrain_offset_y = 0;
-		}
-		
 		//apply zoom offset
 		_new_x -= zoom_x;
 		_new_y -= zoom_y;
+				
+		//zone constricting	
+		if(__zone != noone){
+			var _zone_constrain_x = 0;
+			var _zone_constrain_y = 0;
+			
+			var _left, _right, _top, _bottom;
+			
+			if(__zone.left){
+				_left = max(0, __zone.bbox_left - _new_x);
+			}
+			if(__zone.right){
+				_right = -max(0, _new_x + (width * zoom_amount) - __zone.bbox_right);
+			}
+			if(__zone.top){
+				_top = max(0, __zone.bbox_top - _new_y);
+			}
+			if(__zone.bottom){
+				_bottom = -max(0, _new_y + (height * zoom_amount) - __zone.bbox_bottom);
+			}
+			
+			//horizontal check
+			if(__zone.sprite_width <= (width * zoom_amount) && __zone.left && __zone.right){
+				//if the zones width is smaller than the camera and both left and right are constraining the cam will be pushed to its middle
+				_zone_constrain_x = (__zone.x+__zone.sprite_width/2) - (_new_x+(width*zoom_amount)/2);
+			} else {
+				if(__zone.left)  _zone_constrain_x += _left;
+				if(__zone.right) _zone_constrain_x += _right;
+			}
+			
+			//vertical check
+			if(__zone.sprite_height <= (height * zoom_amount) && __zone.top && __zone.bottom){
+				_zone_constrain_y = (__zone.y+__zone.sprite_height/2) - (_new_y+(height*zoom_amount)/2);
+			} else {
+				if(__zone.top)	_zone_constrain_y += _top;
+				if(__zone.bottom) _zone_constrain_y += _bottom;
+			}
+			
+			__zone_constrain_x = lerp(__zone_constrain_x, _zone_constrain_x, __zone_transition);
+			__zone_constrain_y = lerp(__zone_constrain_y, _zone_constrain_y, __zone_transition);
+		
+			//constrains new camera position using constrain_amount
+			_new_x += lerp(0, __zone_constrain_x, __zone_constrain_amount);
+			_new_y += lerp(0, __zone_constrain_y, __zone_constrain_amount);
+		}
+		
+		//Constrains camera to room
+		if(room_constrain){
+			__constrain_offset_x = (clamp(_new_x, 0, room_width - width * zoom_amount) - _new_x);
+			__constrain_offset_y = (clamp(_new_y, 0, room_height - height * zoom_amount) - _new_y);
+			
+			_new_x += __constrain_offset_x;
+			_new_y += __constrain_offset_y;
+		} else {
+			__constrain_offset_x = 0;
+			__constrain_offset_y = 0;
+		}
 		
 		if(smooth_draw){
 			//seperates position into whole and fractional parts
@@ -646,15 +738,18 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	static __debug_draw = function(){
 		if(debug_draw){
 			//draws camera bounding box
-			if(follow != -1){
+			if(instance_exists(follow)){
 				surface_set_target(surface);
 				
 				var _pre_color = draw_get_color();
 				
-				var _x1 = (width * 0.5) - bounds_w - offset_x - constrain_offset_x + zoom_x;
-				var _x2 = (width * 0.5) + bounds_w - offset_x - constrain_offset_x + zoom_x;
-				var _y1 = (height * 0.5) - bounds_h - offset_y - constrain_offset_y + zoom_y;
-				var _y2 = (height * 0.5) + bounds_h - offset_y - constrain_offset_y + zoom_y;
+				var x_offset = -offset_x - __constrain_offset_x - (__zone_constrain_x * __zone_constrain_amount) + zoom_x;
+				var y_offset = -offset_y - __constrain_offset_y - (__zone_constrain_y * __zone_constrain_amount) + zoom_y;
+				
+				var _x1 = (width * 0.5)  - bounds_w + x_offset;
+				var _x2 = (width * 0.5)  + bounds_w + x_offset;
+				var _y1 = (height * 0.5) - bounds_h + y_offset;
+				var _y2 = (height * 0.5) + bounds_h + y_offset;
 				draw_set_color(c_white);
 				draw_rectangle(_x1, _y1, _x2, _y2, true);
 				

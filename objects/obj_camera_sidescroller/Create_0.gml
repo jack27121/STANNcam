@@ -36,6 +36,8 @@ gui_res = 0;
 
 lookahead = false;
 
+draw_zones = false;
+
 surface = -1;
 
 

@@ -16,7 +16,7 @@ draw_set_color(c_white);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
 draw_text_outline(1, 1, "[arrow keys] move character", _outline_width, _precision);
-var _following = (cam1.follow != undefined) ? "following" : "not following"
+var _following = (instance_exists(cam1.follow)) ? "following" : "not following";
 draw_text_outline(1, _offset, "[space] " + _following, _outline_width, _precision);
 draw_text_outline(1, _offset * 2, "[ALT] toggle hi-res GUI", _outline_width, _precision);
 draw_text_outline(1, _offset * 3, "[LMB] move cam to pos (when not following)", _outline_width, _precision);
