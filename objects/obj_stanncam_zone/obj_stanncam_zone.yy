@@ -29,8 +29,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "stanncam_camzone",
-    "path": "sprites/stanncam_camzone/stanncam_camzone.yy",
+    "name": "spr_stanncam_zone",
+    "path": "sprites/spr_stanncam_zone/spr_stanncam_zone.yy",
   },
   "spriteMaskId": null,
   "visible": true,

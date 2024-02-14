@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
-  "name": "stanncam_camzone_u",
+  "name": "spr_stanncam_zone_corner",
   "bbox_bottom": 15,
   "bbox_left": 0,
   "bbox_right": 15,
@@ -49,14 +49,14 @@
   },
   "origin": 0,
   "parent": {
-    "name": "sprites",
-    "path": "folders/STANNcam/Miscellaneous/sprites.yy",
+    "name": "Sprites",
+    "path": "folders/STANNcam/Miscellaneous/Sprites.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
     "resourceType": "GMSequence",
     "resourceVersion": "1.4",
-    "name": "stanncam_camzone_u",
+    "name": "spr_stanncam_zone_corner",
     "autoRecord": true,
     "backdropHeight": 768,
     "backdropImageOpacity": 0.5,
@@ -78,7 +78,7 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"f0c5359e-863a-4eb0-a39c-8d0c9ea08914","path":"sprites/stanncam_camzone_u/stanncam_camzone_u.yy",},},},"Disabled":false,"id":"827bdbf5-c4c4-423b-a915-1462a3544cfe","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"f0c5359e-863a-4eb0-a39c-8d0c9ea08914","path":"sprites/spr_stanncam_zone_corner/spr_stanncam_zone_corner.yy",},},},"Disabled":false,"id":"2236c912-b723-450d-adb6-70d49e453327","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

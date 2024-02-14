@@ -31,8 +31,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "stanncam_camzone_corner",
-    "path": "sprites/stanncam_camzone_corner/stanncam_camzone_corner.yy",
+    "name": "spr_stanncam_zone_corner",
+    "path": "sprites/spr_stanncam_zone_corner/spr_stanncam_zone_corner.yy",
   },
   "spriteMaskId": null,
   "visible": true,
