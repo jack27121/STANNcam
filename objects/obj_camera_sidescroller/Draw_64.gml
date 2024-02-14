@@ -24,9 +24,9 @@ draw_text_outline(1, _offset * 5, "[CTRL] " + _constrained, _outline_width, _pre
 var _debug = (cam1.debug_draw) ? "debug draw on" : "debug draw off";
 draw_text_outline(1, _offset * 6, "[SHIFT] " + _debug, _outline_width, _precision);
 draw_text_outline(1, _offset * 7, "[F] camera shake", _outline_width, _precision);
-draw_text_outline(1, _offset * 8, "[P] camera paused: " + (cam1.get_paused() ? "ON" : "OFF"), _outline_width, _precision);
+draw_text_outline(1, _offset * 8, "[P] toggle camera paused: " + (cam1.get_paused() ? "ON" : "OFF"), _outline_width, _precision);
 draw_text_outline(1, _offset * 9, "[Tab] camera speed " + string(cam1.spd), _outline_width, _precision);
-draw_text_outline(1, _offset * 10, "[Z] show camera zones " + string(draw_zones), _outline_width, _precision);
+draw_text_outline(1, _offset * 10, "[Z] toggle showing camera zones: " + (draw_zones ? "ON" : "OFF"), _outline_width, _precision);
 draw_text_outline(1, _offset * 11, "[1 & 2 & 3] to switch between example rooms", _outline_width, _precision);
 
 //draw current resolution text
