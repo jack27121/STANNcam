@@ -60,6 +60,21 @@ function stanncam_init(_game_w, _game_h, _resolution_w=_game_w, _resolution_h=_g
 	time_source_start(global.stanncam_time_source);
 }
 
+/// @function stanncam_destroy
+/// @description removes all stanncam references from the game, the opposite of stanncam_init
+/// @param {Bool} [_application_surface_draw_enable=true]
+function stanncam_destroy(_application_surface_draw_enable = true){
+	application_surface_draw_enable(_application_surface_draw_enable);
+	
+	time_source_destroy(global.stanncam_time_source,true);	
+	for (var i = 0; i < array_length(global.stanncams); ++i) {
+		if(global.stanncams[i] != -1) {
+			global.stanncams[i].destroy();
+		}
+	}
+	instance_destroy(__obj_stanncam_manager);
+}
+
 /// @function stanncam_set_resolution
 /// @description updates the camera resolution, has no visible effect when fullscreened
 /// @param {Real} _resolution_w
