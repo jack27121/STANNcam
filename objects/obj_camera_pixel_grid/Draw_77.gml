@@ -1,2 +1,1 @@
-/// @description
-cam1.draw(0,0);
+cam1.draw(0, 0);

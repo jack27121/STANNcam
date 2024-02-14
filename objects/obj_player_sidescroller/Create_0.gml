@@ -1,4 +1,3 @@
-/// @description
 //player
 hinput = 0;
 
@@ -11,12 +10,10 @@ grounded = false;
 jump_count = 0;
 jump_max = 2;
 
-
 scale_x = 1;
 scale_y = 1;
 
 lookahead = false;
-
 
 left = function(){
 	return keyboard_check_direct(vk_left);

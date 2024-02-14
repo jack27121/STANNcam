@@ -9,3 +9,4 @@ resize_height = 0;
 
 __display_scale_x = 1;
 __display_scale_y = 1;
+draw_zones = false;
