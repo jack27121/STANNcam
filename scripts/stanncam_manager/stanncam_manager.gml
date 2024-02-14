@@ -66,25 +66,13 @@ function stanncam_init(_game_w, _game_h, _resolution_w=_game_w, _resolution_h=_g
 function stanncam_destroy(_app_surface_draw_enable = true){
 	application_surface_draw_enable(_app_surface_draw_enable);
 	
-	time_source_destroy(global.stanncam_time_source,true);
-	struct_remove(global,"stanncam_time_source");
-	
+	time_source_destroy(global.stanncam_time_source,true);	
 	for (var i = 0; i < array_length(global.stanncams); ++i) {
 		if(global.stanncams[i] != -1) {
 			global.stanncams[i].destroy();
 		}
 	}
-	struct_remove(global,"stanncams");
-	
 	instance_destroy(__obj_stanncam_manager);
-	
-	struct_remove(global,"game_w");
-	struct_remove(global,"game_h");
-	struct_remove(global,"gui_w");
-	struct_remove(global,"gui_h");
-	struct_remove(global,"res_w");
-	struct_remove(global,"res_h");
-	struct_remove(global,"window_mode");
 }
 
 /// @function stanncam_set_resolution
