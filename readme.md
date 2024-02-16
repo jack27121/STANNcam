@@ -1,9 +1,9 @@
 <p align="center">
-<img width=300px  src="https://user-images.githubusercontent.com/46312671/224733322-1c9acf55-2cfe-4d1c-87bd-e3b40522b43f.png" alt="STANNcam">
+<img width=300px  src="https://user-images.githubusercontent.com/46312671/224733322-1c9acf55-2cfe-4d1c-87bd-e3b40522b43f.png" alt="STANNcam Logo">
 </p>
 
 <h1 align="center" font-size=100em>
-STANNcam 2.2.4🎥
+STANNcam 2.3.0 🎥
 </h1>
 
 STANNcam is a pixel-perfect camera and resolution manager system for GameMaker (and onwards)  
