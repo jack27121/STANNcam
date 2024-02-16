@@ -185,7 +185,9 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		
 			__t++;
 			
-			if(x == __xTo && y == __yTo) __moving = false;
+			if(__t > __duration){
+				__moving = false;
+			}
 		}
 		#endregion
 		
