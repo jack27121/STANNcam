@@ -156,7 +156,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 
 		#region moving
 		if(instance_exists(follow)){
-	
+			
 			//update destination
 			__xTo = follow.x;
 			__yTo = follow.y;
@@ -179,13 +179,13 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			}
 		
 		} else if(__moving){
+			__t++;
+			
 			//gradually moves camera into position based on duration
 			x = stanncam_animcurve(__t, __xStart, __xTo, __duration, anim_curve);
 			y = stanncam_animcurve(__t, __yStart, __yTo, __duration, anim_curve);
-		
-			__t++;
 			
-			if(__t > __duration){
+			if(__t >= __duration){
 				__moving = false;
 			}
 		}
