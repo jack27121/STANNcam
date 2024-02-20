@@ -20,8 +20,8 @@
   "height": 16,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"76d49faf-df58-47ca-9f03-02785f5fcb2f","blendMode":0,"displayName":"Layer 1","isLocked":false,"opacity":20.0,"visible":true,},
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"f6884eec-9d9a-4a19-b539-64ffb7c6c359","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"f6884eec-9d9a-4a19-b539-64ffb7c6c359","blendMode":0,"displayName":"constrained","isLocked":false,"opacity":100.0,"visible":true,},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"76d49faf-df58-47ca-9f03-02785f5fcb2f","blendMode":0,"displayName":"pass through","isLocked":false,"opacity":65.0,"visible":true,},
   ],
   "nineSlice": {
     "resourceType": "GMNineSliceData",
@@ -39,8 +39,8 @@
     "left": 3,
     "right": 3,
     "tileMode": [
-      0,
-      0,
+      1,
+      1,
       0,
       0,
       0,

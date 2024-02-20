@@ -1,8 +1,8 @@
 /// @description which sides to constrain
-left	= true;
-top		= true;
-right	= true;
-bottom	= true;
+left = true;
+top = true;
+right = true;
+bottom = true;
 
 image_angle = (image_angle mod 360 + 360) mod 360;
 
