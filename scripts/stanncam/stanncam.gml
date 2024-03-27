@@ -622,8 +622,8 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		//if on it is handled by the draw events
 		if(smooth_draw){
 			var _ceiled_zoom = ceil(zoom_amount); //ensures the new surface size is a whole number
-			var _new_width = width * _ceiled_zoom;
-			var _new_height = height * _ceiled_zoom;
+			var _new_width = width * _ceiled_zoom   + 1; //smooth drawing needs the surface to be 1 pixel wider and taller to remove edge warping
+			var _new_height = height * _ceiled_zoom + 1;
 		} else {
 			var _new_width  = floor(width * zoom_amount);
 			var _new_height = floor(height * zoom_amount);
@@ -650,7 +650,11 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		var _new_x = x + offset_x - (width * 0.5) + __shake_x;
 		var _new_y = y + offset_y - (height * 0.5) + __shake_y;
 		
-		if(!smooth_draw){ // when smooth draw is off, the actual camera position gets rounded to whole numbers
+		if(smooth_draw){ //smooth drawing requires one extra pixel on the camera surface to remove edge warping, this is to fix the offset that occurs with that
+			if(_new_x < 1) _new_x -= 1;	
+			if(_new_y < 1) _new_y -= 1;
+			
+		} else { // when smooth draw is off, the actual camera position gets rounded to whole numbers
 			_new_x = round(_new_x);
 			_new_y = round(_new_y);
 		}
@@ -718,8 +722,11 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		
 		if(smooth_draw){
 			//seperates position into whole and fractional parts
-			x_frac = frac(_new_x);
-			y_frac = frac(_new_y);
+			if(_new_x > 0) x_frac = frac(_new_x);
+			else x_frac = 1 + frac(_new_x); //when position is negative, fraction is too, and so this is to compensate for that
+					
+			if(_new_y > 0) y_frac = frac(_new_y);
+			else y_frac = 1 + frac(_new_y);
 			
 			_new_x = floor(abs(_new_x)) * sign(_new_x);
 			_new_y = floor(abs(_new_y)) * sign(_new_y);
