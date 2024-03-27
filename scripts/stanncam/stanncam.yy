@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "stanncam",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "STANNcam",
-    "path": "folders/STANNcam.yy",
+  "$GMScript":"",
+  "%Name":"stanncam",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"stanncam",
+  "parent":{
+    "name":"STANNcam",
+    "path":"folders/STANNcam.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

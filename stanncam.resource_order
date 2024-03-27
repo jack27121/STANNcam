@@ -1,9 +1,9 @@
 {
-  "FolderOrderSettings": [
+  "FolderOrderSettings":[
     {"name":"Sprites","order":3,"path":"folders/STANNcam/Miscellaneous/Sprites.yy",},
     {"name":"Zones","order":5,"path":"folders/STANNcam/Zones.yy",},
   ],
-  "ResourceOrderSettings": [
+  "ResourceOrderSettings":[
     {"name":"obj_stanncam_zone_corner","order":3,"path":"objects/obj_stanncam_zone_corner/obj_stanncam_zone_corner.yy",},
     {"name":"spr_stanncam_zone_2side","order":2,"path":"sprites/spr_stanncam_zone_2side/spr_stanncam_zone_2side.yy",},
     {"name":"spr_stanncam_zone_corner","order":3,"path":"sprites/spr_stanncam_zone_corner/spr_stanncam_zone_corner.yy",},

@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "stanncam_macros",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Miscellaneous",
-    "path": "folders/STANNcam/Miscellaneous.yy",
+  "$GMScript":"",
+  "%Name":"stanncam_macros",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"stanncam_macros",
+  "parent":{
+    "name":"Miscellaneous",
+    "path":"folders/STANNcam/Miscellaneous.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }
