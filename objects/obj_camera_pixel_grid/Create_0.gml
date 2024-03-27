@@ -14,3 +14,11 @@ resolutions = [
 	{w:1280, h:720},
 	{w:1920, h:1080}
 ];
+
+
+hspd = 0;
+vspd = 0;
+
+acceleration_spd = 0.02;
+deacceleration_spd = 0.1;
+max_spd = 3;

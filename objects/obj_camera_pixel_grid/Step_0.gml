@@ -33,6 +33,13 @@ if(keyboard_check_pressed(ord("P"))){
 	}
 }
 
+//toggle camera pause
+if(keyboard_check_pressed(ord("B"))){
+	if(is_instanceof(cam1, stanncam)){
+		cam1.smooth_draw = !cam1.smooth_draw;
+	}
+}
+
 //switch resolutions
 if(keyboard_check_pressed(vk_f1)){
 	game_res++;
@@ -56,11 +63,22 @@ if(keyboard_check_pressed(vk_f4)){
 	stanncam_set_window_mode(_window_mode);
 }
 
-//move camera one pixel
-var _hinput = keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left);
-var _vinput = keyboard_check_pressed(vk_down) - keyboard_check_pressed(vk_up);
-if(_hinput != 0 || _vinput != 0){
-	var _x = cam1.x + _hinput;
-	var _y = cam1.y + _vinput;
+//move camera
+var _hinput = keyboard_check(vk_right) - keyboard_check(vk_left);
+var _vinput = keyboard_check(vk_down) - keyboard_check(vk_up);
+
+if(_hinput != 0) hspd += _hinput*acceleration_spd;
+else hspd -= min(abs(hspd), deacceleration_spd) * sign(hspd);
+
+if(_vinput != 0) vspd += _vinput*acceleration_spd;
+else vspd -= min(abs(vspd), deacceleration_spd) * sign(vspd);	
+
+hspd = clamp(hspd,-max_spd,max_spd);
+vspd = clamp(vspd,-max_spd,max_spd);
+	
+if(hspd != 0 || vspd != 0){
+	var _x = cam1.x + hspd;
+	var _y = cam1.y + vspd;
 	cam1.move(_x, _y, 0);
 }
+
