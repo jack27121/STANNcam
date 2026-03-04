@@ -933,14 +933,15 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		for (var i = 0; i < array_length(__zone_lists_strength); i++) {
 			var _strength = __zone_lists_strength[i];
 			
-			//with smooth draw on, it rounds the constraint transition
+			//with smooth draw off, it rounds the constraint transition
 			if(!smooth_draw){
 				_strength = floor(_strength / 0.01 + 0.99) * 0.01;
 			}
 			
 			var _offset_x = _constrain_offset_x[i] * _strength;
 			var _offset_y = _constrain_offset_y[i] * _strength;
-			
+
+			 //when strength is 1, constraint fractions are present regardles of smooth_draw, so the constraints look correct at all zoom levels
 			if(!smooth_draw && _strength != 1){
 				_offset_x = round(_offset_x);
 				_offset_y = round(_offset_y);
@@ -987,9 +988,6 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		_new_y += __constrain_offset_y;
 		
 		#endregion
-		
-		show_debug_message(_new_x);
-		show_debug_message(_new_y);
 		
 		camera_set_view_pos(__camera, _new_x, _new_y);
 	}
