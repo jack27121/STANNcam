@@ -76,8 +76,8 @@ if(cam1.out_of_bounds(obj_player.x, obj_player.y, 8)){
 	}
 } else {
 	//draws pointer over players head
-	var _arrow_x = cam1.room_to_gui_x(obj_player.x);
-	var _arrow_y = cam1.room_to_gui_y(obj_player.y);
+	var _arrow_x = cam1.room_to_gui_x(round(obj_player.x));
+	var _arrow_y = cam1.room_to_gui_y(round(obj_player.y));
 	if(gui_hires){
 		draw_sprite_ext(spr_arrow, 1, _arrow_x, _arrow_y - 64, 0.5, 0.5, 180, -1, 1);
 	} else {

@@ -70,6 +70,7 @@
     {"id":{"name":"draw_text_outline","path":"scripts/draw_text_outline/draw_text_outline.yy",},},
     {"id":{"name":"macros","path":"scripts/macros/macros.yy",},},
     {"id":{"name":"stanncam_animcurve","path":"scripts/stanncam_animcurve/stanncam_animcurve.yy",},},
+    {"id":{"name":"stanncam_confiig","path":"scripts/stanncam_confiig/stanncam_confiig.yy",},},
     {"id":{"name":"stanncam_macros","path":"scripts/stanncam_macros/stanncam_macros.yy",},},
     {"id":{"name":"stanncam_manager","path":"scripts/stanncam_manager/stanncam_manager.yy",},},
     {"id":{"name":"stanncam_resolution_presets","path":"scripts/stanncam_resolution_presets/stanncam_resolution_presets.yy",},},
