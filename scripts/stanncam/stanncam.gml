@@ -191,6 +191,12 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 				y = __yTo;
 			}
 		}
+		
+		if(!smooth_draw){
+			x = round(x);
+			y = round(y);
+		}
+		
 		#endregion
 		
 		#region zone constrain
@@ -920,8 +926,16 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		__constrain_offset_y = 0;
 		
 		for (var i = 0; i < array_length(__zone_lists_strength); i++) {
-			__constrain_offset_x += _constrain_offset_x[i] * __zone_lists_strength[i];
-			__constrain_offset_y += _constrain_offset_y[i] * __zone_lists_strength[i];
+			var _offset_x = _constrain_offset_x[i] * __zone_lists_strength[i];
+			var _offset_y = _constrain_offset_y[i] * __zone_lists_strength[i];
+			
+			//with smooth draw on, it rounds the constraint transition
+			if(!smooth_draw && __zone_lists_strength[i] < 0.999){
+				_offset_x = round(_offset_x);
+				_offset_y = round(_offset_y);
+			}
+			__constrain_offset_x += _offset_x;
+			__constrain_offset_y += _offset_y;
 		}
 		
 		if(room_constrain){
@@ -962,12 +976,6 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		_new_y += __constrain_offset_y;
 		
 		#endregion
-		
-		//when smooth draw is off, the fractions are applied directly on the camera and not in draw step
-		if(!smooth_draw){
-			_new_x+=x_frac + __constrain_frac_x;
-			_new_y+=y_frac + __constrain_frac_y;
-		}
 		
 		camera_set_view_pos(__camera, _new_x, _new_y);
 	}
@@ -1150,12 +1158,12 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		var _display_scale_x = __obj_stanncam_manager.__display_scale_x;
 		var _display_scale_y = __obj_stanncam_manager.__display_scale_y;
 		
-		var _x_frac = 0;
-		var _y_frac = 0;
+		var _x_frac = __constrain_frac_x;
+		var _y_frac = __constrain_frac_y;
 		
 		if(smooth_draw){
-			_x_frac = x_frac + __constrain_frac_x;
-			_y_frac = y_frac + __constrain_frac_y;
+			_x_frac += x_frac// + __constrain_frac_x;
+			_y_frac += y_frac// + __constrain_frac_y;
 		}
 		
 		var _zoom = __get_zoom();
