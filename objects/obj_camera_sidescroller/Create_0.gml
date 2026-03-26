@@ -44,8 +44,6 @@ gui_hires_scale = 6; //how much bigger the hires font is than the pixel one
 
 lookahead = false;
 
-draw_zones = false;
-
 surface = -1;
 
 

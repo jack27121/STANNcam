@@ -217,7 +217,8 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 				for (var j = 0; j < _zone_count; j++) {
 					var _zone = _zone_list[| j];
 					
-					if(_zone.priority < highest_priority_){
+					//if not active, or of a lower priority of ones collided with, not evaluated
+					if(!_zone.active || _zone.priority < highest_priority_){
 						ds_list_delete(_zone_list,j);
 						_zone_count = ds_list_size(_zone_list);
 						j--;
@@ -877,23 +878,23 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 					var _zone = __zone_lists[l][| z];
 					
 					if(_zone.left ){ // if dist from the zone edge to the center is shorter than previous it takes over
-						if(_zone_left == undefined || _zone.bbox_left < _zone_left){
-							_zone_left = _zone.bbox_left;
+						if(_zone_left == undefined || round(_zone.bbox_left) < _zone_left){
+							_zone_left = round(_zone.bbox_left);
 						}
 					}
 					if(_zone.right){
 						if(_zone_right == undefined || _zone.bbox_right > _zone_right){
-							_zone_right = _zone.bbox_right;
+							_zone_right = round(_zone.bbox_right);
 						}
 					}
 					if(_zone.top){
-						if(_zone_top == undefined || _zone.bbox_top < _zone_top){
-							_zone_top = _zone.bbox_top;
+						if(_zone_top == undefined || round(_zone.bbox_top) < _zone_top){
+							_zone_top = round(_zone.bbox_top);
 						}
 					}
 					if(_zone.bottom){
-						if(_zone_bottom == undefined || _zone.bbox_bottom > _zone_bottom){
-							_zone_bottom = _zone.bbox_bottom;
+						if(_zone_bottom == undefined || round(_zone.bbox_bottom) > _zone_bottom){
+							_zone_bottom = round(_zone.bbox_bottom);
 						}
 					}
 				}

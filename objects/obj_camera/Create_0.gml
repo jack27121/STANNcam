@@ -40,5 +40,3 @@ gui_resolutions = [
 	{w:640, h:360},
 	{w:1280, h:720},
 ];
-
-stanncam_debug_set_draw_zones(true);

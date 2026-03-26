@@ -71,8 +71,7 @@ if(keyboard_check_pressed(ord("P"))){
 
 //toggle drawing camera zones
 if(keyboard_check_pressed(ord("Z"))){
-	draw_zones = !draw_zones;
-	stanncam_debug_set_draw_zones(draw_zones);
+	__obj_stanncam_manager.draw_zones
 }
 
 //switch resolutions
