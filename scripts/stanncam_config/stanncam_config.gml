@@ -6,4 +6,4 @@
 
 #macro STANNCAM_CONFIG_ZONE_CONSTRAIN_ALWAYS_SMOOTH false //Default: false //if true, the transition will be smooth regardless of smooth_draw
 
-#macro STANNCAM_CONFIG_DRAW_CAMERA_ZONES false //Default: __obj_stanncam_manager.draw_zones //set to whichever global variable you like to easily control if zones should be drawn
+#macro STANNCAM_CONFIG_DRAW_CAMERA_ZONES __obj_stanncam_manager.draw_zones //Default: __obj_stanncam_manager.draw_zones //set to whichever global variable you like to easily control if zones should be drawn
