@@ -204,11 +204,29 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			
 			var _zone_list = ds_list_create();
 			var _zone_count = instance_position_list(follow.x, follow.y, obj_stanncam_zone, _zone_list, false);
+			
+			//only highest priority zones are evaluated
+			var highest_priority_ = -9999;
+			
 			if(_zone_count != 0){
-				
+				for (var j = 0; j < _zone_count; j++) {
+					var priority_ = _zone_list[| j].priority;
+					if ( priority_ > highest_priority_) highest_priority_ = priority_;
+				}
+			}
+			
+			if(_zone_count != 0){ 
 				//adds included zones to list
 				for (var j = 0; j < _zone_count; j++) {
 					var _zone = _zone_list[| j];
+					
+					if(_zone.priority < highest_priority_){
+						ds_list_delete(_zone_list,j);
+						_zone_count = ds_list_size(_zone_list);
+						j--;
+						continue;
+					}
+					
 					var _included_zones_count = array_length(_zone.included_zones);
 					if(_included_zones_count > 0){
 						
@@ -260,8 +278,14 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			for (var k = 0; k <= _len; k++) {
 				if(k != _len){
 					__zone_lists_strength[k] = lerp(__zone_lists_strength[k], 0, __constrain_spd);
+					
+					//snaps faster if smoothdraw is off
+					if(!STANNCAM_CONFIG_ZONE_CONSTRAIN_ALWAYS_SMOOTH && !smooth_draw && __zone_lists_strength[k] < 0.01) __zone_lists_strength[k] = 0;
 				} else {
 					__zone_lists_strength[k] = lerp(__zone_lists_strength[k], 1, __constrain_spd);
+					
+					//snaps faster if smoothdraw is off
+					if(!STANNCAM_CONFIG_ZONE_CONSTRAIN_ALWAYS_SMOOTH && !smooth_draw && __zone_lists_strength[k] > 0.99) __zone_lists_strength[k] = 1;
 				}
 				
 				if(__zone_lists_strength[k] == 0){
@@ -934,19 +958,9 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		for (var i = 0; i < array_length(__zone_lists_strength); i++) {
 			var _strength = __zone_lists_strength[i];
 			
-			//with smooth draw off, it rounds the constraint transition
-			if(!smooth_draw){
-				_strength = floor(_strength / 0.01 + 0.99) * 0.01;
-			}
-			
 			var _offset_x = _constrain_offset_x[i] * _strength;
 			var _offset_y = _constrain_offset_y[i] * _strength;
-
-			 //when strength is 1, constraint fractions are present regardles of smooth_draw, so the constraints look correct at all zoom levels
-			if(!smooth_draw && _strength != 1){
-				_offset_x = round(_offset_x);
-				_offset_y = round(_offset_y);
-			}
+			
 			__constrain_offset_x += _offset_x;
 			__constrain_offset_y += _offset_y;
 		}
@@ -969,18 +983,33 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		
 		#region fractional constraint
 		
-		__constrain_frac_x = frac(__constrain_offset_x);
-		if(__constrain_offset_x > 0){
-			__constrain_offset_x = floor(__constrain_offset_x);
-		} else if (__constrain_offset_x < 0) {
-			__constrain_offset_x = ceil(__constrain_offset_x);
-		}
-		
-		__constrain_frac_y = frac(__constrain_offset_y);
-		if(__constrain_offset_y > 0){
-			__constrain_offset_y = floor(__constrain_offset_y);
-		} else if (__constrain_offset_y < 0){
-			__constrain_offset_y = ceil(__constrain_offset_y);
+		if(STANNCAM_CONFIG_ZONE_CONSTRAIN_ALWAYS_SMOOTH || smooth_draw){ //smooth drawing fractional seperation
+			__constrain_frac_x = frac(__constrain_offset_x);
+			if(__constrain_offset_x > 0){
+				__constrain_offset_x = floor(__constrain_offset_x);
+			} else if (__constrain_offset_x < 0) {
+				__constrain_offset_x = ceil(__constrain_offset_x);
+			}
+			
+			__constrain_frac_y = frac(__constrain_offset_y);
+			if(__constrain_offset_y > 0){
+				__constrain_offset_y = floor(__constrain_offset_y);
+			} else if (__constrain_offset_y < 0){
+				__constrain_offset_y = ceil(__constrain_offset_y);
+			}
+			
+		} else { //smooth draw off, no fractions
+			if(__constrain_offset_x > 0){
+				__constrain_offset_x = ceil(__constrain_offset_x);
+			} else if(__constrain_offset_x < 0){
+				__constrain_offset_x = floor(__constrain_offset_x);
+			}
+			
+			if(__constrain_offset_y > 0){
+				__constrain_offset_y = ceil(__constrain_offset_y);
+			} else if(__constrain_offset_y < 0){
+				__constrain_offset_y = floor(__constrain_offset_y);
+			}
 		}
 		
 		#endregion
