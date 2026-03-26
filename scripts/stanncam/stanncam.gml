@@ -206,7 +206,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			var _zone_count = instance_position_list(follow.x, follow.y, obj_stanncam_zone, _zone_list, false);
 			
 			//only highest priority zones are evaluated
-			var highest_priority_ = -9999;
+			var highest_priority_ = -infinity;
 			
 			if(_zone_count != 0){
 				for (var j = 0; j < _zone_count; j++) {
