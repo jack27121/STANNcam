@@ -26,9 +26,6 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 #endregion
 
 #region variables
-	//the first camera uses the application surface
-	use_app_surface = cam_id == 0
-	
 	x = _x;
 	y = _y;
 	
@@ -751,7 +748,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @description checks if surface & surface_extra exists and else creates it
 	/// @ignore
 	static __check_surface = function(){
-		if(use_app_surface){
+		if(cam_id == 0){ //the first camera uses the application surface
 			surface = application_surface;
 		} else {
 			if (!surface_exists(surface)){
