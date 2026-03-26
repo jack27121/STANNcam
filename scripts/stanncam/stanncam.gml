@@ -466,9 +466,10 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @param {Real} [_duration=0]
 	static zoom = function(_zoom, _duration=0){
 		if(_duration == 0){ //if duration is 0 the view is updated immediately
-			zoom_amount = _zoom;
+			zoom_amount = floor((_zoom / 0.001) + 0.9999) * 0.001;
 			
 			if(!get_paused()){
+				__update_view_pos();
 				__update_view_size();
 			}
 		} else {
