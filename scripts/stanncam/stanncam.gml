@@ -207,6 +207,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			
 			if(_zone_count != 0){
 				for (var j = 0; j < _zone_count; j++) {
+					if(!_zone_list[| j].active) continue; //ignore deactivated zones
 					var priority_ = _zone_list[| j].priority;
 					if ( priority_ > highest_priority_) highest_priority_ = priority_;
 				}
