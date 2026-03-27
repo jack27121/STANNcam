@@ -87,7 +87,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	__constrain_frac_x = 0;
 	__constrain_frac_y = 0;
 	
-	__constrain_spd = 0.1;
+	__constrain_spd = 0.15;
 	
 	paused = false;
 	
@@ -274,16 +274,28 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			
 			var _len = array_length(__zone_lists_strength) - 1;
 			for (var k = 0; k <= _len; k++) {
-				if(k != _len){
-					__zone_lists_strength[k] = lerp(__zone_lists_strength[k], 0, __constrain_spd);
-					
-					//snaps faster if smoothdraw is off
-					if(!STANNCAM_CONFIG_ZONE_CONSTRAIN_ALWAYS_SMOOTH && !smooth_draw && __zone_lists_strength[k] < 0.01) __zone_lists_strength[k] = 0;
-				} else {
+				if(k == _len){ //last list_string fades to 1, all previous fades to 0
 					__zone_lists_strength[k] = lerp(__zone_lists_strength[k], 1, __constrain_spd);
 					
 					//snaps faster if smoothdraw is off
-					if(!STANNCAM_CONFIG_ZONE_CONSTRAIN_ALWAYS_SMOOTH && !smooth_draw && __zone_lists_strength[k] > 0.99) __zone_lists_strength[k] = 1;
+					if(
+						!STANNCAM_CONFIG_ZONE_CONSTRAIN_ALWAYS_SMOOTH && 
+						!smooth_draw &&
+						__zone_lists_strength[k] > (1-STANNCAM_CONFIG_ZONE_CONSTRAIN_TRANSITION_SNAP_THRESHOLD)
+					){
+						__zone_lists_strength[k] = 1;
+					} 
+				} else {
+					__zone_lists_strength[k] = lerp(__zone_lists_strength[k], 0, __constrain_spd);
+					
+					//snaps faster if smoothdraw is off
+					if(
+						!STANNCAM_CONFIG_ZONE_CONSTRAIN_ALWAYS_SMOOTH &&
+						!smooth_draw &&
+						__zone_lists_strength[k] < STANNCAM_CONFIG_ZONE_CONSTRAIN_TRANSITION_SNAP_THRESHOLD
+					){
+						__zone_lists_strength[k] = 0;
+					} 
 				}
 				
 				if(__zone_lists_strength[k] == 0){
@@ -348,7 +360,6 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 				zoom_amount = stanncam_animcurve(__t_zoom, __zoomStart, __zoomTo, __zoom_duration, anim_curve_zoom);
 				
 				__t_zoom = min(__t_zoom + 1, __zoom_duration);
-
 				if(__t_zoom >= __zoom_duration) {
 					__zooming = false;
 					zoom_amount = __zoomTo;
@@ -952,6 +963,8 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		
 		__constrain_offset_x = 0;
 		__constrain_offset_y = 0;
+		__constrain_frac_x = 0;
+		__constrain_frac_y = 0;
 		
 		for (var i = 0; i < array_length(__zone_lists_strength); i++) {
 			var _strength = __zone_lists_strength[i];
@@ -964,6 +977,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		}
 		
 		if(room_constrain){
+			
 			//Horizontal
 			if((_view_right - _view_left) < room_width) {
 				__constrain_offset_x = clamp(__constrain_offset_x, -_view_left, room_width - 1 - _view_right);
@@ -979,35 +993,25 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			}
 		}
 		
-		#region fractional constraint
+		__constrain_offset_x = floor((__constrain_offset_x / 0.01) + 0.999) * 0.01;
+		__constrain_offset_y = floor((__constrain_offset_y / 0.01) + 0.999) * 0.01;
 		
-		if(STANNCAM_CONFIG_ZONE_CONSTRAIN_ALWAYS_SMOOTH || smooth_draw){ //smooth drawing fractional seperation
+		#region fractional constraint		 
+		
+		if(STANNCAM_CONFIG_ZONE_CONSTRAIN_ALWAYS_SMOOTH || smooth_draw){
 			__constrain_frac_x = frac(__constrain_offset_x);
-			if(__constrain_offset_x > 0){
-				__constrain_offset_x = floor(__constrain_offset_x);
-			} else if (__constrain_offset_x < 0) {
-				__constrain_offset_x = ceil(__constrain_offset_x);
-			}
-			
 			__constrain_frac_y = frac(__constrain_offset_y);
-			if(__constrain_offset_y > 0){
-				__constrain_offset_y = floor(__constrain_offset_y);
-			} else if (__constrain_offset_y < 0){
-				__constrain_offset_y = ceil(__constrain_offset_y);
-			}
-			
-		} else { //smooth draw off, no fractions
-			if(__constrain_offset_x > 0){
-				__constrain_offset_x = ceil(__constrain_offset_x);
-			} else if(__constrain_offset_x < 0){
-				__constrain_offset_x = floor(__constrain_offset_x);
-			}
-			
-			if(__constrain_offset_y > 0){
-				__constrain_offset_y = ceil(__constrain_offset_y);
-			} else if(__constrain_offset_y < 0){
-				__constrain_offset_y = floor(__constrain_offset_y);
-			}
+		}
+		
+		if(__constrain_offset_x > 0){
+			__constrain_offset_x = floor(__constrain_offset_x);
+		} else if (__constrain_offset_x < 0) {
+			__constrain_offset_x = ceil(__constrain_offset_x);
+		}
+		if(__constrain_offset_y > 0){
+			__constrain_offset_y = floor(__constrain_offset_y);
+		} else if (__constrain_offset_y < 0){
+			__constrain_offset_y = ceil(__constrain_offset_y);
 		}
 		
 		#endregion
