@@ -1,4 +1,4 @@
-if(__obj_stanncam_manager.draw_zones){
+if(STANNCAM_CONFIG_DRAW_CAMERA_ZONES){
 	if(active){
 		draw_self();
 	} else {
