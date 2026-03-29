@@ -179,7 +179,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			//gradually moves camera into position based on duration
 			x = stanncam_animcurve(__t, __xStart, __xTo, __duration, anim_curve);
 			y = stanncam_animcurve(__t, __yStart, __yTo, __duration, anim_curve);
-
+			
 			__t = min(__t + 1, __duration);
 			
 			if(__t >= __duration){
@@ -260,7 +260,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 			if(_active_list_compare != _zone_list_compare){
 				array_push(__zone_lists_strength, 0);
 				array_push(__zone_lists, _zone_list);
-
+				
 				//ensures that the zone lists array has a max size
 				if(array_length(__zone_lists) > __zone_lists_max){
 					array_shift(__zone_lists_strength);
@@ -829,14 +829,9 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	/// @description updates the view position
 	/// @ignore
 	static __update_view_pos = function(){
-		
-		//offseting is whole numbers with smooth_draw off
-		var _offset_x = smooth_draw ? offset_x : round(offset_x);
-		var _offset_y = smooth_draw ? offset_y : round(offset_y);
-		
 		//update camera view
-		var _new_x = x + _offset_x - (width / 2) + __shake_x;
-		var _new_y = y + _offset_y - (height / 2) + __shake_y;
+		var _new_x = x - (width / 2 );
+		var _new_y = y - (height / 2);
 		
 		var _zoom_whole = ceil(zoom_amount - 1);
 		_new_x -= (width / 2) * _zoom_whole;
@@ -867,11 +862,6 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		var _view_right   = view_to_room_x(width) + 1;
 		var _view_top     = view_to_room_y(0) + 1;
 		var _view_bottom  = view_to_room_y(height) + 1;
-		
-		_view_left += _offset_x;
-		_view_right += _offset_x;
-		_view_top += _offset_y;
-		_view_bottom += _offset_y;
 		
 		//zone constricting
 		for (var l = 0; l < array_length(__zone_lists); l++) {
@@ -920,7 +910,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 					var _zone_width = (_zone_right - _zone_left);
 					if((_view_right - _view_left) > _zone_width){
 						var _middle = ((_zone_left + _zone_right) / 2) - 1;
-						_constrain_offset_x[l] = _middle - x - _offset_x;
+						_constrain_offset_x[l] = _middle - x;
 						_zone_center_h = true;
 					}
 				}
@@ -944,7 +934,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 					var _zone_height = (_zone_bottom - _zone_top);
 					if((_view_bottom - _view_top) > _zone_height){
 						var _middle = ((_zone_top + _zone_bottom) / 2) - 1;
-						_constrain_offset_y[l] = _middle - y - _offset_y;
+						_constrain_offset_y[l] = _middle - y;
 						_zone_center_v = true;
 					}
 				}
@@ -1021,6 +1011,13 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		_new_y += __constrain_offset_y;
 		
 		#endregion
+		
+		//offseting is whole numbers with smooth_draw off
+		var _offset_x = smooth_draw ? offset_x : round(offset_x);
+		var _offset_y = smooth_draw ? offset_y : round(offset_y);
+		
+		_new_x += _offset_x + __shake_x;
+		_new_y += _offset_y + __shake_y;
 		
 		camera_set_view_pos(__camera, _new_x, _new_y);
 	}
