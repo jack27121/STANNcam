@@ -6,6 +6,10 @@ for (var i = 0; i < _len; ++i){
 	_cam.__check_viewports();
 	_cam.__step();
 	
+	_cam.__zone_lists_max = 4;
+	_cam.__zone_lists = [noone];
+	_cam.__zone_lists_strength = [1];
+	
 	//if following something, snap the camera to it on room start
 	if(STANNCAM_CONFIG_SNAP_TO_FOLLOW_ON_ROOM_START && instance_exists(_cam.follow)){
 		_cam.move(_cam.follow.x, _cam.follow.y, 0);
