@@ -8,3 +8,6 @@ anim_spd = sprite_get_speed(spr_player_moving);
 subimg = 0;
 
 pointer = false;
+
+follow_x = 0; //different follow origin point
+follow_y = 0;

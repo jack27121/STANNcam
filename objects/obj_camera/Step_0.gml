@@ -1,9 +1,9 @@
 //toggle following player
 if(keyboard_check_pressed(vk_space)){
 	if(instance_exists(cam1.follow)){
-		cam1.follow = noone;
+		cam1.set_follow();
 	} else {
-		cam1.follow = obj_player;
+		cam1.set_follow(obj_player);
 	}
 }
 
@@ -15,7 +15,7 @@ if(keyboard_check_pressed(vk_f5)){
 		cam1.set_size(global.game_w / 2, global.game_h);
 		
 		cam2 = cam1.clone();
-		cam2.follow = obj_player2;
+		cam2.set_follow(obj_player2);
 	} else {
 		if(!cam2.is_destroyed()) cam2.destroy();
 		cam1.set_size(global.game_w, global.game_h);
