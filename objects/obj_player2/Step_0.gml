@@ -6,3 +6,6 @@ y += vspd;
 
 x = clamp(x, 0, room_width);
 y = clamp(y, 0, room_height);
+
+follow_x = x + 10;
+follow_y = y + 10;

@@ -40,6 +40,8 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 	offset_y = 0;
 	
 	follow = noone;
+	follow_x_name = "x"; //the names of the variables on the followed object to act as x and y
+	follow_y_name = "y"; //this can be used to have a different origin on the followed object, or animate the follow point per object
 	
 	//The extra surface is only neccesary if you are drawing the camera recursively in the room
 	//Like a tv screen, where it can capture itself
@@ -162,8 +164,8 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		#region moving
 		if(instance_exists(follow)){
 			//update destination
-			__xTo = follow.x;
-			__yTo = follow.y;
+			__xTo = variable_instance_get(follow,follow_x_name);
+			__yTo = variable_instance_get(follow,follow_y_name);
 			
 			var _x_dist = __xTo - x;
 			var _y_dist = __yTo - y;
@@ -197,7 +199,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		if(instance_exists(follow)){
 			
 			var _zone_list = ds_list_create();
-			var _zone_count = instance_position_list(follow.x, follow.y, obj_stanncam_zone, _zone_list, false);
+			var _zone_count = instance_position_list(__xTo,__yTo, obj_stanncam_zone, _zone_list, false);
 			if(_zone_count != 0){
 				
 				//adds included zones to list
@@ -390,6 +392,21 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 		_clone.__zoom_duration = __zoom_duration;
 		
 		return _clone;
+	}
+	
+	/// @function set_follow
+	/// @description sets object to be followed, and optionally which named variables on the followed object to act as the x and y components to follow
+	/// @param {Real} _follow
+	/// @param {Real} _x_name
+	/// @param {Real} _y_name
+	static set_follow = function(_follow = noone, _x_name = "x", _y_name = "y"){
+		follow = _follow;
+		
+		follow_x_name = _x_name;
+		follow_y_name = _y_name;
+		if(!variable_instance_exists(follow,follow_x_name) || !variable_instance_exists(follow,follow_y_name)){
+			show_error($"the variables {follow_x_name} or {follow_y_name} doesn't exist on {follow}",true);
+		}
 	}
 	
 	/// @function move
@@ -842,6 +859,7 @@ function stanncam(_x=0, _y=0, _width=global.game_w, _height=global.game_h, _surf
 				
 				for (var z = 0; z < ds_list_size(__zone_lists[l]); z++) {
 					var _zone = __zone_lists[l][| z];
+					if( !instance_exists(_zone) ) continue;
 					
 					if(_zone.left ){ // if dist from the zone edge to the center is shorter than previous it takes over
 						if(_zone_left == undefined || _zone.bbox_left < _zone_left){

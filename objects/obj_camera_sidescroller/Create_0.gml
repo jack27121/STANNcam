@@ -21,13 +21,13 @@ gui_res = 1;
 stanncam_init(resolutions[2].width, resolutions[2].height, resolutions[game_res].width, resolutions[game_res].height, gui_resolutions[gui_res].width, gui_resolutions[gui_res].height);
 
 cam1 = new stanncam(obj_player_sidescroller.x, obj_player_sidescroller.y, global.game_w, global.game_h);
-cam1.follow = obj_player_sidescroller;
+cam1.set_follow(obj_player_sidescroller);
 cam1.room_constrain = true;
 
 cam1.debug_draw = true;
 
 cam2 = cam1.clone();
-cam2.follow = obj_player_sidescroller2;
+cam2.set_follow(obj_player_sidescroller2);
 cam2.set_size(global.game_w / 2, global.game_h, 0);
 
 split_screen = false;
