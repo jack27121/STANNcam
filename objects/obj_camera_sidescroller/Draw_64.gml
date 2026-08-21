@@ -26,7 +26,7 @@ draw_text_outline(1, _offset * 6, "[SHIFT] " + _debug, _outline_width, _precisio
 draw_text_outline(1, _offset * 7, "[F] camera shake", _outline_width, _precision);
 draw_text_outline(1, _offset * 8, "[P] toggle camera paused: " + (cam1.get_paused() ? "ON" : "OFF"), _outline_width, _precision);
 draw_text_outline(1, _offset * 9, "[Tab] camera speed " + string(cam1.spd), _outline_width, _precision);
-draw_text_outline(1, _offset * 10, "[Z] toggle showing camera zones: " + (draw_zones ? "ON" : "OFF"), _outline_width, _precision);
+draw_text_outline(1, _offset * 10, "[Z] toggle showing camera zones: " + (__obj_stanncam_manager.draw_zones ? "ON" : "OFF"), _outline_width, _precision);
 draw_text_outline(1, _offset * 11, "[1 & 2 & 3] to switch between example rooms", _outline_width, _precision);
 
 //draw current resolution text

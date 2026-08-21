@@ -4,7 +4,7 @@ hinput = 0;
 hspd = 0;
 vspd = 0;
 acc = 0.4;
-top_spd = 6;
+top_spd = 3.07; //arbitrary decimal number to check non integer tracking
 
 grounded = false;
 jump_count = 0;
