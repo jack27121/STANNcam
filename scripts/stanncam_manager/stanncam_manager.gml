@@ -37,9 +37,11 @@ function stanncam_init(_game_w, _game_h, _resolution_w=_game_w, _resolution_h=_g
 	__obj_stanncam_manager.__gui_res_w = global.gui_w;
 	__obj_stanncam_manager.__gui_res_h = global.gui_h;
 	
-	var _len = array_length(view_camera);
-	for (var i = 0; i < _len; ++i){
-		camera_destroy(view_camera[i]);
+	for (var i = 0; i < 8; ++i){ //there can be a max of 8 view cameras
+		if(view_camera[i] != -1){
+			camera_destroy(view_camera[i]);
+			view_camera[i] = -1;
+		}
 	}
 	
 	application_surface_draw_enable(false);
